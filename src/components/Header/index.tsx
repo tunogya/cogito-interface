@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import Logo from '../../assets/svg/logo.svg'
 import LogoDark from '../../assets/svg/logo.svg'
 import {useColorMode} from "@chakra-ui/react";
+import {Trans} from "@lingui/macro";
 
 const HeaderFrame = styled.div<{ showBackground: boolean }>`
   display: grid;
@@ -40,6 +41,7 @@ export const Header = () => {
       <CogitoIcon>
         <img width={'24px'} src={colorMode === "light" ? LogoDark : Logo} alt="logo"/>
       </CogitoIcon>
+      <Trans>Cogito ergo sum</Trans>
     </HeaderFrame>
   )
 }
