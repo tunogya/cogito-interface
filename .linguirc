@@ -1,0 +1,13 @@
+{
+   "locales": ["en-US", "zh-CN"],
+   "sourceLocale": "en-US",
+   "catalogs": [{
+      "path": "src/locales/{locale}",
+      "include": ["src"]
+   }],
+   "format": "po",
+   formatOptions: {
+       lineNumbers: false,
+   },
+   runtimeConfigModule: ['@lingui/core', 'i18n']
+}
