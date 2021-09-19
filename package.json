@@ -30,6 +30,9 @@
     ]
   },
   "devDependencies": {
+    "@chakra-ui/react": "^1.6.7",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@lingui/cli": "^3.11.1",
     "@lingui/loader": "^3.11.1",
     "@lingui/macro": "^3.11.1",
@@ -45,6 +48,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.9",
     "cypress": "^8.4.1",
+    "framer-motion": "^4",
     "jest-styled-components": "^7.0.5",
     "polyfill-object.fromentries": "^1.0.1",
     "prettier": "2.4.1",
