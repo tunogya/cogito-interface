@@ -1,1 +1,1 @@
-import 'polyfill-object.fromentries'
+import "polyfill-object.fromentries"

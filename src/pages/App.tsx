@@ -1,5 +1,5 @@
-import React from 'react'
-import logo from '../asserts/svg/logo.svg'
+import React from "react"
+import logo from "../asserts/svg/logo.svg"
 
 function App() {
   return (

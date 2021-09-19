@@ -1,6 +1,6 @@
-import { I18nProvider } from '@lingui/react'
-import { i18n } from '@lingui/core'
-import { ReactNode } from 'react'
+import { I18nProvider } from "@lingui/react"
+import { i18n } from "@lingui/core"
+import { ReactNode } from "react"
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   return (
