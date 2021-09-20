@@ -1,3 +1,1 @@
-export const borders = {
-
-}
+export const borders = {}

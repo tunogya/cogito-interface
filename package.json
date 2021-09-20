@@ -9,7 +9,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "i18n:extract": "lingui extract --clean",
-    "i18n:compile": "lingui compile --typescript"
+    "i18n:compile": "lingui compile --typescript",
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,7 @@
     "cypress": "^8.4.1",
     "framer-motion": "^4",
     "jest-styled-components": "^7.0.5",
+    "nft.storage": "^3.2.2",
     "polyfill-object.fromentries": "^1.0.1",
     "prettier": "2.4.1",
     "qs": "^6.10.1",

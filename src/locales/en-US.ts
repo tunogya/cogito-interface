@@ -1,1 +1,1 @@
-/*eslint-disable*/export const messages={"Cogito ergo sum":"Cogito ergo sum"};
+/*eslint-disable*/ export const messages = { "Cogito ergo sum": "Cogito ergo sum" }

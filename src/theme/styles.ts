@@ -1,4 +1,4 @@
-import {mode} from "@chakra-ui/theme-tools";
+import { mode } from "@chakra-ui/theme-tools"
 
 export const styles = {
   styles: {
@@ -7,6 +7,6 @@ export const styles = {
         bg: mode("white", "black"),
         color: "white",
       },
-    }
-  }
+    },
+  },
 }

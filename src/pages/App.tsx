@@ -1,7 +1,7 @@
 import React from "react"
-import styled from "styled-components/macro";
-import {Route, Switch} from "react-router-dom";
-import Header from "../components/Header";
+import styled from "styled-components/macro"
+import { Route, Switch } from "react-router-dom"
+import Header from "../components/Header"
 
 const AppWrapper = styled.div`
   display: flex;
@@ -35,14 +35,14 @@ function App() {
   return (
     <AppWrapper>
       <HeaderWrapper>
-        <Header/>
+        <Header />
       </HeaderWrapper>
       <BodyWrapper>
         <Switch>
           <Route exact strict path="/vote" />
-          <Route/>
+          <Route />
         </Switch>
-        <Marginer/>
+        <Marginer />
       </BodyWrapper>
     </AppWrapper>
   )

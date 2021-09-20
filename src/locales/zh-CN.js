@@ -1,1 +1,1 @@
-/*eslint-disable*/module.exports={messages:{"Cogito ergo sum":"我思故我在"}};
+/*eslint-disable*/ module.exports = { messages: { "Cogito ergo sum": "我思故我在" } }
