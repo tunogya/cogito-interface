@@ -51,7 +51,7 @@ const HeaderControls = styled.div`
   justify-self: flex-end;
 `
 
-const HeaderLinks = styled(HStack)`
+const HeaderSearch = styled(HStack)`
   justify-self: center;
   width: 50%;
   direction: column;
@@ -68,9 +68,9 @@ export const Header = () => {
           <img width={"24px"} src={colorMode === "light" ? LogoDark : Logo} alt="logo" />
         </CogitoIcon>
       </Title>
-      <HeaderLinks spacing={4}>
+      <HeaderSearch spacing={4}>
         <Input variant="filled" placeholder={t`Search Cogito`}/>
-      </HeaderLinks>
+      </HeaderSearch>
       <HeaderControls>
         <Button colorScheme={"blue"}><Trans>Login</Trans></Button>
       </HeaderControls>
