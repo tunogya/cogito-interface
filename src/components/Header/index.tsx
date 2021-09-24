@@ -1,80 +1,68 @@
-import useScrollPosition from "@react-hook/window-scroll"
-import styled from "styled-components/macro"
-import Logo from "../../assets/svg/logo.svg"
-import LogoDark from "../../assets/svg/logo.svg"
-import {useColorMode, HStack, Input, Button} from "@chakra-ui/react"
-import { t, Trans } from "@lingui/macro"
-
-const HeaderFrame = styled.div<{ showBackground: boolean }>`
-  display: grid;
-  grid-template-columns: 120px 1fr 120px;
-  align-items: center;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  top: 0;
-  position: relative;
-  padding: 1rem;
-  z-index: 21;
-  position: relative;
-  /* Background slide effect on scroll. */
-  background-position: ${({ showBackground }) => (showBackground ? "0 -100%" : "0 0")};
-  background-size: 100% 200%;
-  background-color: white;
-  transition: background-position 0.1s, box-shadow 0.1s;
-  background-blend-mode: hard-light;
-`
-
-const CogitoIcon = styled.div`
-  transition: transform 0.3s ease;
-  :hover {
-    transform: rotate(-5deg);
-  }
-`
-
-const Title = styled.a`
-  display: flex;
-  align-items: center;
-  pointer-events: auto;
-  justify-self: flex-start;
-  margin-right: 12px;
-  :hover {
-    cursor: pointer;
-  }
-`
-
-const HeaderControls = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-self: flex-end;
-`
-
-const HeaderSearch = styled(HStack)`
-  justify-self: center;
-  width: 50%;
-  direction: column;
-`
+import {
+  Button,
+  Grid,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Stack,
+  Text,
+  useColorMode
+} from '@chakra-ui/react'
+import {useHistory} from "react-router-dom";
+import {useState} from "react";
+import {HamburgerIcon} from "@chakra-ui/icons";
+import {t, Trans} from "@lingui/macro";
 
 export const Header = () => {
-  const scrollY = useScrollPosition()
-  const { colorMode } = useColorMode()
+  const links = [
+    {path: "/", label: "Cogito"},
+    {path: "/memory", label: "Memory"},
+  ]
+  const history = useHistory()
+  const [currentPath, setCurrentPath] = useState(history.location.pathname)
+  const {colorMode, toggleColorMode} = useColorMode()
 
   return (
-    <HeaderFrame showBackground={scrollY > 45}>
-      <Title>
-        <CogitoIcon>
-          <img width={"24px"} src={colorMode === "light" ? LogoDark : Logo} alt="logo" />
-        </CogitoIcon>
-      </Title>
-      <HeaderSearch spacing={4}>
-        <Input variant="filled" placeholder={t`Search Cogito`}/>
-      </HeaderSearch>
-      <HeaderControls>
-        <Button colorScheme={"blue"}><Trans>Login</Trans></Button>
-      </HeaderControls>
-    </HeaderFrame>
+    <Grid templateColumns="repeat(3, 1fr)" p={4} gap={6} alignItems={"center"}>
+      <Stack justifySelf={"flex-start"}>
+        <Text fontWeight={"bold"} fontSize={"md"}>Create React Dapp</Text>
+      </Stack>
+      <Stack justifySelf={"center"} direction={"row"} p={1} borderRadius={"md"}>
+        {links.map((link, index) => (
+          <Button key={index} colorScheme={"gray"} size={"md"} variant={currentPath === link.path ? "solid" : "ghost"}
+                  onClick={() => {
+                    history.push(link.path)
+                    setCurrentPath(link.path)
+                  }}>{link.label}</Button>
+        ))}
+      </Stack>
+      <Stack justifySelf={"flex-end"} direction={"row"} alignItems={"center"}>
+        <Button size={"md"}>Address</Button>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            aria-label="Options"
+            icon={<HamburgerIcon/>}
+          />
+          <MenuList>
+            <MenuItem>
+              <Trans>About</Trans>
+            </MenuItem>
+            <MenuItem>
+              <Trans>Document</Trans>
+            </MenuItem>
+            <MenuItem>
+              <Trans>Language</Trans>
+            </MenuItem>
+            <MenuItem onClick={toggleColorMode}>
+              {colorMode === "light" ? t`Dark` : t`Light`} <Trans>Mode</Trans>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Stack>
+    </Grid>
   )
 }
 

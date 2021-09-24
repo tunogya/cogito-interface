@@ -31,10 +31,12 @@
     ]
   },
   "devDependencies": {
+    "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@lingui/cli": "^3.11.1",
+    "@lingui/detect-locale": "^3.11.1",
     "@lingui/loader": "^3.11.1",
     "@lingui/macro": "^3.11.1",
     "@lingui/react": "^3.11.1",
