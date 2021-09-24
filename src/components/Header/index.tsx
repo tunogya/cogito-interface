@@ -17,8 +17,8 @@ import {t, Trans} from "@lingui/macro";
 
 export const Header = () => {
   const links = [
-    {path: "/", label: "Cogito"},
-    {path: "/memory", label: "Memory"},
+    {path: "/", label: <Trans>Cogito</Trans>},
+    {path: "/memory", label: <Trans>Memory</Trans>},
   ]
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
@@ -27,7 +27,7 @@ export const Header = () => {
   return (
     <Grid templateColumns="repeat(3, 1fr)" p={4} gap={6} alignItems={"center"}>
       <Stack justifySelf={"flex-start"}>
-        <Text fontWeight={"bold"} fontSize={"md"}>Cogito ergo sum</Text>
+        <Text fontWeight={"bold"} fontSize={"md"}><Trans>Cogito ergo sum</Trans></Text>
       </Stack>
       <Stack justifySelf={"center"} direction={"row"} p={1} borderRadius={"md"}>
         {links.map((link, index) => (

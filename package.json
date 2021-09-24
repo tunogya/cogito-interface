@@ -31,6 +31,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.15.5",
     "@chakra-ui/icons": "^1.0.15",
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11",
@@ -53,7 +54,9 @@
     "@types/react-router-dom": "^5.1.9",
     "@types/rebass": "^4.0.9",
     "@types/styled-components": "^5.1.14",
+    "babel-plugin-macros": "^3.1.0",
     "cypress": "^8.4.1",
+    "dynamic-cdn-webpack-plugin": "^5.0.0",
     "framer-motion": "^4",
     "jest-styled-components": "^7.0.5",
     "nft.storage": "^3.2.2",

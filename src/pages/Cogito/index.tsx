@@ -1,6 +1,10 @@
+import {Button, Stack} from "@chakra-ui/react";
+
 const Cogito = () => {
   return (
-    <>Cogito</>
+    <Stack>
+      <Button>Change language</Button>
+    </Stack>
   )
 }
 

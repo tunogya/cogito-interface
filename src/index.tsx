@@ -1,11 +1,11 @@
-import { StrictMode } from "react"
+import {StrictMode} from "react"
 import ReactDOM from "react-dom"
 import App from "./pages/App"
-import { LanguageProvider } from "./i18n"
-import { RecoilRoot } from "recoil"
-import { HashRouter } from "react-router-dom"
+import LanguageProvider from "./i18n"
+import {RecoilRoot} from "recoil"
+import {HashRouter} from "react-router-dom"
 import reportWebVitals from "./reportWebVitals"
-import { ChakraProvider } from "@chakra-ui/react"
+import {ChakraProvider} from "@chakra-ui/react"
 import theme from "./theme"
 
 const Updaters = () => {

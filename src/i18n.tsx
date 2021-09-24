@@ -1,9 +1,8 @@
-import { I18nProvider } from '@lingui/react'
+import { FC, useEffect } from 'react'
 import { i18n } from '@lingui/core'
-import { ReactNode, useEffect } from 'react'
-
-import { en, zh } from 'make-plural/plurals'
-import { detect, fromUrl, fromStorage, fromNavigator } from '@lingui/detect-locale'
+import { I18nProvider } from '@lingui/react'
+import { en, cs } from 'make-plural/plurals'
+import {detect, fromNavigator, fromStorage, fromUrl} from "@lingui/detect-locale";
 
 export const locales = {
   "en-US": "English",
@@ -15,30 +14,11 @@ export const defaultLocale = detect(fromUrl('lang'), fromStorage('lang'), fromNa
 
 i18n.loadLocaleData({
   "en-US": { plurals: en },
-  "zh-CN": { plurals: zh },
+  "zh-CN": { plurals: cs },
 })
 
-export async function dynamicActivate(locale: string) {
-  if (!(locale in locales)) {
-    locale = 'en-US'
-  }
-  const { messages } = await import(`./locales/${locale}.po`)
-  i18n.load(locale, messages)
-  i18n.activate(locale)
-
-  if (window.localStorage) {
-    window.localStorage.setItem('lang', locale)
-  }
+const LanguageProvider: FC = ({ children }) => {
+  return <I18nProvider i18n={i18n} forceRenderOnLocaleChange={false}>{children}</I18nProvider>
 }
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  useEffect(() => {
-    dynamicActivate(defaultLocale)
-  }, [])
-
-  return (
-    <I18nProvider forceRenderOnLocaleChange={false} i18n={i18n}>
-      {children}
-    </I18nProvider>
-  )
-}
+export default LanguageProvider
