@@ -27,7 +27,7 @@ export const Header = () => {
   return (
     <Grid templateColumns="repeat(3, 1fr)" p={4} gap={6} alignItems={"center"}>
       <Stack justifySelf={"flex-start"}>
-        <Text fontWeight={"bold"} fontSize={"md"}>Create React Dapp</Text>
+        <Text fontWeight={"bold"} fontSize={"md"}>Cogito ergo sum</Text>
       </Stack>
       <Stack justifySelf={"center"} direction={"row"} p={1} borderRadius={"md"}>
         {links.map((link, index) => (

@@ -14,5 +14,25 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/components/Header/index.tsx
-msgid "Cogito ergo sum"
-msgstr "我思故我在"
+msgid "About"
+msgstr "关于"
+
+#: src/components/Header/index.tsx
+msgid "Dark"
+msgstr "深色"
+
+#: src/components/Header/index.tsx
+msgid "Document"
+msgstr "文档"
+
+#: src/components/Header/index.tsx
+msgid "Language"
+msgstr "语言"
+
+#: src/components/Header/index.tsx
+msgid "Light"
+msgstr "浅色"
+
+#: src/components/Header/index.tsx
+msgid "Mode"
+msgstr "模式"
