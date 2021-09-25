@@ -1,11 +1,11 @@
-import { atom ,useRecoilState } from "recoil";
-import {DEFAULT_LOCALE, SUPPORTED_LOCALES, SupportedLocale} from "../constants/locales";
+import { atom, useRecoilState } from "recoil"
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, SupportedLocale } from "../constants/locales"
 
 function parseLocale(maybeSupportedLocale: unknown): SupportedLocale | undefined {
-  if (typeof maybeSupportedLocale !== 'string') return undefined
+  if (typeof maybeSupportedLocale !== "string") return undefined
   const lowerMaybeSupportedLocale = maybeSupportedLocale.toLowerCase()
   return SUPPORTED_LOCALES.find(
-    (locale) => locale.toLowerCase() === lowerMaybeSupportedLocale || locale.split('-')[0] === lowerMaybeSupportedLocale
+    locale => locale.toLowerCase() === lowerMaybeSupportedLocale || locale.split("-")[0] === lowerMaybeSupportedLocale
   )
 }
 
@@ -22,7 +22,7 @@ const localeAtom = atom({
   default: initialLocale,
 })
 
-export function useActiveLocale(){
+export function useActiveLocale() {
   const [locale, setLocale] = useRecoilState(localeAtom)
 
   const switchLocale = (locale: string) => {
