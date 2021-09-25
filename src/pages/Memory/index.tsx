@@ -1,7 +1,5 @@
 const Memory = () => {
-  return (
-    <>Memory</>
-  )
+  return <>Memory</>
 }
 
 export default Memory
