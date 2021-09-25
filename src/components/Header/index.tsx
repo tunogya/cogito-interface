@@ -24,7 +24,7 @@ export const Header = () => {
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
   const { colorMode, toggleColorMode } = useColorMode()
-  const { locale, toggleEnUS, toggleZhCN} = useActiveLocale()
+  const { locale, switchLocale} = useActiveLocale()
 
   return (
     <Grid templateColumns="repeat(3, 1fr)" p={4} gap={6} alignItems={"center"}>
@@ -57,10 +57,10 @@ export const Header = () => {
             <MenuItem><Trans>About</Trans></MenuItem>
             <MenuItem><Trans>Document</Trans></MenuItem>
             <MenuItem onClick={toggleColorMode}>{colorMode === "light" ? t`Dark Mode` : t`Light Mode`}</MenuItem>
-            <MenuDivider />
+            <MenuDivider/>
             <MenuOptionGroup defaultValue={locale} title="language" type="radio">
-              <MenuItemOption value="en-US" onClick={toggleEnUS}>English</MenuItemOption>
-              <MenuItemOption value="zh-CN" onClick={toggleZhCN}>简体中文</MenuItemOption>
+              <MenuItemOption value="en-US" onClick={() => switchLocale("en-US")}>English</MenuItemOption>
+              <MenuItemOption value="zh-CN" onClick={() => switchLocale("zh-CN")}>简体中文</MenuItemOption>
             </MenuOptionGroup>
           </MenuList>
         </Menu>
