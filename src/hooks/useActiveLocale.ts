@@ -12,17 +12,17 @@ const localeAtom = atom({
 export function useActiveLocale(){
   const [locale, setLocale] = useRecoilState(localeAtom)
 
-  const toggle = () => {
+  const toggleEnUS = () => {
     setLocale(EN_LOCALE)
-    if (locale === "en-US"){
-      setLocale(ZH_LOCALE)
-    }else{
-      setLocale(EN_LOCALE)
-    }
+  }
+
+  const toggleZhCN = () => {
+    setLocale(ZH_LOCALE)
   }
 
   return {
     locale,
-    toggle
+    toggleEnUS,
+    toggleZhCN
   }
 }
