@@ -13,11 +13,12 @@ import {
 import { useHistory } from "react-router-dom"
 import { useState } from "react"
 import { HamburgerIcon } from "@chakra-ui/icons"
+import {t, Trans} from "@lingui/macro";
 
 export const Header = () => {
   const links = [
-    { path: "/", label: "Cogito" },
-    { path: "/memory", label: "Memory" },
+    { path: "/", label: <Trans>Cogito</Trans>},
+    { path: "/memory", label: <Trans>Memory</Trans>},
   ]
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
@@ -27,7 +28,7 @@ export const Header = () => {
     <Grid templateColumns="repeat(3, 1fr)" p={4} gap={6} alignItems={"center"}>
       <Stack justifySelf={"flex-start"}>
         <Text fontWeight={"bold"} fontSize={"md"}>
-          Cogito ergo sum
+          <Trans>Cogito ergo sum</Trans>
         </Text>
       </Stack>
       <Stack justifySelf={"center"} direction={"row"} p={1} borderRadius={"md"}>
@@ -51,10 +52,10 @@ export const Header = () => {
         <Menu>
           <MenuButton as={IconButton} aria-label="Options" icon={<HamburgerIcon />} />
           <MenuList>
-            <MenuItem>About</MenuItem>
-            <MenuItem>Document</MenuItem>
-            <MenuItem>Language</MenuItem>
-            <MenuItem onClick={toggleColorMode}>{colorMode === "light" ? "Dark" : "Light"} Mode</MenuItem>
+            <MenuItem><Trans>About</Trans></MenuItem>
+            <MenuItem><Trans>Document</Trans></MenuItem>
+            <MenuItem><Trans>Language</Trans></MenuItem>
+            <MenuItem onClick={toggleColorMode}>{colorMode === "light" ? t`Dark Mode` : t`Light Mode`}</MenuItem>
           </MenuList>
         </Menu>
       </Stack>

@@ -1,9 +1,11 @@
 import { Button, Stack } from "@chakra-ui/react"
+import {useActiveLocale} from "../../hooks/useActiveLocale";
 
 const Cogito = () => {
+  const {toggle} = useActiveLocale()
   return (
     <Stack>
-      <Button>Change language</Button>
+      <Button onClick={toggle}>Change language</Button>
     </Stack>
   )
 }
