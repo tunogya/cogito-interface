@@ -6,6 +6,7 @@ import { HashRouter } from "react-router-dom"
 import reportWebVitals from "./reportWebVitals"
 import { ChakraProvider } from "@chakra-ui/react"
 import theme from "./theme"
+import {LanguageProvider} from "./i18n";
 
 const Updaters = () => {
   return <></>
@@ -16,8 +17,10 @@ ReactDOM.render(
     <RecoilRoot>
       <HashRouter>
         <ChakraProvider theme={theme}>
-          <Updaters />
-          <App />
+          <LanguageProvider>
+            <Updaters />
+            <App />
+          </LanguageProvider>
         </ChakraProvider>
       </HashRouter>
     </RecoilRoot>
