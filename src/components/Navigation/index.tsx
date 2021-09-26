@@ -1,15 +1,16 @@
-import {Button, Divider, Spacer, Stack, Text} from "@chakra-ui/react";
+import {Button, Spacer, Stack, Text} from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useHistory} from "react-router-dom";
 import {useState} from "react";
+import {SmallAddIcon, InfoIcon, SettingsIcon, StarIcon} from "@chakra-ui/icons";
 
 export const Navigation = () => {
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
   const links = [
-    {pathname: "/", label: <Trans>Overview</Trans>},
-    {pathname: "/fresh", label: <Trans>Fresh Memory</Trans>},
-    {pathname: "/setting", label: <Trans>Setting</Trans>},
+    {pathname: "/", label: <Trans>Overview</Trans>, icon: <InfoIcon/>},
+    {pathname: "/fresh", label: <Trans>Fresh Memory</Trans>, icon: <StarIcon/>},
+    {pathname: "/setting", label: <Trans>Setting</Trans>, icon: <SettingsIcon/>},
   ]
 
   return (
@@ -18,8 +19,10 @@ export const Navigation = () => {
       {links.map((link, index) => (
         <Stack direction={"row"} key={index}>
           <Button
+            leftIcon={link.icon}
             variant={"ghost"}
-            fontWeight={currentPath === link.pathname ? "bold" : "normal"}
+            fontSize={currentPath === link.pathname ? "md" : "sm"}
+            opacity={ currentPath === link.pathname ? "1" : "0.6" }
             onClick={() => {
               history.push(link.pathname)
               setCurrentPath(link.pathname)
@@ -28,7 +31,9 @@ export const Navigation = () => {
           </Button>
         </Stack>
       ))}
-      <Button>Cogito</Button>
+      <Button leftIcon={<SmallAddIcon/>}>
+        Cogito
+      </Button>
       <Spacer/>
       <Button>MY ACCOUNT</Button>
     </Stack>
