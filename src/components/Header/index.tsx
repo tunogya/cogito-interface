@@ -68,7 +68,7 @@ export const Header = () => {
               {colorMode === "light" ? <Trans>Dark Mode</Trans> : <Trans>Light Mode</Trans>}
             </MenuItem>
             <MenuDivider />
-            <MenuOptionGroup defaultValue={locale} title="language" type="radio">
+            <MenuOptionGroup defaultValue={locale} type="radio">
               {SUPPORTED_LOCALES.map((locale, index) => (
                 <MenuItemOption value={locale} key={index} onClick={() => switchLocale(locale)}>
                   {LOCALE_LABEL[locale]}
