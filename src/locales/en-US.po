@@ -18,10 +18,6 @@ msgid "About"
 msgstr "About"
 
 #: src/components/Header/index.tsx
-msgid "Cogito"
-msgstr "Cogito"
-
-#: src/components/Header/index.tsx
 msgid "Cogito ergo sum"
 msgstr "Cogito ergo sum"
 
@@ -34,13 +30,13 @@ msgid "Document"
 msgstr "Document"
 
 #: src/components/Header/index.tsx
-msgid "Language"
-msgstr "Language"
+msgid "Fresh"
+msgstr "Fresh"
 
 #: src/components/Header/index.tsx
 msgid "Light Mode"
 msgstr "Light Mode"
 
 #: src/components/Header/index.tsx
-msgid "Memory"
-msgstr "Memory"
+msgid "Loss"
+msgstr "Loss"

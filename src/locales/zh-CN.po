@@ -18,10 +18,6 @@ msgid "About"
 msgstr "关于"
 
 #: src/components/Header/index.tsx
-msgid "Cogito"
-msgstr "思绪"
-
-#: src/components/Header/index.tsx
 msgid "Cogito ergo sum"
 msgstr "我思故我在"
 
@@ -34,13 +30,13 @@ msgid "Document"
 msgstr "文档"
 
 #: src/components/Header/index.tsx
-msgid "Language"
-msgstr "语言"
+msgid "Fresh"
+msgstr "记忆"
 
 #: src/components/Header/index.tsx
 msgid "Light Mode"
 msgstr "浅色模式"
 
 #: src/components/Header/index.tsx
-msgid "Memory"
-msgstr "记忆"
+msgid "Loss"
+msgstr "丢失"

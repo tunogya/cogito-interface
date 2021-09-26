@@ -1,24 +1,26 @@
 import React from "react"
-import { Redirect, Route, Switch } from "react-router-dom"
-import { Stack } from "@chakra-ui/react"
-import Header from "../components/Header"
-import Cogito from "./Cogito"
-import Memory from "./Memory"
+import {Redirect, Route, Switch} from "react-router-dom"
+import {Divider, Grid, Spacer, Stack} from "@chakra-ui/react"
+import Fresh from "./Fresh"
+import Navigation from "../components/Navigation";
+import SubContent from "../components/SubContent";
+import Content from "../components/Content";
 
 function App() {
   return (
-    <Stack spacing={0} minH={"100vh"}>
-      <Stack position={"fixed"} w={"100%"}>
-        <Header />
+    <Grid templateColumns="1fr 2fr 1fr" alignItems={"center"}>
+      <Stack h={"100vh"}>
+        <Navigation/>
       </Stack>
-      <Stack p={"120px 16px 0 16px"} alignItems={"center"}>
-        <Switch>
-          <Route exact strict path="/memory" component={Memory} />
-          <Route exact strict path="/" component={Cogito} />
-          <Redirect to="/" />
-        </Switch>
+      <Stack direction={"row"} h={"100%"}>
+        <Divider orientation="vertical"/>
+        <Content/>
+        <Divider orientation="vertical"/>
       </Stack>
-    </Stack>
+      <Stack>
+        <SubContent/>
+      </Stack>
+    </Grid>
   )
 }
 

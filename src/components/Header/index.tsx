@@ -22,8 +22,8 @@ import { LOCALE_LABEL, SUPPORTED_LOCALES } from "../../constants/locales"
 
 export const Header = () => {
   const links = [
-    { path: "/", label: <Trans>Cogito</Trans> },
-    { path: "/memory", label: <Trans>Memory</Trans> },
+    { path: "/", label: <Trans>Fresh</Trans> },
+    { path: "/loss", label: <Trans>Loss</Trans> },
   ]
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
