@@ -1,14 +1,14 @@
 import {Stack, Text} from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 
-const Fresh = () => {
+const Overview = () => {
   return (
     <Stack w={"100%"} h={"100%"}>
       <Text fontWeight={"bold"} fontSize={"xl"}>
-        <Trans>Fresh Memory</Trans>
+        <Trans>Overview</Trans>
       </Text>
     </Stack>
   )
 }
 
-export default Fresh
+export default Overview

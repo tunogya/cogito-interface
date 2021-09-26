@@ -1,9 +1,9 @@
-import {Stack} from "@chakra-ui/react";
+import Loss from "../../pages/Loss";
 
 export const SubContent = () => {
-  return <Stack>
-    SubContent
-  </Stack>
+  return (
+    <Loss/>
+  )
 }
 
 export default SubContent
