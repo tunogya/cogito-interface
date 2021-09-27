@@ -21,8 +21,7 @@ export const Navigation = () => {
           <Button
             leftIcon={link.icon}
             variant={"ghost"}
-            fontSize={currentPath === link.pathname ? "md" : "sm"}
-            opacity={ currentPath === link.pathname ? "1" : "0.6" }
+            opacity={ currentPath === link.pathname ? "1" : "0.8" }
             onClick={() => {
               history.push(link.pathname)
               setCurrentPath(link.pathname)

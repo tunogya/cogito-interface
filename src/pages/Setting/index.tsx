@@ -1,9 +1,9 @@
-import {Stack, Text, useColorMode} from "@chakra-ui/react";
+import {Button, Select, Stack, StackDivider, Text, useColorMode} from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {CheckIcon, MoonIcon, SunIcon} from "@chakra-ui/icons";
 
 const Setting = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const {colorMode, toggleColorMode} = useColorMode()
 
   return (
     <Stack w={"100%"} h={"100%"} spacing={6}>
@@ -11,20 +11,20 @@ const Setting = () => {
         <Text fontWeight={"bold"}>
           <Trans>Appearance</Trans>
         </Text>
-        <Stack p={4} borderRadius={"md"}
-               direction={"row"} justifyContent={"space-between"}
-               alignItems={"center"}
-               onClick={toggleColorMode}
-        >
-          <Text>
-            <Trans>{ colorMode === "light" ? ("Light mode") : ("Dark mode")} </Trans>
-          </Text>
-          { colorMode === "light" ? (
-            <SunIcon/>
-          ) : (
-            <MoonIcon/>
-          )}
-        </Stack>
+        <Button onClick={toggleColorMode}>
+          <Stack direction={"row"} justifyContent={"space-between"}
+                 alignItems={"center"} w={"100%"}
+          >
+            <Text>
+              <Trans>{colorMode === "light" ? ("Light mode") : ("Dark mode")} </Trans>
+            </Text>
+            {colorMode === "light" ? (
+              <SunIcon/>
+            ) : (
+              <MoonIcon/>
+            )}
+          </Stack>
+        </Button>
 
       </Stack>
       <Stack>
@@ -36,12 +36,10 @@ const Setting = () => {
         <Text fontWeight={"bold"}>
           <Trans>Language</Trans>
         </Text>
-        <Stack p={4} borderRadius={"md"} direction={"row"} justifyContent={"space-between"}>
-          <Text>
-            <Trans>English</Trans>
-          </Text>
-          <CheckIcon/>
-        </Stack>
+        <Select placeholder="Select language" variant={"filled"}>
+          <option value="option1">English</option>
+          <option value="option2">简体中文</option>
+        </Select>
       </Stack>
     </Stack>
   )
