@@ -13,30 +13,44 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/Header/index.tsx
-msgid "About"
-msgstr "About"
+#: src/pages/Setting/index.tsx
+msgid "Appearance"
+msgstr "Appearance"
 
-#: src/components/Header/index.tsx
-msgid "Cogito ergo sum"
-msgstr "Cogito ergo sum"
+#: src/components/Navigation/index.tsx
+msgid "Cogito"
+msgstr "Cogito"
 
-#: src/components/Header/index.tsx
-msgid "Dark Mode"
-msgstr "Dark Mode"
+#: src/pages/Setting/index.tsx
+msgid "Dark mode"
+msgstr "Dark mode"
 
-#: src/components/Header/index.tsx
-msgid "Document"
-msgstr "Document"
+#: src/components/Navigation/index.tsx
+#: src/pages/Fresh/index.tsx
+msgid "Fresh Memory"
+msgstr "Fresh Memory"
 
-#: src/components/Header/index.tsx
-msgid "Fresh"
-msgstr "Fresh"
+#: src/pages/Setting/index.tsx
+msgid "Language"
+msgstr "Language"
 
-#: src/components/Header/index.tsx
-msgid "Light Mode"
-msgstr "Light Mode"
+#: src/pages/Setting/index.tsx
+msgid "Light mode"
+msgstr "Light mode"
 
-#: src/components/Header/index.tsx
-msgid "Loss"
-msgstr "Loss"
+#: src/components/Navigation/index.tsx
+msgid "MY ACCOUNT"
+msgstr "MY ACCOUNT"
+
+#: src/pages/Loss/index.tsx
+msgid "Memory Loss"
+msgstr "Memory Loss"
+
+#: src/components/Navigation/index.tsx
+#: src/pages/Overview/index.tsx
+msgid "Overview"
+msgstr "Overview"
+
+#: src/components/Navigation/index.tsx
+msgid "Setting"
+msgstr "Setting"

@@ -13,30 +13,44 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/Header/index.tsx
-msgid "About"
-msgstr "关于"
+#: src/pages/Setting/index.tsx
+msgid "Appearance"
+msgstr "外观"
 
-#: src/components/Header/index.tsx
-msgid "Cogito ergo sum"
-msgstr "我思故我在"
+#: src/components/Navigation/index.tsx
+msgid "Cogito"
+msgstr "思考"
 
-#: src/components/Header/index.tsx
-msgid "Dark Mode"
+#: src/pages/Setting/index.tsx
+msgid "Dark mode"
 msgstr "深色模式"
 
-#: src/components/Header/index.tsx
-msgid "Document"
-msgstr "文档"
+#: src/components/Navigation/index.tsx
+#: src/pages/Fresh/index.tsx
+msgid "Fresh Memory"
+msgstr "记忆犹新"
 
-#: src/components/Header/index.tsx
-msgid "Fresh"
-msgstr "记忆"
+#: src/pages/Setting/index.tsx
+msgid "Language"
+msgstr "语言"
 
-#: src/components/Header/index.tsx
-msgid "Light Mode"
+#: src/pages/Setting/index.tsx
+msgid "Light mode"
 msgstr "浅色模式"
 
-#: src/components/Header/index.tsx
-msgid "Loss"
-msgstr "丢失"
+#: src/components/Navigation/index.tsx
+msgid "MY ACCOUNT"
+msgstr "我的账户"
+
+#: src/pages/Loss/index.tsx
+msgid "Memory Loss"
+msgstr "失忆"
+
+#: src/components/Navigation/index.tsx
+#: src/pages/Overview/index.tsx
+msgid "Overview"
+msgstr "概览"
+
+#: src/components/Navigation/index.tsx
+msgid "Setting"
+msgstr "设置"

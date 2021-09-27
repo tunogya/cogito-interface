@@ -1,9 +1,7 @@
-import Loss from "../../pages/Loss";
+import Loss from "../../pages/Loss"
 
 export const SubContent = () => {
-  return (
-    <Loss/>
-  )
+  return <Loss />
 }
 
 export default SubContent
