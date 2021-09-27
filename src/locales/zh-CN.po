@@ -44,7 +44,7 @@ msgstr "我的账户"
 
 #: src/pages/Loss/index.tsx
 msgid "Memory Loss"
-msgstr "失忆"
+msgstr "遗忘"
 
 #: src/components/Navigation/index.tsx
 #: src/pages/Overview/index.tsx
