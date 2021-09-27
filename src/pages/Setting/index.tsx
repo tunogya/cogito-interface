@@ -1,17 +1,16 @@
 import {
   Accordion,
   AccordionButton, AccordionIcon,
-  AccordionItem, AccordionPanel, Box,
-  Button, Divider, FormControl, FormLabel, IconButton, MenuItemOption,
+  AccordionItem, AccordionPanel,
+  FormControl, FormLabel, IconButton,
   Select, Spacer,
   Stack,
-  StackDivider, Switch,
+  StackDivider,
   Text,
   useColorMode
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
-import {CheckIcon, MoonIcon, SunIcon} from "@chakra-ui/icons";
-import {useState} from "react";
+import {MoonIcon, SunIcon} from "@chakra-ui/icons";
 import {LOCALE_LABEL, SUPPORTED_LOCALES} from "../../constants/locales";
 import {useActiveLocale} from "../../hooks/useActiveLocale";
 
@@ -24,7 +23,7 @@ const Setting = () => {
       <AccordionItem>
         <AccordionButton>
           <Text flex="1" textAlign="left" fontWeight={"bold"}>
-            Appearance
+            <Trans>Appearance</Trans>
           </Text>
           <AccordionIcon/>
         </AccordionButton>
@@ -33,9 +32,9 @@ const Setting = () => {
             <FormControl display="flex" alignItems="center" pl={4}>
               <FormLabel htmlFor="email-alerts">
                 {colorMode === "dark" ? (
-                  <Text>Dark mode</Text>
+                  <Text><Trans>Dark mode</Trans></Text>
                 ) : (
-                  <Text>Light mode</Text>
+                  <Text><Trans>Light mode</Trans></Text>
                 )}
               </FormLabel>
               <Spacer/>
@@ -49,7 +48,7 @@ const Setting = () => {
       <AccordionItem>
         <AccordionButton>
           <Text flex="1" textAlign="left" fontWeight={"bold"}>
-            Language
+            <Trans>Language</Trans>
           </Text>
           <AccordionIcon/>
         </AccordionButton>
@@ -58,7 +57,8 @@ const Setting = () => {
             <FormControl display="flex" alignItems="center" pl={4}>
               <Select defaultValue={locale}>
                 {SUPPORTED_LOCALES.map((locale, index) => (
-                  <option key={index} value={locale} onClick={() => switchLocale(locale)}>{LOCALE_LABEL[locale]}</option>
+                  <option key={index} value={locale}
+                          onClick={() => switchLocale(locale)}>{LOCALE_LABEL[locale]}</option>
                 ))}
               </Select>
             </FormControl>
