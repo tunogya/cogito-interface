@@ -27,7 +27,7 @@ const Setting = () => {
     <Accordion defaultIndex={[0]} allowMultiple w={"100%"}>
       <AccordionItem>
         <AccordionButton>
-          <Text flex="1" textAlign="left" fontWeight={"bold"}>
+          <Text flex="1" textAlign="left" fontWeight={"bold"} fontSize={"xl"}>
             <Trans>Appearance</Trans>
           </Text>
           <AccordionIcon />
@@ -59,7 +59,7 @@ const Setting = () => {
       </AccordionItem>
       <AccordionItem>
         <AccordionButton>
-          <Text flex="1" textAlign="left" fontWeight={"bold"}>
+          <Text flex="1" textAlign="left" fontWeight={"bold"} fontSize={"xl"}>
             <Trans>Language</Trans>
           </Text>
           <AccordionIcon />
@@ -67,9 +67,9 @@ const Setting = () => {
         <AccordionPanel p={4}>
           <Stack divider={<StackDivider />}>
             <FormControl display="flex" alignItems="center" pl={4}>
-              <Select defaultValue={locale}>
+              <Select defaultValue={locale} onChange={(e) => switchLocale(e.target.value)}>
                 {SUPPORTED_LOCALES.map((locale, index) => (
-                  <option key={index} value={locale} onClick={() => switchLocale(locale)}>
+                  <option key={index} value={locale}>
                     {LOCALE_LABEL[locale]}
                   </option>
                 ))}

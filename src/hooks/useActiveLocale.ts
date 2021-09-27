@@ -24,7 +24,6 @@ const localeAtom = atom({
 
 export function useActiveLocale() {
   const [locale, setLocale] = useRecoilState(localeAtom)
-
   const switchLocale = (locale: string) => {
     setLocale(parseLocale(locale) ?? DEFAULT_LOCALE)
   }
