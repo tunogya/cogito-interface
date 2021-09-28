@@ -1,3 +1,4 @@
+import "./constants/config"
 import { StrictMode } from "react"
 import ReactDOM from "react-dom"
 import App from "./pages/App"

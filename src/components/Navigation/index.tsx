@@ -3,6 +3,7 @@ import { Trans } from "@lingui/macro"
 import { useHistory } from "react-router-dom"
 import { useState } from "react"
 import { SmallAddIcon, InfoIcon, SettingsIcon, StarIcon } from "@chakra-ui/icons"
+import {useCurrentUser} from "../../hooks/useCurrentUser"
 
 export const Navigation = () => {
   const history = useHistory()
@@ -12,6 +13,7 @@ export const Navigation = () => {
     { pathname: "/fresh", label: <Trans>Fresh Memory</Trans>, icon: <StarIcon /> },
     { pathname: "/setting", label: <Trans>Setting</Trans>, icon: <SettingsIcon /> },
   ]
+  const { user, logIn } = useCurrentUser()
 
   return (
     <Stack width={"240px"} h={"100%"} spacing={4}>
@@ -37,7 +39,7 @@ export const Navigation = () => {
         <Trans>Cogito</Trans>
       </Button>
       <Spacer />
-      <Button>
+      <Button onClick={logIn}>
         <Trans>MY ACCOUNT</Trans>
       </Button>
     </Stack>
