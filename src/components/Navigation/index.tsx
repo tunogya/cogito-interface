@@ -14,7 +14,7 @@ export const Navigation = () => {
     { pathname: "/setting", label: <Trans>Setting</Trans>, icon: <SettingsIcon /> },
   ]
   const { user, logIn } = useCurrentUser()
-
+  console.log(user)
   return (
     <Stack width={"240px"} h={"100%"} spacing={4}>
       <Text fontWeight={"bold"} fontSize={"xl"}>
@@ -39,9 +39,15 @@ export const Navigation = () => {
         <Trans>Cogito</Trans>
       </Button>
       <Spacer />
-      <Button onClick={logIn}>
-        <Trans>MY ACCOUNT</Trans>
-      </Button>
+      { user.loggedIn ? (
+        <Button>
+          <Trans>{ user.addr }</Trans>
+        </Button>
+      ) : (
+        <Button onClick={logIn}>
+          <Trans>Log in</Trans>
+        </Button>
+      ) }
     </Stack>
   )
 }
