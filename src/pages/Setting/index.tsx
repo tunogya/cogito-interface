@@ -24,7 +24,7 @@ const Setting = () => {
   const { locale, switchLocale } = useActiveLocale()
 
   return (
-    <Accordion defaultIndex={[0]} allowMultiple w={"100%"}>
+    <Accordion defaultIndex={[]} allowMultiple w={"100%"}>
       <AccordionItem>
         <AccordionButton>
           <Text flex="1" textAlign="left" fontWeight={"bold"} fontSize={"xl"}>
@@ -32,7 +32,7 @@ const Setting = () => {
           </Text>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel p={4}>
+        <AccordionPanel pl={4}>
           <Stack divider={<StackDivider />}>
             <FormControl display="flex" alignItems="center" pl={4}>
               <FormLabel htmlFor="email-alerts">
@@ -64,7 +64,7 @@ const Setting = () => {
           </Text>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel p={4}>
+        <AccordionPanel pl={4}>
           <Stack divider={<StackDivider />}>
             <FormControl display="flex" alignItems="center" pl={4}>
               <Select defaultValue={locale} onChange={(e) => switchLocale(e.target.value)}>

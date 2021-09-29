@@ -1,14 +1,9 @@
-import {Box, Divider, Text} from "@chakra-ui/react"
-import { Trans } from "@lingui/macro"
+import Content from "../../components/Content";
 
 const Fresh = () => {
   return (
-    <Box w={"100%"} h={"100%"}>
-      <Text fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
-        <Trans>Fresh Memory</Trans>
-      </Text>
-      <Divider/>
-    </Box>
+    <Content label={"Fresh Memory"}>
+    </Content>
   )
 }
 
