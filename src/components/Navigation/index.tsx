@@ -24,14 +24,14 @@ export const Navigation = () => {
         <Stack direction={"row"} key={index}>
           <Button
             leftIcon={link.icon}
+            size={"lg"}
             variant={"ghost"}
-            opacity={currentPath === link.pathname ? "1" : "0.8"}
             onClick={() => {
               history.push(link.pathname)
               setCurrentPath(link.pathname)
             }}
           >
-            {link.label}
+            <Text fontWeight={currentPath === link.pathname ? "bold": "normal" }>{link.label}</Text>
           </Button>
         </Stack>
       ))}
