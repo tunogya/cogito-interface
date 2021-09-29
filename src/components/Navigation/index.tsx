@@ -18,7 +18,7 @@ export const Navigation = () => {
   return (
     <Stack width={"240px"} h={"100%"} spacing={4}>
       <Text fontWeight={"bold"} fontSize={"xl"}>
-        Cogito ergo sum
+        Cogito ergo sum-{process.env.REACT_APP_CHAIN_ENV}
       </Text>
       {links.map((link, index) => (
         <Stack direction={"row"} key={index}>

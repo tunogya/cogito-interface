@@ -1,8 +1,4 @@
 import { config } from "@onflow/fcl"
-import * as process from "process"
-
-const discoveryWallet = process.env.REACT_APP_WALLET_DISCOVERY
-console.log(discoveryWallet)
 
 config()
   .put("app.detail.title", process.env.REACT_APP_DETAIL_TITLE)
