@@ -7,15 +7,15 @@ import Content from "../components/Content"
 function App() {
   return (
     <Grid templateColumns="1fr 2fr 1fr" alignItems={"center"} minH={"100vh"}>
-      <Stack h={"100%"} justifySelf={"flex-end"} p={"20px 40px 20px 40px"}>
+      <Stack h={"100%"} w={"100%"}>
         <Navigation />
       </Stack>
-      <Stack h={"100%"} direction={"row"} spacing={0}>
+      <Stack h={"100%"} w={"100%"} direction={"row"} spacing={0}>
         <Divider orientation="vertical"/>
         <Content />
         <Divider orientation="vertical" />
       </Stack>
-      <Stack h={"100%"} justifySelf={"flex-start"} p={"20px 40px 0px 40px"}>
+      <Stack h={"100%"} w={"100%"}>
         <SubContent />
       </Stack>
     </Grid>

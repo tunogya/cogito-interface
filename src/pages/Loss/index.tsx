@@ -1,13 +1,14 @@
-import { Stack, Text } from "@chakra-ui/react"
+import {Box, Divider, Text} from "@chakra-ui/react"
 import { Trans } from "@lingui/macro"
 
 const Loss = () => {
   return (
-    <Stack width={"240px"} h={"100%"} spacing={4}>
-      <Text fontWeight={"bold"} fontSize={"xl"}>
-        <Trans>Memory Loss</Trans>
+    <Box w={"100%"} h={"100%"}>
+      <Text fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
+        <Trans>Loss</Trans>
       </Text>
-    </Stack>
+      <Divider/>
+    </Box>
   )
 }
 

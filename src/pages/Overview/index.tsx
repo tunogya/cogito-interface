@@ -1,13 +1,14 @@
-import { Stack, Text } from "@chakra-ui/react"
+import {Box, Divider, Text} from "@chakra-ui/react"
 import { Trans } from "@lingui/macro"
 
 const Overview = () => {
   return (
-    <Stack w={"100%"} h={"100%"}>
-      <Text fontWeight={"bold"} fontSize={"xl"}>
+    <Box w={"100%"} h={"100%"}>
+      <Text fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
         <Trans>Overview</Trans>
       </Text>
-    </Stack>
+      <Divider/>
+    </Box>
   )
 }
 
