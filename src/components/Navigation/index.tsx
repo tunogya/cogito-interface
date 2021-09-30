@@ -16,7 +16,7 @@ export const Navigation = () => {
   const { user, logIn } = useCurrentUser()
   return (
     <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
-      <Stack spacing={4} pr={"16px"}>
+      <Stack spacing={4} pr={4}>
         <Text fontWeight={"bold"} fontSize={"xl"}>
           Cogito ergo sum-{process.env.REACT_APP_CHAIN_ENV}
         </Text>

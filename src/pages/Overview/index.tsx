@@ -3,7 +3,7 @@ import {Text} from "@chakra-ui/react"
 
 const Overview = () => {
   return (
-    <Content label={"Overview"}>
+    <Content label={"Overview"} hasDivider>
       <Text>Overview</Text>
     </Content>
   )

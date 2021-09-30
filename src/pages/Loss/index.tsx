@@ -3,7 +3,7 @@ import {Text} from "@chakra-ui/react"
 
 const Loss = () => {
   return (
-    <Content label={"Loss"}>
+    <Content label={"Loss"} hasDivider>
       <Text>Loss</Text>
       <Text>Loss</Text>
     </Content>

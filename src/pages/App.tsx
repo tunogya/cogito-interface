@@ -9,7 +9,7 @@ import Loss from "./Loss";
 
 function App() {
   return (
-    <Grid templateColumns="1fr 2fr 1fr" alignItems={"center"} minH={"100vh"}>
+    <Grid templateColumns="1fr 2fr 1.2fr" alignItems={"center"} minH={"100vh"}>
       <Stack h={"100%"} w={"100%"}>
         <Navigation />
       </Stack>
@@ -26,7 +26,12 @@ function App() {
         <Divider orientation="vertical" />
       </Stack>
       <Stack h={"100%"} w={"100%"} spacing={0}>
-        <Loss />
+        <Switch>
+          <Route exact strict path="/" component={Loss} />
+          <Route exact strict path="/fresh" component={Loss} />
+          <Route exact strict path="/setting" component={Loss} />
+          <Redirect to="/" />
+        </Switch>
       </Stack>
     </Grid>
   )
