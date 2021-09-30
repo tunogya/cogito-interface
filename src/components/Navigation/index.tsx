@@ -1,27 +1,26 @@
-import { Button, Spacer, Stack, Text } from "@chakra-ui/react"
-import { Trans } from "@lingui/macro"
-import { useHistory } from "react-router-dom"
-import { useState } from "react"
-import { SmallAddIcon} from "@chakra-ui/icons"
-import {useCurrentUser} from "../../hooks/useCurrentUser"
+import {Button, Spacer, Stack, Text} from "@chakra-ui/react"
+import {Trans} from "@lingui/macro"
+import {useHistory} from "react-router-dom"
+import {useState} from "react"
+import {SmallAddIcon} from "@chakra-ui/icons"
+import Auth from "../Auth";
 import {
-  AiFillInfoCircle,
   AiFillSetting,
   AiFillStar,
-  AiOutlineInfoCircle,
   AiOutlineSetting,
-  AiOutlineStar
+  AiOutlineStar, RiUserSmileFill, RiUserSmileLine
 } from "react-icons/all";
+
 
 export const Navigation = () => {
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
   const links = [
-    { pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <AiFillInfoCircle />, outlineIcon: <AiOutlineInfoCircle />},
-    { pathname: "/fresh", label: <Trans>Fresh Memory</Trans>, fillIcon: <AiFillStar />, outlineIcon: <AiOutlineStar /> },
-    { pathname: "/setting", label: <Trans>Setting</Trans>, fillIcon: <AiFillSetting />, outlineIcon: <AiOutlineSetting /> },
+    {pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill/>, outlineIcon: <RiUserSmileLine/>},
+    {pathname: "/fresh", label: <Trans>Fresh Memory</Trans>, fillIcon: <AiFillStar/>, outlineIcon: <AiOutlineStar/>},
+    {pathname: "/setting", label: <Trans>Setting</Trans>, fillIcon: <AiFillSetting/>, outlineIcon: <AiOutlineSetting/>},
   ]
-  const { user, logIn } = useCurrentUser()
+
   return (
     <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
       <Stack spacing={4} pr={4}>
@@ -31,6 +30,7 @@ export const Navigation = () => {
         {links.map((link, index) => (
           <Stack direction={"row"} key={index}>
             <Button
+              borderRadius={"3xl"}
               leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
               size={"lg"}
               variant={"ghost"}
@@ -43,21 +43,12 @@ export const Navigation = () => {
             </Button>
           </Stack>
         ))}
-        <Button leftIcon={<SmallAddIcon />}>
+        <Button leftIcon={<SmallAddIcon/>} borderRadius={"3xl"}>
           <Trans>Cogito</Trans>
         </Button>
       </Stack>
-
-      <Spacer />
-      { user.loggedIn ? (
-        <Button>
-          <Trans>{ user.addr }</Trans>
-        </Button>
-      ) : (
-        <Button onClick={logIn}>
-          <Trans>Log in</Trans>
-        </Button>
-      ) }
+      <Spacer/>
+      <Auth/>
     </Stack>
   )
 }
