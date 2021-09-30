@@ -2,16 +2,24 @@ import { Button, Spacer, Stack, Text } from "@chakra-ui/react"
 import { Trans } from "@lingui/macro"
 import { useHistory } from "react-router-dom"
 import { useState } from "react"
-import { SmallAddIcon, InfoIcon, SettingsIcon, StarIcon } from "@chakra-ui/icons"
+import { SmallAddIcon} from "@chakra-ui/icons"
 import {useCurrentUser} from "../../hooks/useCurrentUser"
+import {
+  AiFillInfoCircle,
+  AiFillSetting,
+  AiFillStar,
+  AiOutlineInfoCircle,
+  AiOutlineSetting,
+  AiOutlineStar
+} from "react-icons/all";
 
 export const Navigation = () => {
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
   const links = [
-    { pathname: "/", label: <Trans>Overview</Trans>, icon: <InfoIcon /> },
-    { pathname: "/fresh", label: <Trans>Fresh Memory</Trans>, icon: <StarIcon /> },
-    { pathname: "/setting", label: <Trans>Setting</Trans>, icon: <SettingsIcon /> },
+    { pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <AiFillInfoCircle />, outlineIcon: <AiOutlineInfoCircle />},
+    { pathname: "/fresh", label: <Trans>Fresh Memory</Trans>, fillIcon: <AiFillStar />, outlineIcon: <AiOutlineStar /> },
+    { pathname: "/setting", label: <Trans>Setting</Trans>, fillIcon: <AiFillSetting />, outlineIcon: <AiOutlineSetting /> },
   ]
   const { user, logIn } = useCurrentUser()
   return (
@@ -23,7 +31,7 @@ export const Navigation = () => {
         {links.map((link, index) => (
           <Stack direction={"row"} key={index}>
             <Button
-              leftIcon={link.icon}
+              leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
               size={"lg"}
               variant={"ghost"}
               onClick={() => {
@@ -31,7 +39,7 @@ export const Navigation = () => {
                 setCurrentPath(link.pathname)
               }}
             >
-              <Text fontWeight={currentPath === link.pathname ? "bold": "normal" }>{link.label}</Text>
+              {link.label}
             </Button>
           </Stack>
         ))}
