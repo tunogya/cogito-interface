@@ -1,17 +1,26 @@
 import {
-  Button, Heading,
+  Button, Divider, Heading, IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, Stack, useDisclosure
+  ModalOverlay, Spacer, Textarea, useDisclosure
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
+import {
+  AiOutlineFile,
+  BiFileBlank,
+  HiFilm,
+  HiLocationMarker,
+  HiOutlinePhotograph,
+  HiPaperClip,
+  RiUserSmileLine
+} from "react-icons/all";
 
 const MintCogito = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {isOpen, onOpen, onClose} = useDisclosure()
 
   return (
     <>
@@ -19,23 +28,24 @@ const MintCogito = () => {
         <Trans>+ Cogito</Trans>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false}>
-        <ModalOverlay />
-        <ModalContent h={"600px"}>
+        <ModalOverlay/>
+        <ModalContent>
           <ModalHeader>
-            <Heading fontSize={"2xl"}>
-              <Trans>Mint Cogito</Trans>
+            <Heading fontSize={"xl"}>
+              <Trans>Cogito ergo sum</Trans>
             </Heading>
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton/>
           <ModalBody>
-
+            <Textarea placeholder="What's happening?" resize={"none"} variant="filled"/>
           </ModalBody>
-
           <ModalFooter>
-            <Stack direction={"row"}>
-              <Button variant={"ghost"}>Save</Button>
-              <Button>Mint</Button>
-            </Stack>
+            <IconButton aria-label={"photo"} icon={<HiOutlinePhotograph/>} size={"md"} variant={"ghost"}/>
+            <IconButton aria-label={"film"} icon={<HiFilm/>} size={"md"} variant={"ghost"}/>
+            <IconButton aria-label={"file"} icon={<BiFileBlank/>} size={"md"} variant={"ghost"}/>
+            <IconButton aria-label={"emoji"} icon={<HiLocationMarker/>} size={"md"} variant={"ghost"}/>
+            <Spacer/>
+            <Button fontWeight={"bold"}>Mint</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
