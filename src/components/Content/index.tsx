@@ -1,4 +1,4 @@
-import {Box, Divider, Stack, Text} from "@chakra-ui/react";
+import {Box, Divider, Heading, Stack, Text} from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {FC, ReactNode} from "react";
 
@@ -11,9 +11,9 @@ interface ContentProps {
 export const Content: FC<ContentProps> = ({...props}) => {
   return (
     <Box w={"100%"} h={"100%"}>
-      <Text fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
+      <Heading fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
         <Trans>{props.label}</Trans>
-      </Text>
+      </Heading>
       {props.hasDivider && (
         <Divider/>
       )}

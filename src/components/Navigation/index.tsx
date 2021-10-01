@@ -1,4 +1,4 @@
-import {Badge, Button, Spacer, Stack, Text} from "@chakra-ui/react"
+import {Badge, Button, Heading, Spacer, Stack, Text} from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState} from "react"
@@ -23,19 +23,13 @@ export const Navigation = () => {
 
   return (
     <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
-      <Stack pr={4}>
-        <Stack direction={"row"} alignItems={"center"}>
-          <Text fontWeight={"bold"} fontSize={"xl"}>
-            Cogito ergo sum
-          </Text>
-          <Badge>{process.env.REACT_APP_CHAIN_ENV}</Badge>
-        </Stack>
+      <Stack pr={4} spacing={3}>
+       <Heading fontSize={"2xl"}>Cogito ergo sum</Heading>
         {links.map((link, index) => (
           <Stack direction={"row"} key={index}>
             <Button
-              borderRadius={"3xl"}
               leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
-              size={"lg"}
+              fontWeight={currentPath === link.pathname ? "bold" : "normal" }
               variant={"ghost"}
               onClick={() => {
                 history.push(link.pathname)

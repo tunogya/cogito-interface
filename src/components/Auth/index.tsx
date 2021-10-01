@@ -1,4 +1,4 @@
-import {Button, Divider, Link, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {Button, Divider, Heading, Link, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
 import {t, Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {ChevronDownIcon, CopyIcon, ExternalLinkIcon} from "@chakra-ui/icons";
@@ -13,24 +13,24 @@ const Auth = () => {
     <>
       {user.loggedIn ? (
         <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} borderRadius={"3xl"} size={"lg"}>
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"}>
             {hasCopied ? (t`Copied!`) : user.addr}
           </MenuButton>
           <MenuList borderRadius={"xl"}>
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
-              <Trans>Copy Address</Trans>
+              <Heading fontSize={"md"} fontWeight={"normal"}><Trans>Copy Address</Trans></Heading>
             </MenuItem>
-            <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={"https://www.baidu.com"} isExternal>
-              <Trans>View on Explorer</Trans>
+            <MenuItem icon={<ExternalLinkIcon/>} href={"https://www.baidu.com"} isExternal>
+              <Heading fontSize={"md"} fontWeight={"normal"}><Trans>View on Explorer</Trans></Heading>
             </MenuItem>
             <Divider/>
             <MenuItem onClick={logOut} color={"red"} icon={<AiOutlineLogout/>} fontWeight={"bold"}>
-             <Trans>Log out</Trans>
+             <Heading fontSize={"md"} fontWeight={"normal"}><Trans>Log out</Trans></Heading>
             </MenuItem>
           </MenuList>
         </Menu>
       ) : (
-        <Button onClick={logIn}>
+        <Button onClick={logIn} fontWeight={"bold"}>
           <Trans>Log in</Trans>
         </Button>
       )}
