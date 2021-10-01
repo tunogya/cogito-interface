@@ -1,8 +1,7 @@
-import {Button, Spacer, Stack, Text} from "@chakra-ui/react"
+import {Badge, Button, Spacer, Stack, Text} from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState} from "react"
-import {SmallAddIcon} from "@chakra-ui/icons"
 import Auth from "../Auth";
 import {
   AiFillSetting,
@@ -10,6 +9,7 @@ import {
   AiOutlineSetting,
   AiOutlineStar, RiUserSmileFill, RiUserSmileLine
 } from "react-icons/all";
+import MintCogito from "./MintCogito";
 
 
 export const Navigation = () => {
@@ -24,9 +24,12 @@ export const Navigation = () => {
   return (
     <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
       <Stack pr={4}>
-        <Text fontWeight={"bold"} fontSize={"xl"}>
-          Cogito ergo sum-{process.env.REACT_APP_CHAIN_ENV}
-        </Text>
+        <Stack direction={"row"} alignItems={"center"}>
+          <Text fontWeight={"bold"} fontSize={"xl"}>
+            Cogito ergo sum
+          </Text>
+          <Badge>{process.env.REACT_APP_CHAIN_ENV}</Badge>
+        </Stack>
         {links.map((link, index) => (
           <Stack direction={"row"} key={index}>
             <Button
@@ -43,9 +46,7 @@ export const Navigation = () => {
             </Button>
           </Stack>
         ))}
-        <Button leftIcon={<SmallAddIcon/>} borderRadius={"3xl"}>
-          <Trans>Cogito</Trans>
-        </Button>
+        <MintCogito/>
       </Stack>
       <Spacer/>
       <Auth/>

@@ -1,4 +1,4 @@
-import {Button, Divider, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {Button, Divider, Link, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
 import {t, Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {ChevronDownIcon, CopyIcon, ExternalLinkIcon} from "@chakra-ui/icons";
@@ -13,14 +13,14 @@ const Auth = () => {
     <>
       {user.loggedIn ? (
         <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} borderRadius={"3xl"}>
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} borderRadius={"3xl"} size={"lg"}>
             {hasCopied ? (t`Copied!`) : user.addr}
           </MenuButton>
           <MenuList borderRadius={"xl"}>
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
               <Trans>Copy Address</Trans>
             </MenuItem>
-            <MenuItem onClick={onCopy} icon={<ExternalLinkIcon/>}>
+            <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={"https://www.baidu.com"} isExternal>
               <Trans>View on Explorer</Trans>
             </MenuItem>
             <Divider/>
