@@ -1,5 +1,5 @@
 import {
-  Button, Divider, Heading, IconButton,
+  Button, Heading, IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,13 +10,10 @@ import {
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {
-  AiOutlineFile,
   BiFileBlank,
   HiFilm,
   HiLocationMarker,
   HiOutlinePhotograph,
-  HiPaperClip,
-  RiUserSmileLine
 } from "react-icons/all";
 
 const MintCogito = () => {
