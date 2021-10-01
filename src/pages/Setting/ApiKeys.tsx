@@ -20,7 +20,7 @@ const ApiKeys = () => {
   return (
     <AccordionItem>
       <AccordionButton>
-        <Heading flex="1" textAlign="left" fontWeight={"bold"} fontSize={"md"}>
+        <Heading flex="1" textAlign="left" fontWeight={"normal"} fontSize={"md"}>
           <Trans>API Keys</Trans>
         </Heading>
         <AccordionIcon/>
