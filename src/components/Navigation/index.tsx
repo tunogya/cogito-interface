@@ -1,4 +1,4 @@
-import {Badge, Button, Heading, Spacer, Stack, Text} from "@chakra-ui/react"
+import {Button, Heading, Spacer, Stack} from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState} from "react"
@@ -10,6 +10,7 @@ import {
   AiOutlineStar, RiUserSmileFill, RiUserSmileLine
 } from "react-icons/all";
 import MintCogito from "./MintCogito";
+import Support from "./Support";
 
 
 export const Navigation = () => {
@@ -44,6 +45,7 @@ export const Navigation = () => {
       </Stack>
       <Spacer/>
       <Auth/>
+      <Support/>
     </Stack>
   )
 }

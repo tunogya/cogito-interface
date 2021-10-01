@@ -20,7 +20,7 @@ const Auth = () => {
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
               <Heading fontSize={"md"} fontWeight={"normal"}><Trans>Copy Address</Trans></Heading>
             </MenuItem>
-            <MenuItem icon={<ExternalLinkIcon/>} href={"https://www.baidu.com"} isExternal>
+            <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={"https://www.baidu.com"} isExternal>
               <Heading fontSize={"md"} fontWeight={"normal"}><Trans>View on Explorer</Trans></Heading>
             </MenuItem>
             <Divider/>
