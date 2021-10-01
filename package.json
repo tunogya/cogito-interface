@@ -59,7 +59,7 @@
     "cypress": "^8.4.1",
     "framer-motion": "^4",
     "jest-styled-components": "^7.0.5",
-    "nft.storage": "^3.2.2",
+    "nft.storage": "^3.3.0",
     "polyfill-object.fromentries": "^1.0.1",
     "prettier": "2.4.1",
     "react": "^17.0.2",

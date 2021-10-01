@@ -9,17 +9,22 @@ import {
   ModalOverlay, Spacer, Textarea, useDisclosure
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
-import {
-  BiFileBlank,
-  HiFilm,
-  HiLocationMarker,
-  HiOutlinePhotograph,
-} from "react-icons/all";
-import {useCurrentUser} from "../../hooks/useCurrentUser";
+import {useCurrentUser} from "../../hooks/useCurrentUser"
+import {useEffect, useRef, useState} from "react"
+import {useNFTStorage} from "../../hooks/useNFTStorage";
+import {BiFileBlank} from "react-icons/all";
 
 const MintCogito = () => {
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const [content, setContent] = useState("")
+  const [fileList, setFileList] = useState<object>()
   const {user} = useCurrentUser()
+  const storage = useNFTStorage()
+  const filesUpload = useRef(null)
+
+  useEffect(() => {
+    console.log(fileList)
+  }, [fileList, setFileList])
 
   return (
     <>
@@ -36,15 +41,29 @@ const MintCogito = () => {
           </ModalHeader>
           <ModalCloseButton/>
           <ModalBody>
-            <Textarea placeholder="What's happening?" resize={"none"} variant="filled"/>
+            <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
+                      onChange={(e) => setContent(e.target.value)}/>
           </ModalBody>
           <ModalFooter>
-            <IconButton aria-label={"photo"} icon={<HiOutlinePhotograph/>} size={"md"} variant={"ghost"}/>
-            <IconButton aria-label={"film"} icon={<HiFilm/>} size={"md"} variant={"ghost"}/>
-            <IconButton aria-label={"file"} icon={<BiFileBlank/>} size={"md"} variant={"ghost"}/>
-            <IconButton aria-label={"emoji"} icon={<HiLocationMarker/>} size={"md"} variant={"ghost"}/>
+            <input type={"file"} ref={filesUpload} style={{display: "none"}} onChange={(e) => {
+              if (!e.target.files) {
+                return
+              }
+              setFileList(e.target.files)
+            }}/>
+
+            <IconButton aria-label={"files"} icon={<BiFileBlank/>} size={"md"} variant={"ghost"}
+                        onClick={() => {
+                          // @ts-ignore
+                          filesUpload.current.click()
+                        }}/>
+
             <Spacer/>
-            <Button fontWeight={"bold"}>Mint</Button>
+            <Button fontWeight={"bold"} onClick={() => storage?.storeCogito({
+              name: Date.now().toString(),
+              description: content,
+              image: "Hello",
+            })}>Mint</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
