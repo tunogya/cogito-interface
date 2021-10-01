@@ -17,12 +17,12 @@ import {BiFileBlank} from "react-icons/all";
 const MintCogito = () => {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const [content, setContent] = useState("")
-  const [fileList, setFileList] = useState<object>()
+  const [fileList, setFileList] = useState([])
   const {user} = useCurrentUser()
   const storage = useNFTStorage()
   const filesUpload = useRef(null)
 
-  useEffect(() => {
+  useEffect(()=>{
     console.log(fileList)
   }, [fileList, setFileList])
 
@@ -45,11 +45,16 @@ const MintCogito = () => {
                       onChange={(e) => setContent(e.target.value)}/>
           </ModalBody>
           <ModalFooter>
-            <input type={"file"} ref={filesUpload} style={{display: "none"}} onChange={(e) => {
+            <input type={"file"} ref={filesUpload} multiple style={{display: "none"}} onChange={(e) => {
               if (!e.target.files) {
                 return
               }
-              setFileList(e.target.files)
+              const list = [];
+              for (let i = 0; i < e.target.files.length; i++) {
+                list[i] = e.target.files[i]
+              }
+              // @ts-ignore
+              setFileList(list)
             }}/>
 
             <IconButton aria-label={"files"} icon={<BiFileBlank/>} size={"md"} variant={"ghost"}
