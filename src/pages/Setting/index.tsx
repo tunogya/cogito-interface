@@ -5,7 +5,7 @@ import {
   AccordionItem,
   AccordionPanel,
   FormControl,
-  FormLabel,
+  FormLabel, Heading,
   IconButton,
   Select,
   Spacer,
@@ -29,9 +29,9 @@ const Setting = () => {
       <Accordion defaultIndex={[]} allowMultiple w={"100%"}>
         <AccordionItem>
           <AccordionButton>
-            <Text flex="1" textAlign="left" fontWeight={"bold"}>
+            <Heading flex="1" textAlign="left" fontWeight={"bold"} fontSize={"md"}>
               <Trans>Appearance</Trans>
-            </Text>
+            </Heading>
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel p={4}>
@@ -61,9 +61,9 @@ const Setting = () => {
         </AccordionItem>
         <AccordionItem>
           <AccordionButton>
-            <Text flex="1" textAlign="left" fontWeight={"bold"}>
+            <Heading flex="1" textAlign="left" fontWeight={"bold"} fontSize={"md"}>
               <Trans>Language</Trans>
-            </Text>
+            </Heading>
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel p={4}>
