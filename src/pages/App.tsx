@@ -6,6 +6,7 @@ import Overview from "./Overview";
 import Fresh from "./Fresh";
 import Setting from "./Setting";
 import Loss from "./Loss";
+import Initialized from "./Initialized";
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
         <Switch>
           <Route exact strict path="/" component={Loss} />
           <Route exact strict path="/fresh" component={Loss} />
-          <Route exact strict path="/setting" component={Loss} />
+          <Route exact strict path="/setting" component={Initialized} />
           <Redirect to="/" />
         </Switch>
       </Stack>
