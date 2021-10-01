@@ -25,7 +25,7 @@ export const Navigation = () => {
   return (
     <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
       <Stack pr={4} spacing={3}>
-       <Heading fontSize={"2xl"}>Cogito ergo sum</Heading>
+       <Heading fontSize={"2xl"}>Cogito</Heading>
         {links.map((link, index) => (
           <Stack direction={"row"} key={index}>
             <Button

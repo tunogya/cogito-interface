@@ -20,12 +20,14 @@ import {LOCALE_LABEL, SUPPORTED_LOCALES} from "../../constants/locales"
 import {useActiveLocale} from "../../hooks/useActiveLocale"
 import Content from "../../components/Content";
 import {useState} from "react";
+import {useCurrentUser} from "../../hooks/useCurrentUser";
 
 const Setting = () => {
   const {colorMode, toggleColorMode} = useColorMode()
   const {locale, switchLocale} = useActiveLocale()
   const {hasCopied, onCopy} = useClipboard(process.env.REACT_APP_NFT_STORAGE_DEFAULT_KEY || "error")
   const [key, setKey] = useState("")
+  const {user} = useCurrentUser()
 
   return (
     <Content label={"Setting"}>
@@ -105,7 +107,7 @@ const Setting = () => {
                   />
                   {key !== "" && (
                     <InputRightElement width="5.6rem">
-                      <Button h="1.75rem" size="sm">Update</Button>
+                      <Button h="1.75rem" size="sm" disabled={!user.loggedIn}>Update</Button>
                     </InputRightElement>
                   )}
                 </InputGroup>

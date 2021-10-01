@@ -15,13 +15,15 @@ import {
   HiLocationMarker,
   HiOutlinePhotograph,
 } from "react-icons/all";
+import {useCurrentUser} from "../../hooks/useCurrentUser";
 
 const MintCogito = () => {
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const {user} = useCurrentUser()
 
   return (
     <>
-      <Button onClick={onOpen} fontWeight={"bold"}>
+      <Button onClick={onOpen} fontWeight={"bold"} disabled={!user.loggedIn}>
         <Trans>+ Cogito</Trans>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false}>
