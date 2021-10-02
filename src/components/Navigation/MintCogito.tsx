@@ -5,7 +5,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader, Text,
+  ModalHeader,
   ModalOverlay, Spacer, Textarea, useDisclosure, Stack
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
