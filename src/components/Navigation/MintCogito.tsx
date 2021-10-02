@@ -5,8 +5,8 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
-  ModalOverlay, Spacer, Textarea, useDisclosure
+  ModalHeader, Text,
+  ModalOverlay, Spacer, Textarea, useDisclosure, Stack
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
@@ -43,6 +43,11 @@ const MintCogito = () => {
           <ModalBody>
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setContent(e.target.value)}/>
+            { fileList.map(({name, size, type})=> (
+              <Stack mt={2}>
+                <Button size={"sm"}>{name}</Button>
+              </Stack>
+            )) }
           </ModalBody>
           <ModalFooter>
             <input type={"file"} ref={filesUpload} multiple style={{display: "none"}} onChange={(e) => {
@@ -51,7 +56,7 @@ const MintCogito = () => {
               }
               const list = [];
               for (let i = 0; i < e.target.files.length; i++) {
-                list[i] = e.target.files[i]
+                list[i] = e.target.files[i] as File
               }
               // @ts-ignore
               setFileList(list)
