@@ -12,7 +12,7 @@ import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
-import {BiFileBlank} from "react-icons/all";
+import {AiFillFileAdd} from "react-icons/all";
 
 const MintCogito = () => {
   const {isOpen, onOpen, onClose} = useDisclosure()
@@ -62,7 +62,7 @@ const MintCogito = () => {
               setFileList(list)
             }}/>
 
-            <IconButton aria-label={"files"} icon={<BiFileBlank/>} size={"md"} variant={"ghost"}
+            <IconButton aria-label={"files"} icon={<AiFillFileAdd/>} size={"md"} variant={"ghost"}
                         onClick={() => {
                           // @ts-ignore
                           filesUpload.current.click()
