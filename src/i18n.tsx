@@ -34,7 +34,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [locale])
 
   return (
-    <I18nProvider forceRenderOnLocaleChange={false} i18n={i18n}>
+    <I18nProvider forceRenderOnLocaleChange i18n={i18n}>
       {children}
     </I18nProvider>
   )
