@@ -6,13 +6,14 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, Spacer, Textarea, useDisclosure, Stack
+  ModalOverlay, Spacer, Textarea, useDisclosure, Stack,
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
+import FileListItem from "./FileListItem";
 
 const MintCogito = () => {
   const {isOpen, onOpen, onClose} = useDisclosure()
@@ -44,8 +45,8 @@ const MintCogito = () => {
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setContent(e.target.value)}/>
             { fileList.map(({name, size, type})=> (
-              <Stack mt={2}>
-                <Button size={"sm"}>{name}</Button>
+              <Stack mt={2} direction={"row"}>
+                <FileListItem name={name} size={size} type={type}/>
               </Stack>
             )) }
           </ModalBody>

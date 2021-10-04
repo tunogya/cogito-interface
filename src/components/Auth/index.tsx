@@ -16,7 +16,7 @@ const Auth = () => {
           <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"}>
             {hasCopied ? (t`Copied!`) : user.addr}
           </MenuButton>
-          <MenuList borderRadius={"xl"}>
+          <MenuList borderRadius={"xl"} padding={0}>
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
               <Heading fontSize={"md"} fontWeight={"normal"}><Trans>Copy Address</Trans></Heading>
             </MenuItem>
