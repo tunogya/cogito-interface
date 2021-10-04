@@ -44,11 +44,11 @@ const MintCogito = () => {
           <ModalBody>
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setContent(e.target.value)}/>
-            { fileList.map(({name, size, type})=> (
-              <Stack mt={2} direction={"row"}>
-                <FileListItem name={name} size={size} type={type}/>
-              </Stack>
-            )) }
+            <Stack py={2}>
+              { fileList.map(({name, size, type}, index)=> (
+                <FileListItem key={index} index={index} name={name} size={size} type={type}/>
+              )) }
+            </Stack>
           </ModalBody>
           <ModalFooter>
             <input type={"file"} ref={filesUpload} multiple style={{display: "none"}} onChange={(e) => {
