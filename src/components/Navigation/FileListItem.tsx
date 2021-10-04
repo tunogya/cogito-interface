@@ -1,31 +1,36 @@
 import {Button, Heading, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text} from "@chakra-ui/react";
-import {FC} from "react";
+import {FC, useEffect} from "react";
+import {useNFTStorage} from "../../hooks/useNFTStorage";
 
 interface Props {
-  name: string
-  size: number
-  type: string
+  file: File
   onDelete: (name: string) => void
 }
 
-const FileListItem: FC<Props> = ({...props}) => {
+const FileListItem: FC<Props> = ({file, onDelete}) => {
+  const storage = useNFTStorage()
+
+  useEffect(() => {
+    storage?.storeBlob(file)
+  }, [file])
+
   return (
     <Menu>
       <MenuButton as={Button} size={"sm"} maxW={"200px"} overflow={"scroll"} fontFamily={"sans-serif"} textTransform={"none"}>
-        {props.name}
+        {file.name}
       </MenuButton>
       <MenuList borderRadius={"xl"}>
         <Text px={3} fontWeight={"bold"}>
-          {props.name}
+          {file.name}
         </Text>
         <Text px={3}>
-          {props.type}
+          {file.type}
         </Text>
         <Text px={3}>
-          {props.size}
+          {file.size}
         </Text>
         <MenuDivider/>
-        <MenuItem color={"red"} onClick={() => props.onDelete(props.name)}>
+        <MenuItem color={"red"} onClick={() => onDelete(file.name)}>
           <Heading size={"sm"} fontWeight={"normal"}>Delete</Heading>
         </MenuItem>
       </MenuList>

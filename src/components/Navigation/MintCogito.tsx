@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
-import {useEffect, useRef, useState} from "react"
+import {useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
 import FileListItem from "./FileListItem";
@@ -20,12 +20,8 @@ const MintCogito = () => {
   const [content, setContent] = useState("")
   const [fileList, setFileList] = useState([])
   const {user} = useCurrentUser()
-  const storage = useNFTStorage()
   const filesUpload = useRef(null)
-
-  useEffect(() => {
-    console.log(fileList)
-  }, [fileList, setFileList])
+  const storage = useNFTStorage()
 
   const handleDelete = (name: string) => {
     // @ts-ignore
@@ -50,9 +46,9 @@ const MintCogito = () => {
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setContent(e.target.value)}/>
             <Wrap pt={2}>
-              {fileList.map(({name, size, type}, index) => (
+              {fileList.map((file, index) => (
                 <WrapItem key={index}>
-                  <FileListItem name={name} size={size} type={type} onDelete={handleDelete}/>
+                  <FileListItem file={file} onDelete={handleDelete}/>
                 </WrapItem>
               ))}
             </Wrap>
@@ -78,11 +74,7 @@ const MintCogito = () => {
                         }}/>
 
             <Spacer/>
-            <Button fontWeight={"bold"} onClick={() => storage?.storeCogito({
-              name: Date.now().toString(),
-              description: content,
-              image: "Hello",
-            })}>Mint</Button>
+            <Button fontWeight={"bold"} onClick={() => storage?.storeBlob(content) }>Mint</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
