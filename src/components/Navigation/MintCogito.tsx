@@ -6,7 +6,7 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalOverlay, Spacer, Textarea, useDisclosure, Stack,
+  ModalOverlay, Spacer, Textarea, useDisclosure, Wrap, WrapItem,
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
@@ -23,7 +23,7 @@ const MintCogito = () => {
   const storage = useNFTStorage()
   const filesUpload = useRef(null)
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log(fileList)
   }, [fileList, setFileList])
 
@@ -37,7 +37,7 @@ const MintCogito = () => {
       <Button onClick={onOpen} fontWeight={"bold"} disabled={!user.loggedIn}>
         <Trans>+ Cogito</Trans>
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"} size={"lg"}>
         <ModalOverlay/>
         <ModalContent>
           <ModalHeader>
@@ -49,11 +49,14 @@ const MintCogito = () => {
           <ModalBody>
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setContent(e.target.value)}/>
-            <Stack py={2}>
-              { fileList.map(({name, size, type}, index)=> (
-                <FileListItem key={index} name={name} size={size} type={type} onDelete={handleDelete}/>
-              )) }
-            </Stack>
+            <Wrap pt={2}>
+              {fileList.map(({name, size, type}, index) => (
+                <WrapItem key={index}>
+                  <FileListItem name={name} size={size} type={type} onDelete={handleDelete}/>
+                </WrapItem>
+              ))}
+            </Wrap>
+
           </ModalBody>
           <ModalFooter>
             <input type={"file"} ref={filesUpload} multiple style={{display: "none"}} onChange={(e) => {
