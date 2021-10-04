@@ -27,6 +27,11 @@ const MintCogito = () => {
     console.log(fileList)
   }, [fileList, setFileList])
 
+  const handleDelete = (name: string) => {
+    // @ts-ignore
+    setFileList(fileList.filter(file => file.name !== name))
+  }
+
   return (
     <>
       <Button onClick={onOpen} fontWeight={"bold"} disabled={!user.loggedIn}>
@@ -46,7 +51,7 @@ const MintCogito = () => {
                       onChange={(e) => setContent(e.target.value)}/>
             <Stack py={2}>
               { fileList.map(({name, size, type}, index)=> (
-                <FileListItem key={index} index={index} name={name} size={size} type={type}/>
+                <FileListItem key={index} name={name} size={size} type={type} onDelete={handleDelete}/>
               )) }
             </Stack>
           </ModalBody>

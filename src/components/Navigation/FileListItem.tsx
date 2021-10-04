@@ -2,24 +2,23 @@ import {Button, Heading, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/
 import {FC} from "react";
 
 interface Props {
-  index: number
   name: string
   size: number
   type: string
-  onDelete?: (index: number) => void
+  onDelete: (name: string) => void
 }
 
 const FileListItem: FC<Props> = ({...props}) => {
   return (
     <Menu>
       <MenuButton as={Button} size={"sm"}>
-        {props.index + 1}: {props.name}
+        {props.name}
       </MenuButton>
-      <MenuList padding={0} borderRadius={"xl"} >
+      <MenuList padding={0} borderRadius={"xl"}>
         <MenuItem>
           <Heading size={"xs"} fontWeight={"normal"}>View</Heading>
         </MenuItem>
-        <MenuItem color={"red"}>
+        <MenuItem color={"red"} onClick={() => props.onDelete(props.name)}>
           <Heading size={"xs"} fontWeight={"normal"}>Delete</Heading>
         </MenuItem>
       </MenuList>
