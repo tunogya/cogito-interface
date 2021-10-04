@@ -1,16 +1,11 @@
 import {Blob, NFTStorage} from 'nft.storage'
-import {atom, useRecoilState} from "recoil";
 import {IDLE, PROCESSING} from "../constants/status";
+import {useState} from "react";
 
 const apiKey = process.env.REACT_APP_NFT_STORAGE_DEFAULT_KEY
 
-export const stateAtom = atom({
-  key: "STORE_STATE",
-  default: IDLE,
-})
-
 export const useNFTStorage = () => {
-  const [state, setState] = useRecoilState(stateAtom)
+  const [state, setState] = useState(IDLE)
 
   if (!apiKey) {
     return
