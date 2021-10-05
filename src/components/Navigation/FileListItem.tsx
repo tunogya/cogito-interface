@@ -16,7 +16,7 @@ const FileListItem: FC<Props> = ({file, onDelete}) => {
     storage?.storeBlob(file).then((cid) =>
       setResult(cid)
     )
-  }, [])
+  }, [file])
 
   return (
     <Menu>
