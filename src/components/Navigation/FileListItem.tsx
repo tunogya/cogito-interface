@@ -12,7 +12,7 @@ const FileListItem: FC<Props> = ({file, onDelete}) => {
 
   useEffect(() => {
     storage?.storeBlob(file)
-  }, [file])
+  }, [file, storage])
 
   return (
     <Menu>
