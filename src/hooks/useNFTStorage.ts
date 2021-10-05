@@ -17,7 +17,6 @@ export const useNFTStorage = () => {
     setState(PROCESSING)
     const result = await client.storeBlob(new Blob([data]))
     setState(IDLE)
-    console.log(result)
     return result
   }
 
