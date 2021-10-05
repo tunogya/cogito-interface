@@ -4,42 +4,48 @@ import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {PROCESSING} from "../../constants/status";
 
 interface Props {
-  file: File
+  store: { file: File, cid: string }
   onDelete: (name: string) => void
+  onSetCid: (name: string, newStore: {file: File, cid: string}) => void
 }
 
-const FileListItem: FC<Props> = ({file, onDelete}) => {
+const FileListItem: FC<Props> = ({store, onDelete, onSetCid}) => {
   const storage = useNFTStorage()
   const [result, setResult] = useState("")
 
   useEffect(() => {
-    storage?.storeBlob(file).then((cid) =>
-      setResult(cid)
+    storage?.storeBlob(store.file).then((cid) => {
+        setResult(cid)
+        onSetCid(store.file.name, {
+          file: store.file,
+          cid: cid
+        })
+      }
     )
-  }, [file])
+  }, [store.file])
 
   return (
     <Menu>
       <MenuButton as={Button} size={"sm"} maxW={"200px"} overflow={"scroll"}
                   isLoading={storage?.state === PROCESSING}
-                  fontFamily={"sans-serif"} textTransform={"none"} >
-        {file.name}
+                  fontFamily={"sans-serif"} textTransform={"none"}>
+        {store.file.name}
       </MenuButton>
       <MenuList borderRadius={"xl"}>
         <Text px={3} fontWeight={"bold"}>
-          {file.name}
+          {store.file.name}
         </Text>
         <Text px={3}>
-          {file.type}
+          {store.file.type}
         </Text>
         <Text px={3}>
-          {file.size}
+          {store.file.size}
         </Text>
         <Text px={3}>
           {result}
         </Text>
         <MenuDivider/>
-        <MenuItem color={"red"} onClick={() => onDelete(file.name)}>
+        <MenuItem color={"red"} onClick={() => onDelete(store.file.name)}>
           <Heading size={"sm"} fontWeight={"normal"}>Delete</Heading>
         </MenuItem>
       </MenuList>

@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
-import {useRef, useState} from "react"
+import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
 import FileListItem from "./FileListItem";
@@ -27,6 +27,15 @@ const MintCogito = () => {
     // @ts-ignore
     setFileList(fileList.filter(file => file.name !== name))
   }
+
+  const handleSetCid = (name: string, newStore: {file: File, cid: string}) => {
+    // @ts-ignore
+    setFileList(fileList.map((store) => store.file.name === name ? newStore : store))
+  }
+
+  useEffect(()=> {
+    console.log(fileList)
+  }, [fileList, setFileList])
 
   return (
     <>
@@ -46,25 +55,23 @@ const MintCogito = () => {
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setContent(e.target.value)}/>
             <Wrap pt={2}>
-              {fileList.map((file, index) => (
+              {fileList.map((store, index) => (
                 <WrapItem key={index}>
-                  <FileListItem file={file} onDelete={handleDelete}/>
+                  <FileListItem store={store} onDelete={handleDelete} onSetCid={handleSetCid}/>
                 </WrapItem>
               ))}
             </Wrap>
 
           </ModalBody>
           <ModalFooter>
-            <input type={"file"} ref={filesUpload} multiple style={{display: "none"}} onChange={(e) => {
+            <input type={"file"} ref={filesUpload} style={{display: "none"}} onChange={(e) => {
               if (!e.target.files) {
                 return
               }
-              const list = [];
               for (let i = 0; i < e.target.files.length; i++) {
-                list[i] = e.target.files[i] as File
+                // @ts-ignore
+                setFileList([...fileList, {file: e.target.files[i] as File, cid: ""}])
               }
-              // @ts-ignore
-              setFileList(list)
             }}/>
 
             <IconButton aria-label={"files"} icon={<AiFillFileAdd/>} size={"md"} variant={"ghost"}
