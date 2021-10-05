@@ -1,5 +1,5 @@
 import {
-  Button, Heading, IconButton,
+  Button, Heading, IconButton, Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -17,7 +17,8 @@ import FileListItem from "./FileListItem";
 
 const MintCogito = () => {
   const {isOpen, onOpen, onClose} = useDisclosure()
-  const [content, setContent] = useState("")
+  const [name, setName] = useState("")
+  const [description, setDescription] = useState("")
   const [fileList, setFileList] = useState([])
   const {user} = useCurrentUser()
   const filesUpload = useRef(null)
@@ -25,7 +26,7 @@ const MintCogito = () => {
 
   const handleDelete = (name: string) => {
     // @ts-ignore
-    setFileList(fileList.filter(file => file.name !== name))
+    setFileList(fileList.filter(store => store.file.name !== name))
   }
 
   const handleSetCid = (name: string, newStore: {file: File, cid: string}) => {
@@ -35,7 +36,19 @@ const MintCogito = () => {
 
   useEffect(()=> {
     console.log(fileList)
-  }, [fileList, setFileList])
+    const nft = {
+      name: name,
+      description: description,
+      image: "",
+      properties: {
+        files: fileList.map((store)=> { // @ts-ignore
+          return store.cid})
+      }
+    }
+
+    console.log(nft)
+
+  }, [fileList, setFileList, description, name])
 
   return (
     <>
@@ -52,8 +65,9 @@ const MintCogito = () => {
           </ModalHeader>
           <ModalCloseButton/>
           <ModalBody>
+            <Input variant="filled" mb={2} placeholder={"Name"} onChange={(e) => setName(e.target.value)}/>
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
-                      onChange={(e) => setContent(e.target.value)}/>
+                      onChange={(e) => setDescription(e.target.value)}/>
             <Wrap pt={2}>
               {fileList.map((store, index) => (
                 <WrapItem key={index}>
@@ -81,7 +95,7 @@ const MintCogito = () => {
                         }}/>
 
             <Spacer/>
-            <Button fontWeight={"bold"} onClick={() => storage?.storeBlob(content) }>Mint</Button>
+            <Button fontWeight={"bold"} onClick={() => storage?.storeBlob(description) }>Mint</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
