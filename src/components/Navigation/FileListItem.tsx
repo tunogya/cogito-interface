@@ -1,7 +1,18 @@
-import {Button, Heading, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text} from "@chakra-ui/react";
+import {
+  Button,
+  Heading,
+  Link,
+  Menu,
+  MenuButton,
+  MenuDivider,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import {FC, useEffect, useState} from "react";
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {PROCESSING} from "../../constants/status";
+import {parseCidToHttpUrl} from "../../utils/ipfs";
 
 interface Props {
   store: { file: File, cid: string }
@@ -28,6 +39,7 @@ const FileListItem: FC<Props> = ({store, onDelete, onSetCid}) => {
     <Menu>
       <MenuButton as={Button} size={"sm"} maxW={"200px"} overflow={"scroll"}
                   isLoading={storage?.state === PROCESSING}
+                  spinnerPlacement="start" loadingText={store.file.name}
                   fontFamily={"sans-serif"} textTransform={"none"}>
         {store.file.name}
       </MenuButton>
@@ -45,6 +57,13 @@ const FileListItem: FC<Props> = ({store, onDelete, onSetCid}) => {
           {result}
         </Text>
         <MenuDivider/>
+        { result !== "" && (
+          <MenuItem>
+            <Link href={parseCidToHttpUrl(result)} isExternal>
+              <Heading size={"sm"} fontWeight={"normal"}>View</Heading>
+            </Link>
+          </MenuItem>
+        ) }
         <MenuItem color={"red"} onClick={() => onDelete(store.file.name)}>
           <Heading size={"sm"} fontWeight={"normal"}>Delete</Heading>
         </MenuItem>
