@@ -9,7 +9,7 @@ import {
   ModalOverlay, Spacer, Textarea, useDisclosure, Wrap, WrapItem,
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
-import {useCurrentUser} from "../../hooks/useCurrentUser"
+// import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
@@ -20,7 +20,7 @@ const MintCogito = () => {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
   const [fileList, setFileList] = useState([])
-  const {user} = useCurrentUser()
+  // const {user} = useCurrentUser()
   const filesUpload = useRef(null)
   const storage = useNFTStorage()
 
@@ -52,7 +52,7 @@ const MintCogito = () => {
 
   return (
     <>
-      <Button onClick={onOpen} fontWeight={"bold"} disabled={!user.loggedIn}>
+      <Button onClick={onOpen} fontWeight={"bold"}>
         <Trans>+ Cogito</Trans>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"} size={"lg"}>
