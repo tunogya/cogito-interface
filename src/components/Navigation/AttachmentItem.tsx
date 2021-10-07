@@ -74,7 +74,7 @@ const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
         </MenuItem>
         {result !== "" && (
           <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={parseCidToHttpUrl(result)} isExternal>
-            <Heading size={"sm"} fontWeight={"normal"}>View</Heading>
+            <Heading size={"sm"} fontWeight={"normal"}>View on Explore</Heading>
           </MenuItem>
         )}
         <MenuItem color={"red"} onClick={() => onDelete(attachment.content.name)} icon={<DeleteIcon/>}>
