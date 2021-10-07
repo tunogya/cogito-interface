@@ -43,12 +43,12 @@ const MintCogito = () => {
   // delete the attachment
   const handleDelete = (name: string) => {
     // @ts-ignore
-    setAttachmentList(attachmentList.filter(store => store.file.name !== name))
+    setAttachmentList(attachmentList.filter(attachment => attachment.fileName !== name))
   }
 
   const handleUpdate = (fileName: string, newAttachment: Attachment) => {
     // @ts-ignore
-    setAttachmentList(attachmentList.map((attachment) => attachment.content.name === fileName ? newAttachment : attachment))
+    setAttachmentList(attachmentList.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
   }
 
   useEffect(() => {

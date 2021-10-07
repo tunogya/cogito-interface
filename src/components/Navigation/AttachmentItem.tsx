@@ -35,7 +35,7 @@ const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
     storage?.storeBlob(attachment.content).then((cid) => {
         setResult(cid)
         onUpdate(attachment.content.name, {
-          fileName: attachment.content.name,
+          fileName: attachment.fileName,
           content: attachment.content,
           cid: cid
         })
