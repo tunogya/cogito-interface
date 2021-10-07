@@ -40,6 +40,8 @@ const MintCogito = () => {
 
   const [nft, setNft] = useState({})
 
+  const initialFocusRef = useRef(null)
+
   // delete the attachment
   const handleDelete = (name: string) => {
     // @ts-ignore
@@ -72,6 +74,7 @@ const MintCogito = () => {
         <Trans>+ Cogito</Trans>
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"}
+             initialFocusRef={initialFocusRef}
              size={"lg"}>
         <ModalOverlay/>
         <ModalContent>
@@ -82,7 +85,8 @@ const MintCogito = () => {
           </ModalHeader>
           <ModalCloseButton/>
           <ModalBody>
-            <Input variant="filled" mb={2} placeholder={"Name"} onChange={(e) => setName(e.target.value)}/>
+            <Input variant="filled" mb={2} placeholder={"Name"} ref={initialFocusRef}
+                   onChange={(e) => setName(e.target.value)}/>
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setDescription(e.target.value)}/>
             <Wrap pt={2}>
