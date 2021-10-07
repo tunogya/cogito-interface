@@ -17,7 +17,7 @@ import {shortenCid} from "../../utils/ipfs";
 import {CopyIcon, DeleteIcon, ExternalLinkIcon} from "@chakra-ui/icons";
 import {bytesToSize} from "../../utils";
 import {BsImage} from "react-icons/all";
-import {Attachment} from "../../constants/NFT";
+import {Attachment} from "../../constants/interfaces";
 
 interface Props {
   attachment: Attachment
