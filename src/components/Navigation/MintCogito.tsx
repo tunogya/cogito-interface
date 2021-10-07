@@ -14,7 +14,7 @@ import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
 import AttachmentItem from "./AttachmentItem";
-import {Attachment} from "../../constants/Cogito";
+import {Attachment} from "../../constants/NFT";
 
 const MintCogito = () => {
   // mint Modal status

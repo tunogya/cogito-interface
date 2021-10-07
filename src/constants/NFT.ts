@@ -1,7 +1,11 @@
-export interface Cogito {
+export interface NFT {
   name: string,
   description: string,
-  attachment?: string,
+  image: string,
+  properties: {
+    attachment: [Attachment],
+    copyright: string | null,
+  }
 }
 
 export interface Attachment {
