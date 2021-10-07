@@ -9,53 +9,70 @@ import {
   ModalOverlay, Spacer, Textarea, useDisclosure, Wrap, WrapItem,
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
-// import {useCurrentUser} from "../../hooks/useCurrentUser"
+import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
-import FileListItem from "./FileListItem";
+import AttachmentItem from "./AttachmentItem";
+import {Attachment} from "../../constants/Cogito";
 
 const MintCogito = () => {
+  // mint Modal status
   const {isOpen, onOpen, onClose} = useDisclosure()
+
+  // metadata name
   const [name, setName] = useState("")
+
+  // metadata description
   const [description, setDescription] = useState("")
-  const [fileList, setFileList] = useState([])
-  // const {user} = useCurrentUser()
+
+  // metadata properties attachment
+  const [attachmentList, setAttachmentList] = useState([])
+
+  // get user info
+  const {user} = useCurrentUser()
+
+  // content input ref
   const filesUpload = useRef(null)
+
+  // upload nft storage hooks
   const storage = useNFTStorage()
 
+  const [nft, setNft] = useState({})
+
+  // delete the attachment
   const handleDelete = (name: string) => {
     // @ts-ignore
-    setFileList(fileList.filter(store => store.file.name !== name))
+    setAttachmentList(attachmentList.filter(store => store.file.name !== name))
   }
 
-  const handleSetCid = (name: string, newStore: {file: File, cid: string}) => {
+  const handleUpdate = (fileName: string, newAttachment: Attachment) => {
     // @ts-ignore
-    setFileList(fileList.map((store) => store.file.name === name ? newStore : store))
+    setAttachmentList(attachmentList.map((attachment) => attachment.content.name === fileName ? newAttachment : attachment))
   }
 
-  useEffect(()=> {
-    console.log(fileList)
-    const nft = {
+  useEffect(() => {
+    setNft({
       name: name,
       description: description,
       image: "",
       properties: {
-        files: fileList.map((store)=> { // @ts-ignore
-          return store.cid})
+        attachment: attachmentList.map((attachment) => {
+          // @ts-ignore
+          return {fileName: attachment.fileName, cid: attachment.cid}
+        }),
+        copyright: user.addr,
       }
-    }
-
-    console.log(nft)
-
-  }, [fileList, setFileList, description, name])
+    })
+  }, [attachmentList, setAttachmentList, description, name, user.addr])
 
   return (
     <>
       <Button onClick={onOpen} fontWeight={"bold"}>
         <Trans>+ Cogito</Trans>
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"} size={"lg"}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"}
+             size={"lg"}>
         <ModalOverlay/>
         <ModalContent>
           <ModalHeader>
@@ -69,9 +86,9 @@ const MintCogito = () => {
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
                       onChange={(e) => setDescription(e.target.value)}/>
             <Wrap pt={2}>
-              {fileList.map((store, index) => (
+              {attachmentList.map((attachment, index) => (
                 <WrapItem key={index}>
-                  <FileListItem store={store} onDelete={handleDelete} onSetCid={handleSetCid}/>
+                  <AttachmentItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate}/>
                 </WrapItem>
               ))}
             </Wrap>
@@ -84,7 +101,7 @@ const MintCogito = () => {
               }
               for (let i = 0; i < e.target.files.length; i++) {
                 // @ts-ignore
-                setFileList([...fileList, {file: e.target.files[i] as File, cid: ""}])
+                setAttachmentList([...attachmentList, {fileName: e.target.files[i].name, content: e.target.files[i] as File, cid: ""}])
               }
             }}/>
 
@@ -93,9 +110,12 @@ const MintCogito = () => {
                           // @ts-ignore
                           filesUpload.current.click()
                         }}/>
-
             <Spacer/>
-            <Button fontWeight={"bold"} onClick={() => storage?.storeBlob(description) }>Mint</Button>
+            <Button fontWeight={"bold"}
+                    onClick={() => {
+                      console.log(JSON.stringify(nft))
+                      storage?.storeBlob(JSON.stringify(nft))
+                    }}>Mint</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

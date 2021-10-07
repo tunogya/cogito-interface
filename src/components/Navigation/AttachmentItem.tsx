@@ -17,45 +17,49 @@ import {shortenCid} from "../../utils/ipfs";
 import {CopyIcon, DeleteIcon, ExternalLinkIcon} from "@chakra-ui/icons";
 import {bytesToSize} from "../../utils";
 import {BsImage} from "react-icons/all";
+import {Attachment} from "../../constants/Cogito";
 
 interface Props {
-  store: { file: File, cid: string }
-  onDelete: (name: string) => void
-  onSetCid: (name: string, newStore: { file: File, cid: string }) => void
+  attachment: Attachment
+  onDelete: (fileName: string) => void
+  onUpdate: (fileName: string, newAttachment: Attachment) => void
 }
 
-const FileListItem: FC<Props> = ({store, onDelete, onSetCid}) => {
+const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
   const storage = useNFTStorage()
+
+  // the result of file cid
   const [result, setResult] = useState("")
 
   useEffect(() => {
-    storage?.storeBlob(store.file).then((cid) => {
+    storage?.storeBlob(attachment.content).then((cid) => {
         setResult(cid)
-        onSetCid(store.file.name, {
-          file: store.file,
+        onUpdate(attachment.content.name, {
+          fileName: attachment.content.name,
+          content: attachment.content,
           cid: cid
         })
       }
     )
-  }, [store.file])
+  }, [attachment.content])
 
   return (
     <Menu>
       <MenuButton as={Button} size={"sm"} maxW={"200px"} overflow={"scroll"}
                   isLoading={storage?.state === PROCESSING}
-                  spinnerPlacement="start" loadingText={store.file.name}
+                  spinnerPlacement="start" loadingText={attachment.content.name}
                   fontFamily={"sans-serif"} textTransform={"none"}>
-        {store.file.name}
+        {attachment.content.name}
       </MenuButton>
       <MenuList borderRadius={"xl"}>
         <Text px={3} fontWeight={"bold"}>
-          {store.file.name}
+          {attachment.content.name}
         </Text>
         <Text px={3} fontSize={"xs"}>
-          {store.file.type}
+          {attachment.content.type}
         </Text>
         <Text px={3} fontSize={"xs"}>
-          {bytesToSize(store.file.size)}
+          {bytesToSize(attachment.content.size)}
         </Text>
         <Stack direction={"row"} alignItems={"center"}>
           <Text px={3} fontSize={"xs"}>
@@ -73,7 +77,7 @@ const FileListItem: FC<Props> = ({store, onDelete, onSetCid}) => {
             <Heading size={"sm"} fontWeight={"normal"}>View</Heading>
           </MenuItem>
         )}
-        <MenuItem color={"red"} onClick={() => onDelete(store.file.name)} icon={<DeleteIcon/>}>
+        <MenuItem color={"red"} onClick={() => onDelete(attachment.content.name)} icon={<DeleteIcon/>}>
           <Heading size={"sm"} fontWeight={"normal"}>Delete</Heading>
         </MenuItem>
       </MenuList>
@@ -81,4 +85,4 @@ const FileListItem: FC<Props> = ({store, onDelete, onSetCid}) => {
   )
 }
 
-export default FileListItem
+export default AttachmentItem

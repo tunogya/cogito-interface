@@ -1,9 +1,11 @@
 export interface Cogito {
   name: string,
   description: string,
-  image: string,
-  video?: string,
-  location?: [string],
-  file?: string,
-  owner?: string,
+  attachment?: string,
+}
+
+export interface Attachment {
+  fileName: string
+  content: File
+  cid: string
 }
