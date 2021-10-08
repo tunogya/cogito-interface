@@ -64,6 +64,7 @@ const MintCogito = () => {
           return {fileName: attachment.fileName, cid: attachment.cid}
         }),
         copyright: user.addr,
+        createdTimestamp: Date.now()
       }
     })
   }, [attachmentList, setAttachmentList, description, name, user.addr])

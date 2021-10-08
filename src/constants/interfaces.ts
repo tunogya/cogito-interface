@@ -1,10 +1,11 @@
 export interface Interfaces {
   name: string,
   description: string,
-  image: string,
+  image: string | null,
   properties: {
-    attachment: [Attachment],
+    attachment: [Attachment] | null,
     copyright: string | null,
+    createdTimestamp: number,
   }
 }
 
