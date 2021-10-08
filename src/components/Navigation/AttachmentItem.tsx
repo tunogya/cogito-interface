@@ -23,9 +23,10 @@ interface Props {
   attachment: Attachment
   onDelete: (fileName: string) => void
   onUpdate: (fileName: string, newAttachment: Attachment) => void
+  onSetCover: (attachment: Attachment) => void
 }
 
-const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
+const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate, onSetCover}) => {
   const storage = useNFTStorage()
 
   // the result of file cid
@@ -69,7 +70,7 @@ const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
         </Stack>
 
         <MenuDivider/>
-        <MenuItem icon={<BsImage/>}>
+        <MenuItem icon={<BsImage/>} onClick={() => onSetCover(attachment)}>
           <Heading size={"sm"} fontWeight={"normal"}>As Cover</Heading>
         </MenuItem>
         {result !== "" && (

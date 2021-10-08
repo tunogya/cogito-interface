@@ -26,6 +26,9 @@ const MintCogito = () => {
   // metadata description
   const [description, setDescription] = useState("")
 
+  // image
+  const [image, setImage] = useState(null)
+
   // metadata properties attachment
   const [attachmentList, setAttachmentList] = useState([])
 
@@ -53,11 +56,16 @@ const MintCogito = () => {
     setAttachmentList(attachmentList.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
   }
 
+  const handleSetCover = (attachment: Attachment) => {
+    // @ts-ignore
+    setImage({fileName: attachment.fileName, cid: attachment.cid})
+  }
+
   useEffect(() => {
     setNft({
       name: name,
       description: description,
-      image: "",
+      image: image,
       properties: {
         attachment: attachmentList.map((attachment) => {
           // @ts-ignore
@@ -67,7 +75,7 @@ const MintCogito = () => {
         createdTimestamp: Date.now()
       }
     })
-  }, [attachmentList, setAttachmentList, description, name, user.addr])
+  }, [attachmentList, setAttachmentList, description, name, user.addr, image, setImage])
 
   return (
     <>
@@ -93,7 +101,7 @@ const MintCogito = () => {
             <Wrap pt={2}>
               {attachmentList.map((attachment, index) => (
                 <WrapItem key={index}>
-                  <AttachmentItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate}/>
+                  <AttachmentItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate} onSetCover={handleSetCover}/>
                 </WrapItem>
               ))}
             </Wrap>
