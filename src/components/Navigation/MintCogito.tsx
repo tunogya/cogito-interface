@@ -1,5 +1,5 @@
 import {
-  Button, Heading, IconButton, Input,
+  Button, Heading, IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,24 +13,15 @@ import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {useEffect, useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
-import AttachmentItem from "./AttachmentItem";
+import FIleItem from "./FIleItem";
 import {Attachment} from "../../constants/interfaces";
 
 const MintCogito = () => {
   // mint Modal status
   const {isOpen, onOpen, onClose} = useDisclosure()
 
-  // metadata name
-  const [name, setName] = useState("")
-
-  // metadata description
-  const [description, setDescription] = useState("")
-
-  // image
-  const [image, setImage] = useState(null)
-
-  // metadata properties attachment
-  const [attachmentList, setAttachmentList] = useState([])
+  const [text, setText] = useState("")
+  const [file, setFile] = useState([])
 
   // get user info
   const {user} = useCurrentUser()
@@ -41,41 +32,58 @@ const MintCogito = () => {
   // upload nft storage hooks
   const storage = useNFTStorage()
 
-  const [nft, setNft] = useState({})
-
   const initialFocusRef = useRef(null)
+
+  let nft = {}
 
   // delete the attachment
   const handleDelete = (name: string) => {
     // @ts-ignore
-    setAttachmentList(attachmentList.filter(attachment => attachment.fileName !== name))
+    setFile(file.filter(attachment => attachment.fileName !== name))
   }
 
   const handleUpdate = (fileName: string, newAttachment: Attachment) => {
     // @ts-ignore
-    setAttachmentList(attachmentList.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
+    setFile(file.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
   }
 
-  const handleSetCover = (attachment: Attachment) => {
-    // @ts-ignore
-    setImage({fileName: attachment.fileName, cid: attachment.cid})
+  const handleReset = () => {
+    setText("")
+    setFile([])
   }
 
-  useEffect(() => {
-    setNft({
-      name: name,
-      description: description,
-      image: image,
-      properties: {
-        attachment: attachmentList.map((attachment) => {
-          // @ts-ignore
-          return {fileName: attachment.fileName, cid: attachment.cid}
-        }),
-        copyright: user.addr,
-        createdTimestamp: Date.now()
+  const getMetaData = () => {
+    let metadata = {}
+
+    if (text !== "") {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      metadata = {...metadata, text: text}
+    }
+
+    if (user.loggedIn) {
+      metadata = {...metadata, author: user.addr}
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    metadata = {...metadata, create_at: Date.now()}
+
+    if (file.length > 0) {
+      metadata = {
+        ...metadata, attachment: {
+          media: file.map((file) => {
+            // @ts-ignore
+            return { fileName: file.fileName, cid: file.cid, type: file.type, size: file.size, create_at: file.create_at }
+          }),
+          file: file.map((file) => {
+            // @ts-ignore
+            return { fileName: file.fileName, cid: file.cid, type: file.type, size: file.size, create_at: file.create_at }
+          })
+        }
       }
-    })
-  }, [attachmentList, setAttachmentList, description, name, user.addr, image, setImage])
+    }
+
+    return metadata
+  }
 
   return (
     <>
@@ -94,14 +102,12 @@ const MintCogito = () => {
           </ModalHeader>
           <ModalCloseButton/>
           <ModalBody>
-            <Input variant="filled" mb={2} placeholder={"Name"} ref={initialFocusRef}
-                   onChange={(e) => setName(e.target.value)}/>
-            <Textarea placeholder="What's happening?" resize={"none"} variant="filled"
-                      onChange={(e) => setDescription(e.target.value)}/>
+            <Textarea placeholder="What's happening?" resize={"none"} variant="filled" value={text}
+                      onChange={(e) => setText(e.target.value)}/>
             <Wrap pt={2}>
-              {attachmentList.map((attachment, index) => (
+              {file.map((attachment, index) => (
                 <WrapItem key={index}>
-                  <AttachmentItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate} onSetCover={handleSetCover}/>
+                  <FIleItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate}/>
                 </WrapItem>
               ))}
             </Wrap>
@@ -113,8 +119,9 @@ const MintCogito = () => {
                 return
               }
               for (let i = 0; i < e.target.files.length; i++) {
+                const f = e.target.files[i];
                 // @ts-ignore
-                setAttachmentList([...attachmentList, {fileName: e.target.files[i].name, content: e.target.files[i] as File, cid: ""}])
+                setFile([...file, {fileName: f.name, content: f as File, create_at: f.lastModified, size: f.size, type: f.type}]);
               }
             }}/>
 
@@ -125,9 +132,13 @@ const MintCogito = () => {
                         }}/>
             <Spacer/>
             <Button fontWeight={"bold"}
-                    onClick={() => {
-                      console.log(JSON.stringify(nft))
-                      storage?.storeBlob(JSON.stringify(nft))
+                    disabled={text === "" && file.length === 0}
+                    onClick={async () => {
+                      console.log(JSON.stringify(getMetaData()))
+                      await storage?.storeBlob(JSON.stringify(getMetaData())).then((res)=>{
+                        console.log(res)
+                      })
+                      handleReset()
                     }}>Mint</Button>
           </ModalFooter>
         </ModalContent>

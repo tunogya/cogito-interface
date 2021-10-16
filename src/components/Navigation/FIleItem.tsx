@@ -16,17 +16,15 @@ import {parseCidToHttpUrl} from "../../utils/ipfs";
 import {shortenCid} from "../../utils/ipfs";
 import {CopyIcon, DeleteIcon, ExternalLinkIcon} from "@chakra-ui/icons";
 import {bytesToSize} from "../../utils";
-import {BsImage} from "react-icons/all";
 import {Attachment} from "../../constants/interfaces";
 
 interface Props {
   attachment: Attachment
   onDelete: (fileName: string) => void
   onUpdate: (fileName: string, newAttachment: Attachment) => void
-  onSetCover: (attachment: Attachment) => void
 }
 
-const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate, onSetCover}) => {
+const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
   const storage = useNFTStorage()
 
   // the result of file cid
@@ -35,11 +33,7 @@ const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate, onSetCover})
   useEffect(() => {
     storage?.storeBlob(attachment.content).then((cid) => {
         setResult(cid)
-        onUpdate(attachment.content.name, {
-          fileName: attachment.fileName,
-          content: attachment.content,
-          cid: cid
-        })
+        onUpdate(attachment.content.name, {...attachment, cid: cid})
       }
     )
   }, [attachment.content])
@@ -70,9 +64,6 @@ const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate, onSetCover})
         </Stack>
 
         <MenuDivider/>
-        <MenuItem icon={<BsImage/>} onClick={() => onSetCover(attachment)}>
-          <Heading size={"sm"} fontWeight={"normal"}>As Cover</Heading>
-        </MenuItem>
         {result !== "" && (
           <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={parseCidToHttpUrl(result)} isExternal>
             <Heading size={"sm"} fontWeight={"normal"}>View on Explore</Heading>
@@ -86,4 +77,4 @@ const AttachmentItem: FC<Props> = ({attachment, onDelete, onUpdate, onSetCover})
   )
 }
 
-export default AttachmentItem
+export default FIleItem
