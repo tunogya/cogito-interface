@@ -1,4 +1,4 @@
-export const bytesToSize = (bytes: number) => {
+const bytesToSize = (bytes: number) => {
   if (bytes === 0) return '0 B';
   const k = 1024,
     sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
@@ -6,3 +6,5 @@ export const bytesToSize = (bytes: number) => {
 
   return (bytes / Math.pow(k, i)).toPrecision(3) + ' ' + sizes[i];
 }
+
+export default bytesToSize

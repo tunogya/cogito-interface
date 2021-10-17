@@ -12,11 +12,12 @@ import {
 import {FC, useEffect, useState} from "react";
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {PROCESSING} from "../../constants/status";
-import {parseCidToHttpUrl} from "../../utils/ipfs";
-import {shortenCid} from "../../utils/ipfs";
 import {CopyIcon, DeleteIcon, ExternalLinkIcon} from "@chakra-ui/icons";
-import {bytesToSize} from "../../utils";
+import bytesToSize from "../../utils/bytesToSize";
+import shortenCid from "../../utils/shortenCid";
+import parseUriToHttp from "../../utils/parseUriToHttp";
 import {Attachment} from "../../constants/interfaces";
+import parseIpfsCid from "../../utils/parseIpfsCid";
 
 interface Props {
   attachment: Attachment
@@ -27,13 +28,14 @@ interface Props {
 const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
   const storage = useNFTStorage()
 
-  // the result of file cid
-  const [result, setResult] = useState("")
+  // the cid of file
+  const [cid, setCid] = useState("")
 
   useEffect(() => {
     storage?.storeBlob(attachment.content).then((cid) => {
-        setResult(cid)
-        onUpdate(attachment.content.name, {...attachment, cid: cid})
+        setCid(cid)
+        console.log("file: " + parseIpfsCid(cid))
+        onUpdate(attachment.content.name, {...attachment, uri: parseIpfsCid(cid)})
       }
     )
   }, [attachment.content])
@@ -58,14 +60,14 @@ const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
         </Text>
         <Stack direction={"row"} alignItems={"center"}>
           <Text px={3} fontSize={"xs"}>
-            {shortenCid(result, 8)}
+            {shortenCid(cid, 8)}
           </Text>
           <IconButton aria-label={"copy"} icon={<CopyIcon/>} size={"xs"} variant={"ghost"}/>
         </Stack>
 
         <MenuDivider/>
-        {result !== "" && (
-          <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={parseCidToHttpUrl(result)} isExternal>
+        {cid !== "" && (
+          <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={parseUriToHttp("ipfs://" + cid)[0]} isExternal>
             <Heading size={"sm"} fontWeight={"normal"}>View on Explore</Heading>
           </MenuItem>
         )}

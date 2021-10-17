@@ -10,18 +10,21 @@ import {
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser"
-import {useEffect, useRef, useState} from "react"
+import {useRef, useState} from "react"
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {AiFillFileAdd} from "react-icons/all";
 import FIleItem from "./FIleItem";
 import {Attachment} from "../../constants/interfaces";
+import {PROCESSING} from "../../constants/status";
+import parseIpfsCid from "../../utils/parseIpfsCid";
+import checkMedia from "../../utils/checkMedia";
 
 const MintCogito = () => {
   // mint Modal status
   const {isOpen, onOpen, onClose} = useDisclosure()
 
   const [text, setText] = useState("")
-  const [file, setFile] = useState([])
+  const [files, setFiles] = useState([])
 
   // get user info
   const {user} = useCurrentUser()
@@ -34,52 +37,57 @@ const MintCogito = () => {
 
   const initialFocusRef = useRef(null)
 
-  let nft = {}
-
   // delete the attachment
   const handleDelete = (name: string) => {
     // @ts-ignore
-    setFile(file.filter(attachment => attachment.fileName !== name))
+    setFiles(files.filter(attachment => attachment.fileName !== name))
   }
 
   const handleUpdate = (fileName: string, newAttachment: Attachment) => {
     // @ts-ignore
-    setFile(file.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
+    setFiles(files.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
   }
 
   const handleReset = () => {
     setText("")
-    setFile([])
+    setFiles([])
   }
 
   const getMetaData = () => {
     let metadata = {}
 
-    if (text !== "") {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      metadata = {...metadata, text: text}
-    }
-
     if (user.loggedIn) {
       metadata = {...metadata, author: user.addr}
+    }
+
+    if (files.length > 0) {
+
+      let attachment = {}
+
+      // @ts-ignore
+      const m = files.filter((file) => checkMedia(file.type))
+      // @ts-ignore
+      const f = files.filter((file) => !checkMedia(file.type))
+
+      if (m.length > 0) {
+        attachment = {...attachment, media: m}
+      }
+
+      if (f.length > 0) {
+        attachment = {...attachment, files: f}
+      }
+
+      metadata = {
+        ...metadata, attachment
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     metadata = {...metadata, create_at: Date.now()}
 
-    if (file.length > 0) {
-      metadata = {
-        ...metadata, attachment: {
-          media: file.map((file) => {
-            // @ts-ignore
-            return { fileName: file.fileName, cid: file.cid, type: file.type, size: file.size, create_at: file.create_at }
-          }),
-          file: file.map((file) => {
-            // @ts-ignore
-            return { fileName: file.fileName, cid: file.cid, type: file.type, size: file.size, create_at: file.create_at }
-          })
-        }
-      }
+    if (text !== "") {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      metadata = {...metadata, text: text}
     }
 
     return metadata
@@ -105,7 +113,7 @@ const MintCogito = () => {
             <Textarea placeholder="What's happening?" resize={"none"} variant="filled" value={text}
                       onChange={(e) => setText(e.target.value)}/>
             <Wrap pt={2}>
-              {file.map((attachment, index) => (
+              {files.map((attachment, index) => (
                 <WrapItem key={index}>
                   <FIleItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate}/>
                 </WrapItem>
@@ -121,7 +129,7 @@ const MintCogito = () => {
               for (let i = 0; i < e.target.files.length; i++) {
                 const f = e.target.files[i];
                 // @ts-ignore
-                setFile([...file, {fileName: f.name, content: f as File, create_at: f.lastModified, size: f.size, type: f.type}]);
+                setFiles([...files, {fileName: f.name, content: f as File, create_at: f.lastModified, size: f.size, type: f.type}]);
               }
             }}/>
 
@@ -132,11 +140,12 @@ const MintCogito = () => {
                         }}/>
             <Spacer/>
             <Button fontWeight={"bold"}
-                    disabled={text === "" && file.length === 0}
+                    disabled={text === "" && files.length === 0}
+                    isLoading={storage?.state === PROCESSING}
                     onClick={async () => {
                       console.log(JSON.stringify(getMetaData()))
-                      await storage?.storeBlob(JSON.stringify(getMetaData())).then((res)=>{
-                        console.log(res)
+                      await storage?.storeBlob(JSON.stringify(getMetaData())).then((cid)=>{
+                        console.log(parseIpfsCid(cid))
                       })
                       handleReset()
                     }}>Mint</Button>
