@@ -70,11 +70,17 @@ const MintCogito = () => {
       const f = files.filter((file) => !checkMedia(file.type))
 
       if (m.length > 0) {
-        attachment = {...attachment, media: m}
+        attachment = {...attachment, media: m.map((file)=> {
+          // @ts-ignore
+            return { name: file.fileName, uri: file.uri }
+          })}
       }
 
       if (f.length > 0) {
-        attachment = {...attachment, files: f}
+        attachment = {...attachment, files: f.map((file)=> {
+          // @ts-ignore
+            return {name: file.fileName, uri: file.uri}
+          })}
       }
 
       metadata = {
@@ -144,9 +150,8 @@ const MintCogito = () => {
                     isLoading={storage?.state === PROCESSING}
                     onClick={async () => {
                       console.log(JSON.stringify(getMetaData()))
-                      await storage?.storeBlob(JSON.stringify(getMetaData())).then((cid)=>{
-                        console.log(parseIpfsCid(cid))
-                      })
+                      const cid = await storage?.storeBlob(JSON.stringify(getMetaData())).then(cid=> cid)
+                      console.log(parseIpfsCid(cid))
                       handleReset()
                     }}>Mint</Button>
           </ModalFooter>

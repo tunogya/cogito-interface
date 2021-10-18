@@ -1,6 +1,6 @@
 import {
   Button,
-  Heading, IconButton,
+  Heading,
   Link,
   Menu,
   MenuButton,
@@ -12,7 +12,7 @@ import {
 import {FC, useEffect, useState} from "react";
 import {useNFTStorage} from "../../hooks/useNFTStorage";
 import {PROCESSING} from "../../constants/status";
-import {CopyIcon, DeleteIcon, ExternalLinkIcon} from "@chakra-ui/icons";
+import {DeleteIcon, ExternalLinkIcon} from "@chakra-ui/icons";
 import bytesToSize from "../../utils/bytesToSize";
 import shortenCid from "../../utils/shortenCid";
 import parseUriToHttp from "../../utils/parseUriToHttp";
@@ -34,7 +34,6 @@ const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
   useEffect(() => {
     storage?.storeBlob(attachment.content).then((cid) => {
         setCid(cid)
-        console.log("file: " + parseIpfsCid(cid))
         onUpdate(attachment.content.name, {...attachment, uri: parseIpfsCid(cid)})
       }
     )
@@ -60,14 +59,13 @@ const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
         </Text>
         <Stack direction={"row"} alignItems={"center"}>
           <Text px={3} fontSize={"xs"}>
-            {shortenCid(cid, 8)}
+            {parseIpfsCid(shortenCid(cid, 8))}
           </Text>
-          <IconButton aria-label={"copy"} icon={<CopyIcon/>} size={"xs"} variant={"ghost"}/>
         </Stack>
 
         <MenuDivider/>
         {cid !== "" && (
-          <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={parseUriToHttp("ipfs://" + cid)[0]} isExternal>
+          <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={parseUriToHttp(parseIpfsCid(cid))[0]} isExternal>
             <Heading size={"sm"} fontWeight={"normal"}>View on Explore</Heading>
           </MenuItem>
         )}
