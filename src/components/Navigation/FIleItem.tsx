@@ -37,7 +37,7 @@ const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
         onUpdate(attachment.content.name, {...attachment, uri: parseIpfsCid(cid)})
       }
     )
-  }, [attachment.content])
+  }, [attachment, storage, onUpdate])
 
   return (
     <Menu>
