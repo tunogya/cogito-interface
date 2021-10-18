@@ -10,7 +10,7 @@ interface ContentProps {
 
 export const Content: FC<ContentProps> = ({...props}) => {
   return (
-    <Box w={"100%"} h={"100%"}>
+    <Stack w={"100%"} h={"100%"}>
       <Heading fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
         <Trans>{props.label}</Trans>
       </Heading>
@@ -20,7 +20,7 @@ export const Content: FC<ContentProps> = ({...props}) => {
       <Stack>
         { props.children }
       </Stack>
-    </Box>
+    </Stack>
   )
 }
 
