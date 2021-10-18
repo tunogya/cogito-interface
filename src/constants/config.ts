@@ -8,6 +8,6 @@ config()
   .put("env", process.env.REACT_APP_CHAIN_ENV)
   .put("discovery.wallet", process.env.REACT_APP_WALLET_DISCOVERY)
   .put("0xFungibleToken", process.env.REACT_APP_CONTRACT_FUNGIBLE_TOKEN)
-  .put("0xNonFungibleToken", process.env.REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN)
-  .put("0xCOGITO", process.env.REACT_APP_CONTRACT_COGITO)
+  .put("0xNFTADDRESS", process.env.REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN)
+  .put("0xCOGITOADDRESS", process.env.REACT_APP_CONTRACT_COGITO)
 
