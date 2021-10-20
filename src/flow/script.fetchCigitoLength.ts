@@ -5,19 +5,20 @@ const CODE = cdc`
 import NonFungibleToken from 0xNFTADDRESS
 import Cogito from 0xCOGITOADDRESS
 
-// This transaction returns an array of all the nft ids in the collection
+// This transaction gets the length of an account's nft collection
 
-pub fun main(address: Address): [UInt64] {
+pub fun main(address: Address): Int {
     let account = getAccount(address)
 
-    let collectionRef = account.getCapability(Cogito.CollectionPublicPath)!.borrow<&{NonFungibleToken.CollectionPublic}>()
+    let collectionRef = account.getCapability(Cogito.CollectionPublicPath)
+        .borrow<&{NonFungibleToken.CollectionPublic}>()
         ?? panic("Could not borrow capability from public collection")
 
-    return collectionRef.getIDs()
+    return collectionRef.getIDs().length
 }
 `
 
-const scriptFetchCogitoIDs = (address: string | null) => {
+const scriptFetchCogitoLength = (address: string | null) => {
   if (address == null) return Promise.resolve(false)
 
   return send([
@@ -28,4 +29,4 @@ const scriptFetchCogitoIDs = (address: string | null) => {
   ]).then(decode)
 }
 
-export default scriptFetchCogitoIDs
+export default scriptFetchCogitoLength

@@ -8,13 +8,13 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-const useMintCogito = () => {
+const useCogitoMinter = () => {
   // @ts-ignore
   const [status, setStatus] = useRecoilState(statusAtom())
 
-  const mint = async (recipient: string, metadata: string) => {
-    console.log(recipient, metadata)
-    return await txMintCogito(recipient, metadata, {
+  const mint = async (metadata: string) => {
+    console.log(metadata)
+    return await txMintCogito(metadata, {
       onStart() {
         setStatus(PROCESSING)
       },
@@ -38,4 +38,4 @@ const useMintCogito = () => {
 
 }
 
-export default useMintCogito
+export default useCogitoMinter

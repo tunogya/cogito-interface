@@ -18,7 +18,7 @@ import {Attachment} from "../../constants/interfaces";
 import {PROCESSING} from "../../constants/status";
 import parseIpfsCid from "../../utils/parseIpfsCid";
 import checkMedia from "../../utils/checkMedia";
-import useMintCogito from "../../hooks/useMintCogito";
+import useCogitoMinter from "../../hooks/useCogitoMinter";
 
 const MintCogito = () => {
   // mint Modal status
@@ -38,7 +38,7 @@ const MintCogito = () => {
 
   const initialFocusRef = useRef(null)
 
-  const minter = useMintCogito()
+  const minter = useCogitoMinter()
 
   // delete the attachment
   const handleDelete = (name: string) => {
@@ -154,7 +154,7 @@ const MintCogito = () => {
                     onClick={async () => {
                       const cid = await storage?.storeBlob(JSON.stringify(getMetaData())).then(cid => cid)
                       if (user.addr) {
-                        await minter.mint(user.addr, parseIpfsCid(cid)).then(res => {
+                        await minter.mint(parseIpfsCid(cid)).then(res => {
                           console.log(res)
                         })
                         handleReset()

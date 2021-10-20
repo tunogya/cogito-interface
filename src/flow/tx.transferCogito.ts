@@ -7,24 +7,20 @@ const CODE = cdc`
 import NonFungibleToken from 0xNFTADDRESS
 import Cogito from 0xCOGITOADDRESS
 
-// This transaction is for transferring and NFT from
-// one account to another
+// This transaction transfers a Cogito from one account to another.
 
 transaction(recipient: Address, withdrawID: UInt64) {
-
-    prepare(acct: AuthAccount) {
+    prepare(signer: AuthAccount) {
 
         // get the recipients public account object
         let recipient = getAccount(recipient)
 
         // borrow a reference to the signer's NFT collection
-        let collectionRef = acct.borrow<&Cogito.Collection>(from: /storage/CogitoCollection)
+        let collectionRef = signer.borrow<&Cogito.Collection>(from: Cogito.CollectionStoragePath)
             ?? panic("Could not borrow a reference to the owner's collection")
 
         // borrow a public reference to the receivers collection
-        let depositRef = recipient.getCapability(/public/CogitoCollection)
-            .borrow<&{NonFungibleToken.CollectionPublic}>()
-            ?? panic("Could not borrow a reference to the receiver's collection")
+        let depositRef = recipient.getCapability(Cogito.CollectionPublicPath)!.borrow<&{NonFungibleToken.CollectionPublic}>()!
 
         // withdraw the NFT from the owner's collection
         let nft <- collectionRef.withdraw(withdrawID: withdrawID)

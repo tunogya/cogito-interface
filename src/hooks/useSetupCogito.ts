@@ -1,7 +1,7 @@
 import {atomFamily, selectorFamily, useRecoilState} from "recoil";
 import {ERROR, IDLE, IDLE_DELAY, LOADING, PROCESSING} from "../constants/status";
 import scriptIsCogitoInit from "../flow/script.isCogitoInit";
-import txInitCogito from "../flow/tx.initCogito";
+import txSetupCogito from "../flow/tx.setupCogito";
 import sleep from "../utils/sleep";
 
 export const $status = atomFamily({
@@ -18,26 +18,16 @@ export const $init = atomFamily({
   })
 })
 
-// export const $computedInit = selectorFamily({
-//   key: "init-cogito::computed",
-//   get:
-//     address =>
-//       async ({get}) => {
-//         return get($init(address))
-//       },
-// })
-
-const useInitCogito = (address: string | null) => {
+const useSetupCogito = (address: string | null) => {
   const [init, setInit] = useRecoilState($init(address))
-  // const isInitialized = useRecoilValue($computedInit(address))
   const [status, setStatus] = useRecoilState($status(address))
 
   const recheck = () => {
     scriptIsCogitoInit(address).then(setInit)
   }
 
-  const initialize = async () => {
-    await txInitCogito(address, {
+  const setup = async () => {
+    await txSetupCogito(address, {
       onStart(){
         setStatus(PROCESSING)
       },
@@ -56,11 +46,10 @@ const useInitCogito = (address: string | null) => {
 
   return {
     init,
-    // isInitialized,
     status: init === null ? LOADING : status,
     recheck,
-    initialize,
+    setup,
   }
 }
 
-export default useInitCogito
+export default useSetupCogito
