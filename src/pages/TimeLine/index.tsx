@@ -18,7 +18,7 @@ const TimeLine = () => {
     <Content label={"TimeLine"} hasDivider>
       <Stack>
         <Text>{cogitos.length}个</Text>
-        {cogitos.ids.map((id: Number, index: Key) => (
+        {cogitos.ids.map((id: number, index: Key) => (
           <WrappedCogitoItem id={id} key={index}/>
         ))}
       </Stack>
