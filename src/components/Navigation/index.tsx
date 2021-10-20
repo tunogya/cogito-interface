@@ -14,7 +14,6 @@ import useSetupCogito from "../../hooks/useSetupCogito";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {PROCESSING} from "../../constants/status";
 
-
 export const Navigation = () => {
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)

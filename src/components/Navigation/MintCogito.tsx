@@ -150,7 +150,7 @@ const MintCogito = () => {
             <Spacer/>
             <Button fontWeight={"bold"}
                     disabled={text === "" && files.length === 0}
-                    isLoading={storage?.state === PROCESSING}
+                    isLoading={storage?.state === PROCESSING || minter.status === PROCESSING}
                     onClick={async () => {
                       const cid = await storage?.storeBlob(JSON.stringify(getMetaData())).then(cid => cid)
                       if (user.addr) {
