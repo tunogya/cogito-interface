@@ -1,4 +1,4 @@
-import {Button, Heading, Spacer, Stack, Text} from "@chakra-ui/react"
+import {Button, Heading, Spacer, Stack} from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState, Suspense} from "react"
@@ -75,7 +75,7 @@ const SkeletonPage = () => {
 
 const WrappedNavigation = () => {
   return (
-    <Suspense fallback={SkeletonPage}>
+    <Suspense fallback={<SkeletonPage/>}>
       <Navigation />
     </Suspense>
   )
