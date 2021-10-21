@@ -1,4 +1,4 @@
-import {Button, Heading, Spacer, Stack} from "@chakra-ui/react"
+import {Button, Heading, Spacer, Stack, Text} from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState, Suspense} from "react"
@@ -22,8 +22,6 @@ export const Navigation = () => {
     {pathname: "/timeline", label: <Trans>Timeline</Trans>, fillIcon: <GiExtraTime/>, outlineIcon: <GiSandsOfTime/>},
     {pathname: "/setting", label: <Trans>Setting</Trans>, fillIcon: <AiFillSetting/>, outlineIcon: <AiOutlineSetting/>},
   ]
-  const {user} = useCurrentUser()
-  const init = useSetupCogito(user.addr)
 
   return (
     <Stack w={"100%"} h={"100%"} p={"16px"}>
@@ -44,15 +42,9 @@ export const Navigation = () => {
             </Button>
           </Stack>
         ))}
-        {user.loggedIn && (
-          <Stack>
-            {init.init ? (
-              <MintCogito/>
-            ) : (
-              <Button onClick={init.setup} isLoading={init.status === PROCESSING}>Setup Cogito First</Button>
-            )}
-          </Stack>
-        )}
+        <Suspense fallback={null}>
+          <WrappedMintButton/>
+        </Suspense>
         <Spacer/>
         <Auth/>
         <Support/>
@@ -61,23 +53,21 @@ export const Navigation = () => {
   )
 }
 
-const SkeletonPage = () => {
+
+const WrappedMintButton = () => {
+  const {user} = useCurrentUser()
+  const init = useSetupCogito(user.addr)
+
+  if (!user.loggedIn) {return null}
   return (
-    <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
-      <Stack pr={4} spacing={3}>
-        <Heading fontSize={"2xl"} mb={4}>Cogito ergo sum</Heading>
-        <Spacer/>
-      </Stack>
+    <Stack>
+      {init.init ? (
+        <MintCogito/>
+      ) : (
+        <Button onClick={init.setup} isLoading={init.status === PROCESSING}>Setup Cogito First</Button>
+      )}
     </Stack>
   )
 }
 
-const WrappedNavigation = () => {
-  return (
-    <Suspense fallback={<SkeletonPage/>}>
-      <Navigation/>
-    </Suspense>
-  )
-}
-
-export default WrappedNavigation
+export default Navigation
