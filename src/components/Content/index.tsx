@@ -10,8 +10,8 @@ interface ContentProps {
 
 export const Content: FC<ContentProps> = ({...props}) => {
   return (
-    <Stack w={"100%"} h={"100%"}>
-      <Heading fontWeight={"bold"} fontSize={"xl"} p={"8px 16px"}>
+    <Stack w={"100%"} h={"100%"} spacing={0}>
+      <Heading fontWeight={"bold"} fontSize={"xl"} p={4}>
         <Trans>{props.label}</Trans>
       </Heading>
       {props.hasDivider && (

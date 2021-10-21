@@ -1,39 +1,54 @@
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
+import {atomFamily, useRecoilState} from "recoil";
 import {IDLE, PROCESSING} from "../constants/status";
 import scriptFetchTokenURI from "../flow/script.fetchTokenURI";
-
-const $valueAtom = atomFamily({
-  // @ts-ignore
-  key: ({address, id}) => { return address + id + "cogito-uri::value"} ,
-  default: selectorFamily({
-    key: "cogito-uri::default",
-    // @ts-ignore
-    get: ({address, id}) => async () => scriptFetchTokenURI(address, id),
-  }),
-})
+import fetcher from "../utils/fetcher";
+import parseUriToHttp from "../utils/parseUriToHttp";
+import {useEffect, useState} from "react";
 
 const $statusAtom = atomFamily({
   key: "cogito-ids::status",
   default: IDLE,
 })
 
+interface AttachmentItem {
+  name: string
+  uri: string
+}
+
+interface CogitoProps {
+  author?: string
+  create_at: number
+  text?: string
+  attachment?: {
+    media?: [AttachmentItem],
+    files?: [AttachmentItem],
+  }
+}
+
 const useCogitoTokenURI = (address: string | null, id: number) => {
-  const [uri, setUri] = useRecoilState($valueAtom({address, id}))
   // @ts-ignore
   const [status, setStatus] = useRecoilState($statusAtom())
+  const [cogito, setCogito] = useState<CogitoProps>()
 
   async function refresh() {
     setStatus(PROCESSING)
-    await scriptFetchTokenURI(address, id).then(setUri)
+    // @ts-ignore
+    const uri = await scriptFetchTokenURI(address, id).then(res=>res)
+    const cogito =await fetcher(parseUriToHttp(uri)[0]).then(res=>res)
+    setCogito(cogito)
+    await
     setStatus(IDLE)
   }
 
-  return {
-    uri,
-    status,
-    refresh
-  }
+  useEffect(()=>{
+    refresh()
+  }, [])
 
+  return {
+    cogito,
+    status,
+    refresh,
+  }
 }
 
 export default useCogitoTokenURI
