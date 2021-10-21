@@ -8,10 +8,15 @@ import WrappedCogitoItem from "../../components/CogitoItem";
 const TimeLine = () => {
   const {user} = useCurrentUser()
   const cogitos = useCogitoIds(user.addr)
-  console.log(cogitos)
 
-  if (!cogitos.ids) {
-    return <SkeletonPage/>
+  if (!user.loggedIn || !cogitos.ids) {
+    return (
+      <Stack>
+        <Text>
+          No cogito
+        </Text>
+      </Stack>
+    )
   }
 
   return (
