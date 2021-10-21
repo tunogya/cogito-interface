@@ -1,4 +1,4 @@
-import {Box, Divider, Heading, Stack} from "@chakra-ui/react";
+import {Divider, Heading, Stack} from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
 import {FC, ReactNode} from "react";
 

@@ -1,4 +1,4 @@
-import {Button, Divider, Heading, Link, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
+import {Button, Divider, Heading, Link, Menu, MenuButton, MenuItem, MenuList, Stack} from "@chakra-ui/react";
 import {t, Trans} from "@lingui/macro";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {ChevronDownIcon, CopyIcon, ExternalLinkIcon} from "@chakra-ui/icons";
@@ -10,7 +10,7 @@ const Auth = () => {
   const {hasCopied, onCopy} = useClipboard(user.addr ?? "")
 
   return (
-    <>
+    <Stack w={"250px"}>
       {user.loggedIn ? (
         <Menu>
           <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"}>
@@ -34,7 +34,7 @@ const Auth = () => {
           <Trans>Log in</Trans>
         </Button>
       )}
-    </>
+    </Stack>
   )
 }
 

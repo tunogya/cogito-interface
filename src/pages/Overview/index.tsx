@@ -15,7 +15,7 @@ const Overview = () => {
   const supply = useCogitoSupply()
   const init = useSetupCogito(user.addr)
   const cogitos = useCogitoIds(user.addr)
-  console.log(cogitos)
+
   return (
     <Content label={"Overview"} hasDivider>
       <Text>{user.addr}</Text>
@@ -26,7 +26,6 @@ const Overview = () => {
       <Button onClick={init.setup} disabled={!user.loggedIn || init.init} isLoading={init.status === PROCESSING}>
         初始化账户
       </Button>
-
     </Content>
   )
 }

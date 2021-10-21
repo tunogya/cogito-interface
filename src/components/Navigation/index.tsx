@@ -26,14 +26,14 @@ export const Navigation = () => {
   const init = useSetupCogito(user.addr)
 
   return (
-    <Stack w={"100%"} h={"100%"} p={"8px 16px 16px 32px"}>
-      <Stack pr={4} spacing={3}>
-       <Heading fontSize={"2xl"} mb={4}>Cogito ergo sum</Heading>
+    <Stack w={"100%"} h={"100%"} p={"16px"}>
+      <Stack pr={4} spacing={2} w={"250px"} ml={"auto"} h={"100%"}>
+        <Heading fontSize={"2xl"} mb={2}>Cogito ergo sum</Heading>
         {links.map((link, index) => (
           <Stack direction={"row"} key={index}>
             <Button
               leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
-              fontWeight={currentPath === link.pathname ? "bold" : "normal" }
+              fontWeight={currentPath === link.pathname ? "bold" : "normal"}
               variant={"ghost"}
               onClick={() => {
                 history.push(link.pathname)
@@ -44,19 +44,19 @@ export const Navigation = () => {
             </Button>
           </Stack>
         ))}
-        { user.loggedIn && (
-          <>
+        {user.loggedIn && (
+          <Stack>
             {init.init ? (
               <MintCogito/>
             ) : (
               <Button onClick={init.setup} isLoading={init.status === PROCESSING}>Setup Cogito First</Button>
             )}
-          </>
-        ) }
+          </Stack>
+        )}
+        <Spacer/>
+        <Auth/>
+        <Support/>
       </Stack>
-      <Spacer/>
-      <Auth/>
-      <Support/>
     </Stack>
   )
 }
@@ -75,7 +75,7 @@ const SkeletonPage = () => {
 const WrappedNavigation = () => {
   return (
     <Suspense fallback={<SkeletonPage/>}>
-      <Navigation />
+      <Navigation/>
     </Suspense>
   )
 }
