@@ -4,6 +4,7 @@ import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {ChevronDownIcon, CopyIcon, ExternalLinkIcon} from "@chakra-ui/icons";
 import {useClipboard} from "@chakra-ui/react";
 import {AiOutlineLogout} from "react-icons/all";
+import shortenCid from "../../utils/shortenCid";
 
 const Auth = () => {
   const {user, logIn, logOut} = useCurrentUser()
@@ -13,8 +14,8 @@ const Auth = () => {
     <Stack w={"250px"}>
       {user.loggedIn ? (
         <Menu>
-          <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"}>
-            {hasCopied ? (t`Copied!`) : user.addr}
+          <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"} variant={"outline"}>
+            {hasCopied ? (t`Copied!`) : shortenCid(user.addr ?? "", 6)}
           </MenuButton>
           <MenuList borderRadius={"xl"} padding={0}>
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
