@@ -1,5 +1,5 @@
 import React from "react"
-import { Divider, Grid, Stack } from "@chakra-ui/react"
+import {Divider, Stack} from "@chakra-ui/react"
 import Navigation from "../components/Navigation"
 import {Redirect, Route, Switch} from "react-router-dom";
 import Overview from "./Overview";
@@ -9,26 +9,26 @@ import Explore from "./Explore";
 
 function App() {
   return (
-    <Grid templateColumns="1fr 2fr 1.2fr" alignItems={"center"} h={"100vh"}>
-      <Stack h={"100%"} w={"100%"}>
-        <Navigation />
-      </Stack>
-      <Stack h={"100%"} w={"100%"} direction={"row"} spacing={0}>
+    <Stack h={"100vh"} w={"100vw"} alignItems={"center"}>
+      <Stack direction={"row"} h={"100%"} spacing={0}>
+        <Stack minW={"250px"} h={"100%"}>
+          <Navigation/>
+        </Stack>
         <Divider orientation="vertical"/>
-        <Stack w={"100%"} alignItems={"center"} minW={"480px"}>
+        <Stack minW={"600px"} h={"100%"}>
           <Switch>
-            <Route exact strict path="/" component={Overview} />
+            <Route exact strict path="/" component={Overview}/>
             <Route exact strict path="/timeline" component={TimeLine}/>
-            <Route exact strict path="/setting" component={Setting} />
-            <Redirect to="/" />
+            <Route exact strict path="/setting" component={Setting}/>
+            <Redirect to="/"/>
           </Switch>
         </Stack>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical"/>
+        <Stack minW={"350px"} h={"100%"}>
+          <Explore/>
+        </Stack>
       </Stack>
-      <Stack h={"100%"} w={"100%"} spacing={0}>
-        <Explore/>
-      </Stack>
-    </Grid>
+    </Stack>
   )
 }
 
