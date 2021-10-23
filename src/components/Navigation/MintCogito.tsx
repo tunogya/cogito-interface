@@ -87,7 +87,7 @@ const MintCogito = () => {
   }
 
   return (
-    <Stack alignItems={"center"}>
+    <Stack alignItems={"center"} mt={4}>
       {width >= 1200 ? (
         <Button onClick={onOpen} fontWeight={"bold"} isFullWidth>
           <Trans>+ Cogito</Trans>
