@@ -1,6 +1,6 @@
 export const Button = {
   baseStyle: {
-    borderRadius: "3xl",
+    borderRadius: "full",
     textTransform: "uppercase",
     fontFamily: "ChicagoFLFRegular",
     fontWeight: "normal",
