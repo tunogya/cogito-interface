@@ -1,5 +1,5 @@
 import React from "react"
-import {Divider, Stack} from "@chakra-ui/react"
+import {Divider, Spacer, Stack} from "@chakra-ui/react"
 import Navigation from "../components/Navigation"
 import {Redirect, Route, Switch} from "react-router-dom";
 import Overview from "./Overview";
@@ -22,6 +22,10 @@ function App() {
           <Route exact strict path="/timeline" component={TimeLine}/>
           <Redirect to="/"/>
         </Switch>
+        <Spacer/>
+        {width < 640 && (
+          <Navigation/>
+        )}
       </Stack>
       <Divider orientation="vertical"/>
       {width >= 800 && (
