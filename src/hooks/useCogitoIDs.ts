@@ -26,7 +26,7 @@ const $statusAtom = atomFamily({
   default: IDLE,
 })
 
-export function useCogitoIds(address: string | null) {
+export function useCogitoIDs(address: string | null) {
   const [ids, setIds] = useRecoilState($idsAtom(address))
   const [length, setLength] = useRecoilState($lengthAtom(address))
   const [status, setStatus] = useRecoilState($statusAtom(address))

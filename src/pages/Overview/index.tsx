@@ -7,14 +7,14 @@ import useCogitoSupply from "../../hooks/useCogitoSupply";
 import {parseFlow} from "../../utils/parseFlow";
 import useSetupCogito from "../../hooks/useSetupCogito";
 import {PROCESSING} from "../../constants/status";
-import {useCogitoIds} from "../../hooks/useCogitoIDs";
+import {useCogitoIDs} from "../../hooks/useCogitoIDs";
 
 const Overview = () => {
   const {user} = useCurrentUser()
   const flow = useFlowBalance(user.addr)
   const supply = useCogitoSupply()
   const init = useSetupCogito(user.addr)
-  const cogitos = useCogitoIds(user.addr)
+  const cogitos = useCogitoIDs(user.addr)
 
   return (
     <Content label={"Overview"} hasDivider>
