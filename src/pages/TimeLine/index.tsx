@@ -1,5 +1,9 @@
 import Content from "../../components/Content";
-import {Spinner, Stack, Text} from "@chakra-ui/react";
+import {
+  Spinner,
+  Stack,
+  Text
+} from "@chakra-ui/react";
 import {useCogitoIDs} from "../../hooks/useCogitoIDs";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {Key, Suspense} from "react"

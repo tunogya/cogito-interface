@@ -20,20 +20,20 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const Auth = () => {
   const {user, logIn, logOut} = useCurrentUser()
-  const { width } = useWindowDimensions()
+  const {width} = useWindowDimensions()
   const {hasCopied, onCopy} = useClipboard(user.addr ?? "")
 
   return (
     <Stack alignItems={"center"}>
       {user.loggedIn ? (
         <Menu>
-          { width >= 1200 ? (
+          {width >= 1200 ? (
             <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"} variant={"outline"} isFullWidth>
               {hasCopied ? (t`Copied!`) : shortenCid(user.addr ?? "", 6)}
             </MenuButton>
           ) : (
-            <MenuButton as={IconButton} aria-label={"user"} />
-          ) }
+            <MenuButton as={IconButton} aria-label={"user"}/>
+          )}
 
           <MenuList borderRadius={"xl"} padding={0}>
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
@@ -44,12 +44,12 @@ const Auth = () => {
             </MenuItem>
             <Divider/>
             <MenuItem onClick={logOut} color={"red"} icon={<AiOutlineLogout/>} fontWeight={"bold"}>
-             <Heading fontSize={"md"} fontWeight={"normal"}><Trans>Log out</Trans></Heading>
+              <Heading fontSize={"md"} fontWeight={"normal"}><Trans>Log out</Trans></Heading>
             </MenuItem>
           </MenuList>
         </Menu>
       ) : (
-        <Button onClick={logIn} fontWeight={"bold"}>
+        <Button onClick={logIn} fontWeight={"bold"} isFullWidth fontSize={width >=1200 ? "md" : "xs"}>
           <Trans>Log in</Trans>
         </Button>
       )}
