@@ -3,7 +3,7 @@ import { I18nProvider } from "@lingui/react"
 import { ReactNode, useEffect } from "react"
 import { SupportedLocale } from "./constants/locales"
 
-import { en, zh, PluralCategory } from "make-plural/plurals"
+import { en, PluralCategory } from "make-plural/plurals"
 import { useActiveLocale } from "./hooks/useActiveLocale"
 
 type LocalePlural = {
@@ -11,8 +11,7 @@ type LocalePlural = {
 }
 
 const plurals: LocalePlural = {
-  "en-US": en,
-  "zh-CN": zh,
+  "en-US": en
 }
 
 async function dynamicActivate(locale: SupportedLocale) {

@@ -4,8 +4,7 @@ import {useHistory} from "react-router-dom"
 import {useState, Suspense} from "react"
 import Auth from "../Auth";
 import {
-  AiFillSetting,
-  AiOutlineSetting, GiExtraTime, GiSandsOfTime,
+  GiExtraTime, GiSandsOfTime,
   RiUserSmileFill, RiUserSmileLine
 } from "react-icons/all";
 import MintCogito from "./MintCogito";
@@ -21,8 +20,7 @@ export const Navigation = () => {
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
   const links = [
     {pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill/>, outlineIcon: <RiUserSmileLine/>},
-    {pathname: "/timeline", label: <Trans>Timeline</Trans>, fillIcon: <GiExtraTime/>, outlineIcon: <GiSandsOfTime/>},
-    {pathname: "/setting", label: <Trans>Setting</Trans>, fillIcon: <AiFillSetting/>, outlineIcon: <AiOutlineSetting/>},
+    {pathname: "/timeline", label: <Trans>Timeline</Trans>, fillIcon: <GiExtraTime/>, outlineIcon: <GiSandsOfTime/>}
   ]
 
   return (

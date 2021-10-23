@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   catalogs: [
     {
@@ -13,7 +14,7 @@ export default {
   formatOptions: {
     lineNumbers: false,
   },
-  locales: ["en-US", "zh-CN"],
+  locales: ["en-US"],
   orderBy: "messageId",
   rootDir: ".",
   runtimeConfigModule: ["@lingui/core", "i18n"],

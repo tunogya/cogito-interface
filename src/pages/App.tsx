@@ -3,7 +3,6 @@ import {Divider, Stack} from "@chakra-ui/react"
 import Navigation from "../components/Navigation"
 import {Redirect, Route, Switch} from "react-router-dom";
 import Overview from "./Overview";
-import Setting from "./Setting";
 import TimeLine from "./TimeLine";
 import Explore from "./Explore";
 import useWindowDimensions from "../hooks/useWindowDimensions";
@@ -22,7 +21,6 @@ function App() {
           <Switch>
             <Route exact strict path="/" component={Overview}/>
             <Route exact strict path="/timeline" component={TimeLine}/>
-            <Route exact strict path="/setting" component={Setting}/>
             <Redirect to="/"/>
           </Switch>
         </Stack>
