@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Stack h={"100vh"} w={"100vw"} alignItems={"center"} direction={"row"} spacing={0} justifyContent={"center"}>
-      {width >= 1014 && (
+      {width >= 640 && (
         <Navigation/>
       )}
       <Divider orientation="vertical"/>
@@ -24,7 +24,7 @@ function App() {
         </Switch>
       </Stack>
       <Divider orientation="vertical"/>
-      {width >= 1014 && (
+      {width >= 800 && (
         <Explore/>
       )}
     </Stack>
