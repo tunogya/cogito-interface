@@ -13,44 +13,42 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/Setting/index.tsx
-msgid "Appearance"
-msgstr "Appearance"
+#: src/components/Navigation/MintCogito.tsx
+msgid "+ Cogito"
+msgstr "+ Cogito"
+
+#: src/components/Navigation/MintCogito.tsx
+msgid "Cogito ergo sum"
+msgstr "Cogito ergo sum"
+
+#: src/components/Navigation/Auth.tsx
+msgid "Copied!"
+msgstr "Copied!"
+
+#: src/components/Navigation/Auth.tsx
+msgid "Copy Address"
+msgstr "Copy Address"
+
+#: src/components/Navigation/Auth.tsx
+msgid "Log in"
+msgstr "Log in"
+
+#: src/components/Navigation/Auth.tsx
+msgid "Log out"
+msgstr "Log out"
 
 #: src/components/Navigation/index.tsx
-msgid "Cogito"
-msgstr "Cogito"
-
-#: src/pages/Setting/index.tsx
-msgid "Dark mode"
-msgstr "Dark mode"
-
-#: src/components/Navigation/index.tsx
-#: src/pages/Fresh/index.tsx
-msgid "Fresh Memory"
-msgstr "Fresh Memory"
-
-#: src/pages/Setting/index.tsx
-msgid "Language"
-msgstr "Language"
-
-#: src/pages/Setting/index.tsx
-msgid "Light mode"
-msgstr "Light mode"
-
-#: src/components/Navigation/index.tsx
-msgid "MY ACCOUNT"
-msgstr "MY ACCOUNT"
-
-#: src/pages/Loss/index.tsx
-msgid "Memory Loss"
-msgstr "Memory Loss"
-
-#: src/components/Navigation/index.tsx
-#: src/pages/Overview/index.tsx
 msgid "Overview"
 msgstr "Overview"
 
 #: src/components/Navigation/index.tsx
-msgid "Setting"
-msgstr "Setting"
+msgid "Timeline"
+msgstr "Timeline"
+
+#: src/components/Navigation/Auth.tsx
+msgid "View on Explorer"
+msgstr "View on Explorer"
+
+#: src/components/Content/index.tsx
+msgid "{0}"
+msgstr "{0}"
