@@ -14,17 +14,17 @@ const Overview = () => {
   const flow = useFlowBalance(user.addr)
   const supply = useCogitoSupply()
   const init = useSetupCogito(user.addr)
-  const cogitos = useCogitoIDs(user.addr)
+  const cogitoIDs = useCogitoIDs(user.addr)
 
   return (
     <Content label={"Overview"} hasDivider>
       <Text>{user.addr}</Text>
       <Text>Balance: {parseFlow(flow.balance)} FLOW</Text>
       <Text>Cogito Supply: {supply.supply}</Text>
-      <Text>Length: {cogitos.length}</Text>
+      <Text>Length: {cogitoIDs.length}</Text>
       <Text>{init.init ? "初始化 Cogito" : "未初始化 Cogito" }</Text>
       <Button onClick={init.setup} disabled={!user.loggedIn || init.init} isLoading={init.status === PROCESSING}>
-        初始化账户
+        Setup Account
       </Button>
     </Content>
   )
