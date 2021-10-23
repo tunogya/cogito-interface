@@ -20,8 +20,13 @@ function App() {
           <Route exact strict path="/timeline" component={TimeLine} />
           <Redirect to="/" />
         </Switch>
-        <Spacer />
-        {width < 640 && <Navigation />}
+        {width < 640 && (
+          <>
+            <Divider/>
+            <Spacer />
+            <Navigation />
+          </>
+        )}
       </Stack>
       <Divider orientation="vertical" />
       {width >= 800 && <Explore />}
