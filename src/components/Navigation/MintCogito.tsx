@@ -97,10 +97,9 @@ const MintCogito = () => {
       )}
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"}
-             initialFocusRef={initialFocusRef}
-             size={"lg"}>
+             initialFocusRef={initialFocusRef} size={width >= 640 ? "xl" : "xs"} >
         <ModalOverlay/>
-        <ModalContent>
+        <ModalContent h={96}>
           <ModalHeader>
             <Heading fontSize={"xl"}>
               <Trans>Cogito ergo sum</Trans>
