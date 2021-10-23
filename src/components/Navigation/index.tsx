@@ -24,48 +24,46 @@ export const Navigation = () => {
   ]
 
   return (
-    <Stack w={"100%"} h={"100%"} p={width >= 1200 ? 4 : 2}>
-      <Stack spacing={2} w={width >= 1200 ? "250px" : "64px"} ml={"auto"} h={"100%"}>
-        {width >= 1200 ? (
-          <Heading fontSize={"2xl"} mb={2}>Cogito ergo sum</Heading>
-        ) : (
-          <Heading fontSize={"md"} mb={2} textAlign={"center"}>Cogito</Heading>
-        )}
-        {links.map((link, index) => (
-          <Stack direction={"row"} key={index} justifyContent={width >= 1200 ? "flex-start" : "center"}>
-            {(width >= 1200) ? (
-              <Button
-                leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
-                fontWeight={currentPath === link.pathname ? "bold" : "normal"}
-                variant={"ghost"}
-                onClick={() => {
-                  history.push(link.pathname)
-                  setCurrentPath(link.pathname)
-                }}
-              >
-                <Text>{link.label}</Text>
-              </Button>
-            ) : (
-              <IconButton aria-label={"icon"}
-                          variant={"ghost"}
-                          fontWeight={currentPath === link.pathname ? "bold" : "normal"}
-                          onClick={() => {
-                            history.push(link.pathname)
-                            setCurrentPath(link.pathname)
-                          }}
-                          icon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}/>
-            )}
-          </Stack>
-        ))}
-        <Suspense fallback={null}>
-          <WrappedMintButton/>
-        </Suspense>
-        <Spacer/>
-        <Auth/>
-        {width >= 1200 && (
-          <Support/>
-        )}
-      </Stack>
+    <Stack w={"100%"} h={"100%"} p={width >= 1200 ? 4 : 2} spacing={2}>
+      {width >= 1200 ? (
+        <Heading fontSize={"md"} mb={4}>Cogito ergo sum</Heading>
+      ) : (
+        <Heading fontSize={"md"} mb={4} textAlign={"center"}>Cogito</Heading>
+      )}
+      {links.map((link, index) => (
+        <Stack direction={"row"} key={index} justifyContent={width >= 1200 ? "flex-start" : "center"}>
+          {(width >= 1200) ? (
+            <Button
+              leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
+              fontWeight={currentPath === link.pathname ? "bold" : "normal"}
+              variant={"ghost"}
+              onClick={() => {
+                history.push(link.pathname)
+                setCurrentPath(link.pathname)
+              }}
+            >
+              <Text>{link.label}</Text>
+            </Button>
+          ) : (
+            <IconButton aria-label={"icon"}
+                        variant={"ghost"}
+                        fontWeight={currentPath === link.pathname ? "bold" : "normal"}
+                        onClick={() => {
+                          history.push(link.pathname)
+                          setCurrentPath(link.pathname)
+                        }}
+                        icon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}/>
+          )}
+        </Stack>
+      ))}
+      <Suspense fallback={null}>
+        <WrappedMintButton/>
+      </Suspense>
+      <Spacer/>
+      <Auth/>
+      {width >= 1200 && (
+        <Support/>
+      )}
     </Stack>
   )
 }

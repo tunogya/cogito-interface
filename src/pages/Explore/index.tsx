@@ -2,22 +2,20 @@ import {Button, Heading, Input, Stack, Text} from "@chakra-ui/react";
 
 const Explore = () => {
   return (
-    <Stack spacing={4} p={4}>
-      <Input variant={"filled"} placeholder={"address"} borderRadius={"32px"}/>
+    <Stack py={2} px={4}>
+      <Input variant={"filled"} placeholder={"address"} borderRadius={"full"}/>
       <Stack direction={"row"}>
-        <Input variant={"outline"} placeholder={"id"} borderRadius={"32px"}/>
-        <Button size={"md"} minW={"100px"}>
+        <Input variant={"outline"} placeholder={"id"} borderRadius={"full"}/>
+        <Button size={"md"} minW={24}>
           Search
         </Button>
       </Stack>
-      <Stack p={4} borderRadius={"16px"}>
+      <Stack p={2} borderRadius={"2xl"}>
         <Heading fontSize={"xl"}>Ids</Heading>
         <Stack>
           <Text>Res</Text>
         </Stack>
       </Stack>
-
-
     </Stack>
   )
 }

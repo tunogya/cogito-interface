@@ -41,7 +41,7 @@ const FIleItem: FC<Props> = ({attachment, onDelete, onUpdate}) => {
 
   return (
     <Menu>
-      <MenuButton as={Button} size={"sm"} maxW={"200px"} overflow={"scroll"}
+      <MenuButton as={Button} size={"sm"} maxW={48} overflow={"scroll"}
                   isLoading={storage?.state === PROCESSING}
                   spinnerPlacement="start" loadingText={attachment.content.name}
                   fontFamily={"sans-serif"} textTransform={"none"}>
