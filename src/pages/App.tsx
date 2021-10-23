@@ -15,7 +15,7 @@ function App() {
           <Navigation/>
         </Stack>
         <Divider orientation="vertical"/>
-        <Stack minW={"600px"} h={"100%"}>
+        <Stack minW={"600px"} h={"100%"} spacing={0}>
           <Switch>
             <Route exact strict path="/" component={Overview}/>
             <Route exact strict path="/timeline" component={TimeLine}/>
