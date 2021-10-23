@@ -30,7 +30,7 @@ const CogitoList = () => {
   }
 
   return (
-    <Stack spacing={2} direction={"row"} p={2}>
+    <Stack spacing={4} direction={"row"} p={4}>
       {cogitos.ids.map((id: number, index: Key) => (
         <WrappedCogitoItem id={id} key={index}/>
       ))}

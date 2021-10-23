@@ -1,17 +1,24 @@
-import Content from "../../components/Content";
-import {Spacer, Stack, Text} from "@chakra-ui/react";
+import {Button, Heading, Input, Stack, Text} from "@chakra-ui/react";
 
 const Explore = () => {
   return (
-    <Content label={"Explore"} hasDivider>
-      <Stack h={"100%"}>
-        <Text>hhh</Text>
-
-        <Spacer/>
-
-
+    <Stack spacing={4} p={4}>
+      <Input variant={"filled"} placeholder={"address"} borderRadius={"32px"}/>
+      <Stack direction={"row"}>
+        <Input variant={"outline"} placeholder={"id"} borderRadius={"32px"}/>
+        <Button size={"md"} minW={"100px"}>
+          Search
+        </Button>
       </Stack>
-    </Content>
+      <Stack p={4} borderRadius={"16px"}>
+        <Heading fontSize={"xl"}>Ids</Heading>
+        <Stack>
+          <Text>Res</Text>
+        </Stack>
+      </Stack>
+
+
+    </Stack>
   )
 }
 
