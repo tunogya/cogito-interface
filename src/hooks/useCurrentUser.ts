@@ -1,10 +1,10 @@
-import {useEffect} from "react"
-import {atom, useRecoilState} from "recoil"
+import { useEffect } from "react"
+import { atom, useRecoilState } from "recoil"
 import * as fcl from "@onflow/fcl"
 
 export const currentUser = atom({
   key: "CURRENT_USER",
-  default: {addr: null, loggedIn: null, cid: null},
+  default: { addr: null, loggedIn: null, cid: null },
 })
 
 export function useCurrentUser() {

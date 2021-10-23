@@ -1,11 +1,11 @@
-import {Button, Heading, Input, Stack, Text} from "@chakra-ui/react";
+import { Button, Heading, Input, Stack, Text } from "@chakra-ui/react"
 
 const Explore = () => {
   return (
     <Stack py={2} px={4} h={"100%"} w={80}>
-      <Input variant={"filled"} placeholder={"address"} borderRadius={"full"}/>
+      <Input variant={"filled"} placeholder={"address"} borderRadius={"full"} />
       <Stack direction={"row"}>
-        <Input variant={"outline"} placeholder={"id"} borderRadius={"full"}/>
+        <Input variant={"outline"} placeholder={"id"} borderRadius={"full"} />
         <Button size={"md"} minW={24}>
           Search
         </Button>

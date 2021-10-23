@@ -1,7 +1,7 @@
-import {Divider, Heading, IconButton, Spacer, Stack, useColorMode} from "@chakra-ui/react";
-import {Trans} from "@lingui/macro";
-import {FC, ReactNode} from "react";
-import {MoonIcon, SunIcon} from "@chakra-ui/icons";
+import { Divider, Heading, IconButton, Spacer, Stack, useColorMode } from "@chakra-ui/react"
+import { Trans } from "@lingui/macro"
+import { FC, ReactNode } from "react"
+import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 
 interface ContentProps {
   label: string
@@ -9,28 +9,24 @@ interface ContentProps {
   hasDivider?: boolean
 }
 
-export const Content: FC<ContentProps> = ({...props}) => {
-  const {colorMode, toggleColorMode} = useColorMode()
+export const Content: FC<ContentProps> = ({ ...props }) => {
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Stack w={"100%"} h={"100%"} spacing={0}>
       <Stack direction={"row"} alignItems={"center"} p={2}>
         <Heading fontWeight={"bold"} fontSize={"xl"}>
           <Trans>{props.label}</Trans>
         </Heading>
-        <Spacer/>
+        <Spacer />
         <IconButton
           aria-label={"btn"}
-          icon={colorMode === "dark" ? <MoonIcon/> : <SunIcon/>}
+          icon={colorMode === "dark" ? <MoonIcon /> : <SunIcon />}
           size={"sm"}
           onClick={toggleColorMode}
         />
       </Stack>
-      {props.hasDivider && (
-        <Divider/>
-      )}
-      <Stack>
-        { props.children }
-      </Stack>
+      {props.hasDivider && <Divider />}
+      <Stack>{props.children}</Stack>
     </Stack>
   )
 }

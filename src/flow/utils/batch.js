@@ -1,5 +1,5 @@
-import {spawn, send, INIT} from "@onflow/util-actor";
-import {uid} from "@onflow/util-uid";
+import { spawn, send, INIT } from "@onflow/util-actor"
+import { uid } from "@onflow/util-uid"
 
 const TICK = 500
 const BUFFER_SIZE = 10
@@ -26,12 +26,12 @@ const HANDLERS = {
 
   [ENQUEUE]: (ctx, letter, args) => {
     const id = uid()
-    const hold = {id, args, reply: letter.reply}
+    const hold = { id, args, reply: letter.reply }
     ctx.update("need", n => {
       n.add(id)
       return n
     })
-    ctx.update("hold", h => ({...h, [id]: hold}))
+    ctx.update("hold", h => ({ ...h, [id]: hold }))
     ctx.sendSelf(MAYBE_PROCESS)
   },
 
@@ -52,10 +52,7 @@ const HANDLERS = {
     ctx.put("need", new Set())
 
     const hold = ctx.get("hold")
-    const payload = [...need].reduce(
-      (acc, key) => ({...acc, [key]: hold[key].args}),
-      {}
-    )
+    const payload = [...need].reduce((acc, key) => ({ ...acc, [key]: hold[key].args }), {})
 
     callback(payload).then(result => {
       ctx.sendSelf(RESOLVE, result)
@@ -84,7 +81,7 @@ export const batch = (name, callback) => {
 
   return {
     enqueue(...args) {
-      return send(name, ENQUEUE, args, {expectReply: true, timeout: 0})
+      return send(name, ENQUEUE, args, { expectReply: true, timeout: 0 })
     },
   }
 }

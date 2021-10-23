@@ -1,7 +1,7 @@
-import {transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg} from "@onflow/fcl";
-import * as t from "@onflow/types";
-import {tx} from "./utils/tx";
-import {invariant} from "@onflow/util-invariant";
+import { transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg } from "@onflow/fcl"
+import * as t from "@onflow/types"
+import { tx } from "./utils/tx"
+import { invariant } from "@onflow/util-invariant"
 
 const CODE = cdc`
 import NonFungibleToken from 0xNFTADDRESS
@@ -35,17 +35,17 @@ const txTransferCogito = (recipient: string, withdrawID: Number, opts = {}) => {
   invariant(recipient != null, "transferWakandaToken({recipient, withdrawID}) -- amount required")
   invariant(withdrawID != null, "transferWakandaToken({recipient, withdrawID}) -- to required")
 
-  return tx([
-    transaction(CODE),
-    args([
-      arg(recipient, t.Address),
-      arg(withdrawID, t.UInt64),
-    ]),
-    proposer(authz),
-    payer(authz),
-    authorizations([authz]),
-    limit(1000),
-  ], opts)
+  return tx(
+    [
+      transaction(CODE),
+      args([arg(recipient, t.Address), arg(withdrawID, t.UInt64)]),
+      proposer(authz),
+      payer(authz),
+      authorizations([authz]),
+      limit(1000),
+    ],
+    opts
+  )
 }
 
 export default txTransferCogito

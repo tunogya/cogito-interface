@@ -1,8 +1,8 @@
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {IDLE, PROCESSING} from "../constants/status";
-import scriptFetchTokenURI from "../flow/script.fetchTokenURI";
-import fetcher from "../utils/fetcher";
-import parseUriToHttp from "../utils/parseUriToHttp";
+import { atomFamily, selectorFamily, useRecoilState } from "recoil"
+import { IDLE, PROCESSING } from "../constants/status"
+import scriptFetchTokenURI from "../flow/script.fetchTokenURI"
+import fetcher from "../utils/fetcher"
+import parseUriToHttp from "../utils/parseUriToHttp"
 
 const $valueAtom = atomFamily({
   // @ts-ignore
@@ -28,16 +28,15 @@ const useCogitoTokenURI = (address: string | null, id: number) => {
   // @ts-ignore
   const [status, setStatus] = useRecoilState($statusAtom())
   // @ts-ignore
-  const [cogito, setCogito] = useRecoilState($valueAtom({address, id}))
+  const [cogito, setCogito] = useRecoilState($valueAtom({ address, id }))
 
   async function refresh() {
     setStatus(PROCESSING)
     // @ts-ignore
-    const uri = await scriptFetchTokenURI(address, id).then(res=>res)
-    const cogito =await fetcher(parseUriToHttp(uri)[0]).then(res=>res)
+    const uri = await scriptFetchTokenURI(address, id).then(res => res)
+    const cogito = await fetcher(parseUriToHttp(uri)[0]).then(res => res)
     setCogito(cogito)
-    await
-    setStatus(IDLE)
+    await setStatus(IDLE)
   }
 
   return {

@@ -1,7 +1,7 @@
-import {IDLE, PROCESSING} from "../constants/status";
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import scriptFetchCogitoIDs from "../flow/script.fetchCogitoIDs";
-import scriptFetchCogitoLength from "../flow/script.fetchCigitoLength";
+import { IDLE, PROCESSING } from "../constants/status"
+import { atomFamily, selectorFamily, useRecoilState } from "recoil"
+import scriptFetchCogitoIDs from "../flow/script.fetchCogitoIDs"
+import scriptFetchCogitoLength from "../flow/script.fetchCigitoLength"
 
 const $idsAtom = atomFamily({
   key: "cogito-ids::value",
@@ -17,8 +17,8 @@ const $lengthAtom = atomFamily({
   default: selectorFamily({
     key: "cogito-length::default",
     // @ts-ignore
-    get: address => async () => scriptFetchCogitoLength(address)
-  })
+    get: address => async () => scriptFetchCogitoLength(address),
+  }),
 })
 
 const $statusAtom = atomFamily({

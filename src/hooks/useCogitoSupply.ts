@@ -1,6 +1,6 @@
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import scriptFetchCogitoSupply from "../flow/script.fetchCogitoSupply";
-import {IDLE, PROCESSING} from "../constants/status";
+import { atomFamily, selectorFamily, useRecoilState } from "recoil"
+import scriptFetchCogitoSupply from "../flow/script.fetchCogitoSupply"
+import { IDLE, PROCESSING } from "../constants/status"
 
 export const supplyAtom = atomFamily({
   key: "wkdt-supply::state",

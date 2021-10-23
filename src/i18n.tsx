@@ -11,7 +11,7 @@ type LocalePlural = {
 }
 
 const plurals: LocalePlural = {
-  "en-US": en
+  "en-US": en,
 }
 
 async function dynamicActivate(locale: SupportedLocale) {

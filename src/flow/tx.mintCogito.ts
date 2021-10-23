@@ -1,7 +1,7 @@
-import {transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg} from "@onflow/fcl";
-import {invariant} from "@onflow/util-invariant";
-import {tx} from "./utils/tx";
-import * as t from "@onflow/types";
+import { transaction, limit, proposer, payer, authorizations, authz, cdc, args, arg } from "@onflow/fcl"
+import { invariant } from "@onflow/util-invariant"
+import { tx } from "./utils/tx"
+import * as t from "@onflow/types"
 
 const CODE = cdc`
 import NonFungibleToken from 0xNFTADDRESS
@@ -37,9 +37,7 @@ const txMintCogito = (metadata: string, opts = {}) => {
   return tx(
     [
       transaction(CODE),
-      args([
-        arg(metadata, t.String),
-      ]),
+      args([arg(metadata, t.String)]),
       proposer(authz),
       payer(authz),
       authorizations([authz]),

@@ -1,12 +1,12 @@
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {ERROR, IDLE, IDLE_DELAY, LOADING, PROCESSING} from "../constants/status";
-import scriptIsCogitoInit from "../flow/script.isCogitoInit";
-import txSetupCogito from "../flow/tx.setupCogito";
-import sleep from "../utils/sleep";
+import { atomFamily, selectorFamily, useRecoilState } from "recoil"
+import { ERROR, IDLE, IDLE_DELAY, LOADING, PROCESSING } from "../constants/status"
+import scriptIsCogitoInit from "../flow/script.isCogitoInit"
+import txSetupCogito from "../flow/tx.setupCogito"
+import sleep from "../utils/sleep"
 
 export const $status = atomFamily({
   key: "init-cogito::status",
-  default: IDLE
+  default: IDLE,
 })
 
 export const $init = atomFamily({
@@ -15,7 +15,7 @@ export const $init = atomFamily({
     key: "init-cogito::default",
     // @ts-ignore
     get: address => () => scriptIsCogitoInit(address),
-  })
+  }),
 })
 
 const useSetupCogito = (address: string | null) => {
@@ -28,17 +28,17 @@ const useSetupCogito = (address: string | null) => {
 
   const setup = async () => {
     await txSetupCogito(address, {
-      onStart(){
+      onStart() {
         setStatus(PROCESSING)
       },
-      onSuccess(){
+      onSuccess() {
         recheck()
       },
       onError() {
         setStatus(ERROR)
       },
       async onComplete() {
-        await sleep(IDLE_DELAY);
+        await sleep(IDLE_DELAY)
         setStatus(IDLE)
       },
     })

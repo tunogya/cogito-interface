@@ -1,6 +1,6 @@
-import {Blob, NFTStorage} from 'nft.storage'
-import {IDLE, PROCESSING} from "../constants/status";
-import {useState} from "react";
+import { Blob, NFTStorage } from "nft.storage"
+import { IDLE, PROCESSING } from "../constants/status"
+import { useState } from "react"
 
 const apiKey = process.env.REACT_APP_NFT_STORAGE_DEFAULT_KEY
 
@@ -11,7 +11,7 @@ export const useNFTStorage = () => {
     return
   }
 
-  const client = new NFTStorage({token: apiKey})
+  const client = new NFTStorage({ token: apiKey })
 
   const storeBlob = async (data: any) => {
     setState(PROCESSING)

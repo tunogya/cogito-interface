@@ -1,4 +1,4 @@
-import * as fcl from "@onflow/fcl";
+import * as fcl from "@onflow/fcl"
 
 const noop = async () => {}
 

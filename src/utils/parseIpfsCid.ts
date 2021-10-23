@@ -1,5 +1,7 @@
 const parseIpfsCid = (cid: string | undefined) => {
-  if (!cid) { return "" }
+  if (!cid) {
+    return ""
+  }
   return "ipfs://" + cid
 }
 

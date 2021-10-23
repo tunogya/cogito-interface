@@ -1,14 +1,13 @@
-import scriptFetchFlowBalance from "../flow/script.fetchFlowBalance";
-import {IDLE, IDLE_DELAY, PROCESSING} from "../constants/status";
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import sleep from "../utils/sleep";
-
+import scriptFetchFlowBalance from "../flow/script.fetchFlowBalance"
+import { IDLE, IDLE_DELAY, PROCESSING } from "../constants/status"
+import { atomFamily, selectorFamily, useRecoilState } from "recoil"
+import sleep from "../utils/sleep"
 
 export const $value = atomFamily({
   key: "flow-balance::value",
   default: selectorFamily({
     key: "flow-balance::init",
-    get: (address: string | null) => async() => scriptFetchFlowBalance(address)
+    get: (address: string | null) => async () => scriptFetchFlowBalance(address),
   }),
 })
 
@@ -21,7 +20,7 @@ const useFlowBalance = (address: string | null) => {
   const [balance, setBalance] = useRecoilState($value(address))
   const [status, setStatus] = useRecoilState($status(address))
 
-  async function update(){
+  async function update() {
     setStatus(PROCESSING)
     await scriptFetchFlowBalance(address).then(setBalance)
     await sleep(IDLE_DELAY)
@@ -36,7 +35,3 @@ const useFlowBalance = (address: string | null) => {
 }
 
 export default useFlowBalance
-
-
-
-
