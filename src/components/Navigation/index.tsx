@@ -1,4 +1,4 @@
-import {Button, Heading, Spacer, Stack} from "@chakra-ui/react"
+import {Button, Heading, IconButton, Spacer, Stack, Text} from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState, Suspense} from "react"
@@ -13,9 +13,11 @@ import Support from "./Support";
 import useSetupCogito from "../../hooks/useSetupCogito";
 import {useCurrentUser} from "../../hooks/useCurrentUser";
 import {PROCESSING} from "../../constants/status";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 export const Navigation = () => {
   const history = useHistory()
+  const {width} = useWindowDimensions()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
   const links = [
     {pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill/>, outlineIcon: <RiUserSmileLine/>},
@@ -24,22 +26,37 @@ export const Navigation = () => {
   ]
 
   return (
-    <Stack w={"100%"} h={"100%"} p={4}>
-      <Stack pr={4} spacing={2} w={"250px"} h={"100%"}>
-        <Heading fontSize={"2xl"} mb={2}>Cogito ergo sum</Heading>
+    <Stack w={"100%"} h={"100%"} p={width >= 1200 ? 4 : 2}>
+      <Stack spacing={2} w={width >= 1200 ? "250px" : "64px"} ml={"auto"} h={"100%"}>
+        {width >= 1200 ? (
+          <Heading fontSize={"2xl"} mb={2}>Cogito ergo sum</Heading>
+        ) : (
+          <Heading fontSize={"md"} mb={2} textAlign={"center"}>Cogito</Heading>
+        )}
         {links.map((link, index) => (
-          <Stack direction={"row"} key={index}>
-            <Button
-              leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
-              fontWeight={currentPath === link.pathname ? "bold" : "normal"}
-              variant={"ghost"}
-              onClick={() => {
-                history.push(link.pathname)
-                setCurrentPath(link.pathname)
-              }}
-            >
-              {link.label}
-            </Button>
+          <Stack direction={"row"} key={index} justifyContent={width >= 1200 ? "flex-start" : "center"}>
+            {(width >= 1200) ? (
+              <Button
+                leftIcon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
+                fontWeight={currentPath === link.pathname ? "bold" : "normal"}
+                variant={"ghost"}
+                onClick={() => {
+                  history.push(link.pathname)
+                  setCurrentPath(link.pathname)
+                }}
+              >
+                <Text>{link.label}</Text>
+              </Button>
+            ) : (
+              <IconButton aria-label={"icon"}
+                          variant={"ghost"}
+                          fontWeight={currentPath === link.pathname ? "bold" : "normal"}
+                          onClick={() => {
+                            history.push(link.pathname)
+                            setCurrentPath(link.pathname)
+                          }}
+                          icon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}/>
+            )}
           </Stack>
         ))}
         <Suspense fallback={null}>
@@ -47,7 +64,9 @@ export const Navigation = () => {
         </Suspense>
         <Spacer/>
         <Auth/>
-        <Support/>
+        {width >= 1200 && (
+          <Support/>
+        )}
       </Stack>
     </Stack>
   )
@@ -58,7 +77,9 @@ const WrappedMintButton = () => {
   const {user} = useCurrentUser()
   const init = useSetupCogito(user.addr)
 
-  if (!user.loggedIn) {return null}
+  if (!user.loggedIn) {
+    return null
+  }
   return (
     <Stack>
       {init.init ? (

@@ -5,7 +5,7 @@ import {
   ModalCloseButton,
   ModalContent,
   ModalFooter,
-  ModalHeader,
+  ModalHeader, Stack,
   ModalOverlay, Spacer, Textarea, useDisclosure, Wrap, WrapItem,
 } from "@chakra-ui/react";
 import {Trans} from "@lingui/macro";
@@ -19,94 +19,83 @@ import {PROCESSING} from "../../constants/status";
 import parseIpfsCid from "../../utils/parseIpfsCid";
 import checkMedia from "../../utils/checkMedia";
 import useCogitoMinter from "../../hooks/useCogitoMinter";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import {SmallAddIcon} from "@chakra-ui/icons";
 
 const MintCogito = () => {
+  const { width } = useWindowDimensions()
+
   // mint Modal status
   const {isOpen, onOpen, onClose} = useDisclosure()
-
   const [text, setText] = useState("")
   const [files, setFiles] = useState([])
-
   // get user info
   const {user} = useCurrentUser()
-
   // content input ref
   const filesUpload = useRef(null)
-
   // upload nft storage hooks
   const storage = useNFTStorage()
-
   const initialFocusRef = useRef(null)
-
   const minter = useCogitoMinter()
-
   // delete the attachment
   const handleDelete = (name: string) => {
     // @ts-ignore
     setFiles(files.filter(attachment => attachment.fileName !== name))
   }
-
   const handleUpdate = (fileName: string, newAttachment: Attachment) => {
     // @ts-ignore
     setFiles(files.map((attachment) => attachment.fileName === fileName ? newAttachment : attachment))
   }
-
   const handleReset = () => {
     setText("")
     setFiles([])
   }
-
   const getMetaData = () => {
     let metadata = {}
-
     if (user.loggedIn) {
       metadata = {...metadata, author: user.addr}
     }
-
     if (files.length > 0) {
-
       let attachment = {}
-
       // @ts-ignore
       const m = files.filter((file) => checkMedia(file.type))
       // @ts-ignore
       const f = files.filter((file) => !checkMedia(file.type))
-
       if (m.length > 0) {
         attachment = {...attachment, media: m.map((file)=> {
           // @ts-ignore
             return { name: file.fileName, uri: file.uri }
           })}
       }
-
       if (f.length > 0) {
         attachment = {...attachment, files: f.map((file)=> {
           // @ts-ignore
             return {name: file.fileName, uri: file.uri}
           })}
       }
-
       metadata = {
         ...metadata, attachment
       }
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     metadata = {...metadata, create_at: Date.now()}
-
     if (text !== "") {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       metadata = {...metadata, text: text}
     }
-
     return metadata
   }
 
   return (
-    <>
-      <Button onClick={onOpen} fontWeight={"bold"}>
-        <Trans>+ Cogito</Trans>
-      </Button>
+    <Stack alignItems={"center"}>
+      {width >= 1200 ? (
+        <Button onClick={onOpen} fontWeight={"bold"} isFullWidth>
+          <Trans>+ Cogito</Trans>
+        </Button>
+      ) : (
+        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon/>}/>
+      )}
+
       <Modal isOpen={isOpen} onClose={onClose} isCentered closeOnOverlayClick={false} scrollBehavior={"inside"}
              initialFocusRef={initialFocusRef}
              size={"lg"}>
@@ -163,7 +152,7 @@ const MintCogito = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </Stack>
   )
 }
 

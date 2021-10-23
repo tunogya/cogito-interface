@@ -6,12 +6,15 @@ import Overview from "./Overview";
 import Setting from "./Setting";
 import TimeLine from "./TimeLine";
 import Explore from "./Explore";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 function App() {
+  const { width } = useWindowDimensions()
+
   return (
     <Stack h={"100vh"} w={"100vw"} alignItems={"center"}>
       <Stack direction={"row"} h={"100%"} spacing={0}>
-        <Stack minW={"250px"} h={"100%"}>
+        <Stack h={"100%"}>
           <Navigation/>
         </Stack>
         <Divider orientation="vertical"/>
@@ -24,9 +27,11 @@ function App() {
           </Switch>
         </Stack>
         <Divider orientation="vertical"/>
-        <Stack minW={"350px"} h={"100%"}>
-          <Explore/>
-        </Stack>
+        { width >= 1014 && (
+          <Stack h={"100%"}>
+            <Explore/>
+          </Stack>
+        )}
       </Stack>
     </Stack>
   )

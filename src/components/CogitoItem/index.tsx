@@ -8,7 +8,7 @@ interface Props {
 const CogitoItem: FC<Props> = (props) => {
   return (
     <Stack spacing={0}>
-        <Button size={"sm"}>#{props.id}</Button>
+      <Button size={"sm"} variant={"outline"}>#{props.id}</Button>
     </Stack>
   )
 }
