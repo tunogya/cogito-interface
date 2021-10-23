@@ -24,7 +24,7 @@ export const Navigation = () => {
   ]
 
   return (
-    <Stack w={"100%"} h={"100%"} p={width >= 1200 ? 4 : 2} spacing={2}>
+    <Stack h={"100%"} p={width >= 1200 ? 4 : 2} spacing={2}>
       {width >= 1200 ? (
         <Heading fontSize={"md"} mb={4}>Cogito ergo sum</Heading>
       ) : (
@@ -83,6 +83,14 @@ const WrappedMintButton = () => {
       ) : (
         <Button onClick={init.setup} isLoading={init.status === PROCESSING}>Setup Cogito First</Button>
       )}
+    </Stack>
+  )
+}
+
+const BottomNavigation = () => {
+  return (
+    <Stack>
+      <Text>底部导航</Text>
     </Stack>
   )
 }
