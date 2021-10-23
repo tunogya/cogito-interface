@@ -1,5 +1,5 @@
 import {FC} from "react"
-import {Stack, Button} from "@chakra-ui/react"
+import {AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Heading} from "@chakra-ui/react"
 
 interface Props {
   id: number
@@ -7,9 +7,17 @@ interface Props {
 
 const CogitoItem: FC<Props> = (props) => {
   return (
-    <Stack spacing={0}>
-      <Button size={"sm"} variant={"outline"}>#{props.id}</Button>
-    </Stack>
+    <AccordionItem>
+      <AccordionButton>
+        <Heading flex="1" textAlign="left" fontWeight={"normal"} fontSize={"md"}>
+          #{props.id}
+        </Heading>
+        <AccordionIcon/>
+      </AccordionButton>
+      <AccordionPanel>
+
+      </AccordionPanel>
+    </AccordionItem>
   )
 }
 

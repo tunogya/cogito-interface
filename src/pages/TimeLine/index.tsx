@@ -1,5 +1,6 @@
 import Content from "../../components/Content";
 import {
+  Accordion,
   Spinner,
   Stack,
   Text
@@ -24,17 +25,17 @@ const CogitoList = () => {
   }
 
   return (
-    <Stack spacing={4} direction={"row"} p={4}>
+    <Accordion defaultIndex={[]} allowMultiple w={"100%"}>
       {cogitoIDs.ids.map((id: number, index: Key) => (
         <CogitoItem id={id} key={index}/>
       ))}
-    </Stack>
+    </Accordion>
   )
 }
 
 const TimeLine = () => {
   return (
-    <Content label={"TimeLine"} hasDivider>
+    <Content label={"TimeLine"}>
       <Suspense fallback={(
         <Stack p={4}>
           <Spinner/>
