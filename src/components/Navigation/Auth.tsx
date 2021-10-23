@@ -24,7 +24,7 @@ const Auth = () => {
   const {hasCopied, onCopy} = useClipboard(user.addr ?? "")
 
   return (
-    <Stack alignItems={"center"}>
+    <Stack alignItems={"center"} pb={2}>
       {user.loggedIn ? (
         <Menu>
           {width >= 1200 ? (

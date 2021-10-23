@@ -2,7 +2,7 @@ import {Button, Heading, IconButton, Spacer, Stack, Text} from "@chakra-ui/react
 import {Trans} from "@lingui/macro"
 import {useHistory} from "react-router-dom"
 import {useState, Suspense} from "react"
-import Auth from "../Auth";
+import Auth from "./Auth";
 import {
   GiExtraTime, GiSandsOfTime,
   RiUserSmileFill, RiUserSmileLine
