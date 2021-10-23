@@ -8,7 +8,7 @@ interface Props {
 const CogitoItem: FC<Props> = (props) => {
   return (
     <AccordionItem>
-      <AccordionButton>
+      <AccordionButton h={12}>
         <Heading flex="1" textAlign="left" fontWeight={"normal"} fontSize={"md"}>
           #{props.id}
         </Heading>
