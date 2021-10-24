@@ -15,7 +15,7 @@ export const TopNavigation = () => {
         <Button
           key={index}
           fontWeight={currentPath === link.pathname ? "bold" : "normal"}
-          variant={"ghost"}
+          variant={currentPath === link.pathname ? "solid" : "ghost"}
           size={"sm"}
           onClick={() => {
             history.push(link.pathname)
@@ -28,7 +28,7 @@ export const TopNavigation = () => {
       {width < 980 && (
         <Button
           fontWeight={currentPath === "explore" ? "bold" : "normal"}
-          variant={"ghost"}
+          variant={currentPath === "explore" ? "solid" : "ghost"}
           size={"sm"}
           onClick={()=> {
           history.push("explore")
