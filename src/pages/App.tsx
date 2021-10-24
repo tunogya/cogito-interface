@@ -1,5 +1,5 @@
 import React from "react"
-import {Divider, Stack} from "@chakra-ui/react"
+import {Divider, Spacer, Stack} from "@chakra-ui/react"
 import Navigation from "../components/Navigation"
 import {Redirect, Route, Switch} from "react-router-dom"
 import Overview from "./Overview"
@@ -33,6 +33,7 @@ function App() {
         </Switch>
         {width < 640 && (
           <>
+            <Spacer/>
             <Divider/>
             <BottomNavigation/>
           </>
