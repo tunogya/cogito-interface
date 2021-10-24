@@ -8,7 +8,6 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Stack,
 } from "@chakra-ui/react"
 import { t, Trans } from "@lingui/macro"
 import { useCurrentUser } from "../../hooks/useCurrentUser"
@@ -24,10 +23,10 @@ const Auth = () => {
   const { hasCopied, onCopy } = useClipboard(user.addr ?? "")
 
   return (
-    <Stack alignItems={"center"}>
+    <>
       {user.loggedIn ? (
         <Menu>
-          {width >= 1200 ? (
+          {width >= 1200 || width <= 640  ? (
             <MenuButton as={Button} rightIcon={<ChevronDownIcon />} fontWeight={"bold"} variant={"outline"} isFullWidth>
               {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 6)}
             </MenuButton>
@@ -55,11 +54,11 @@ const Auth = () => {
           </MenuList>
         </Menu>
       ) : (
-        <Button onClick={logIn} fontWeight={"bold"} isFullWidth fontSize={width >= 1200 ? "md" : "xs"}>
+        <Button onClick={logIn} fontWeight={"bold"} isFullWidth >
           <Trans>Log in</Trans>
         </Button>
       )}
-    </Stack>
+    </>
   )
 }
 

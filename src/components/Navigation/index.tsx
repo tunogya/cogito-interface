@@ -11,50 +11,20 @@ import { useCurrentUser } from "../../hooks/useCurrentUser"
 import { PROCESSING } from "../../constants/status"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 
+export const links = [
+  { pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill />, outlineIcon: <RiUserSmileLine /> },
+  {
+    pathname: "/timeline",
+    label: <Trans>Timeline</Trans>,
+    fillIcon: <GiExtraTime />,
+    outlineIcon: <GiSandsOfTime />,
+  },
+]
+
 export const Navigation = () => {
   const history = useHistory()
   const { width } = useWindowDimensions()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
-  const links = [
-    { pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill />, outlineIcon: <RiUserSmileLine /> },
-    {
-      pathname: "/timeline",
-      label: <Trans>Timeline</Trans>,
-      fillIcon: <GiExtraTime />,
-      outlineIcon: <GiSandsOfTime />,
-    },
-  ]
-
-  if (width < 640) {
-    return (
-      <Stack
-        direction={"row"}
-        h={20}
-        justifyContent={"space-around"}
-        alignItems={"center"}
-        zIndex={"docked"}
-        borderTop={"1px #F5F5F5"}
-      >
-        {links.map((link, index) => (
-          <IconButton
-            aria-label={"icon"}
-            variant={"ghost"}
-            key={index}
-            fontWeight={currentPath === link.pathname ? "bold" : "normal"}
-            onClick={() => {
-              history.push(link.pathname)
-              setCurrentPath(link.pathname)
-            }}
-            icon={currentPath === link.pathname ? link.fillIcon : link.outlineIcon}
-          />
-        ))}
-        <Auth />
-        <Suspense fallback={null}>
-          <WrappedMintButton />
-        </Suspense>
-      </Stack>
-    )
-  }
 
   return (
     <Stack h={"100%"} p={[2, 2, 2, 4]} spacing={2}>
