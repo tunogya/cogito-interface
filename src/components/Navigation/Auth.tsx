@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList, useColorMode,
 } from "@chakra-ui/react"
-import {t, Trans} from "@lingui/macro"
+import {Trans} from "@lingui/macro"
 import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {ChevronDownIcon, CopyIcon, ExternalLinkIcon} from "@chakra-ui/icons"
 import {useClipboard} from "@chakra-ui/react"
@@ -19,7 +19,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions"
 const Auth = () => {
   const {user, logIn, logOut} = useCurrentUser()
   const {width} = useWindowDimensions()
-  const {hasCopied, onCopy} = useClipboard(user.addr ?? "")
+  const {onCopy} = useClipboard(user.addr ?? "")
   const {colorMode} = useColorMode()
 
   return (
@@ -27,12 +27,13 @@ const Auth = () => {
       {user.loggedIn ? (
         <Menu>
           {width >= 1200 || width <= 640 ? (
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} fontWeight={"bold"} variant={"outline"} isFullWidth>
-              {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 6)}
+            <MenuButton as={Button} rightIcon={<ChevronDownIcon/>} w={"100%"} fontWeight={"bold"} variant={"outline"}
+                        isFullWidth>
+              {shortenCid(user.addr ?? "", 6)}
             </MenuButton>
           ) : (
             <MenuButton as={Button} aria-label={"user"} variant={"ghost"} h={16} fontSize={"xx-small"} w={16} p={0}>
-              {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 3)}
+              {shortenCid(user.addr ?? "", 3)}
             </MenuButton>
           )}
 
@@ -42,7 +43,12 @@ const Auth = () => {
                 <Trans>Copy Address</Trans>
               </Heading>
             </MenuItem>
-            <MenuItem icon={<ExternalLinkIcon/>} as={Link} href={"https://www.baidu.com"} isExternal>
+            <MenuItem icon={<ExternalLinkIcon/>} as={Link}
+                      href={(process.env.REACT_APP_CHAIN_ENV === "testnet"
+                        ? "https://testnet.flowscan.org/account/"
+                        : "https://flowscan.org/account/")
+                      + user.addr}
+                      isExternal>
               <Heading fontSize={"md"} fontWeight={"normal"}>
                 <Trans>View on Explorer</Trans>
               </Heading>
