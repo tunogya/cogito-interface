@@ -12,6 +12,7 @@ interface ContentProps {
 
 export const Content: FC<ContentProps> = ({...props}) => {
   const {colorMode, toggleColorMode} = useColorMode()
+
   return (
     <Stack w={"100%"} h={"100%"} spacing={0}>
       {props.hasTitle && (
@@ -29,7 +30,7 @@ export const Content: FC<ContentProps> = ({...props}) => {
         </Stack>
       )}
       {props.hasDivider && <Divider/>}
-      <Stack h={"100%"}>{props.children}</Stack>
+      <Stack overflow={"scroll"} pb={20}>{props.children}</Stack>
     </Stack>
   )
 }
