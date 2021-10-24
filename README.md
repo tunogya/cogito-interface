@@ -9,7 +9,4 @@ Mint your mind as an NFT! Metadata is stored in Flow blockchain and IPFS.
 - Collect your interesting and valuable ideas
 - Clone and share your thoughts with others, or get other people’s
 
-## Memory
 
-- It may take some time to recall your memories
-- Recall difficulty setting
