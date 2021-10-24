@@ -8,7 +8,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Stack,
   ModalOverlay,
   Spacer,
   Textarea,
@@ -102,13 +101,13 @@ const MintCogito = () => {
   }
 
   return (
-    <Stack w={"100%"}>
+    <>
       {width >= 1200 ? (
         <Button onClick={onOpen} fontWeight={"bold"} isFullWidth>
           <Trans>+ Cogito</Trans>
         </Button>
       ) : (
-        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon />} />
+        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon />} w={12} h={12}/>
       )}
 
       <Modal
@@ -195,7 +194,7 @@ const MintCogito = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </Stack>
+    </>
   )
 }
 

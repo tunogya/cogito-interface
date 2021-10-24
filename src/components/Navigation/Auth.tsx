@@ -2,7 +2,6 @@ import {
   Button,
   Divider,
   Heading,
-  IconButton,
   Link,
   Menu,
   MenuButton,
@@ -31,7 +30,9 @@ const Auth = () => {
               {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 6)}
             </MenuButton>
           ) : (
-            <MenuButton as={IconButton} aria-label={"user"} />
+            <MenuButton as={Button} aria-label={"user"} variant={"outline"} h={16} fontSize={"xx-small"} w={16} p={0}>
+              {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 3)}
+            </MenuButton>
           )}
 
           <MenuList borderRadius={"xl"} padding={0}>
@@ -54,7 +55,7 @@ const Auth = () => {
           </MenuList>
         </Menu>
       ) : (
-        <Button onClick={logIn} fontWeight={"bold"} isFullWidth >
+        <Button onClick={logIn} fontWeight={"bold"} isFullWidth>
           <Trans>Log in</Trans>
         </Button>
       )}
