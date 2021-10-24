@@ -4,6 +4,7 @@ import { useCogitoIDs } from "../../hooks/useCogitoIDs"
 import { useCurrentUser } from "../../hooks/useCurrentUser"
 import { Key, Suspense } from "react"
 import CogitoItem from "../../components/CogitoItem"
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const CogitoList = () => {
   const { user } = useCurrentUser()
@@ -27,8 +28,10 @@ const CogitoList = () => {
 }
 
 const TimeLine = () => {
+  const {width} = useWindowDimensions()
+
   return (
-    <Content label={"TimeLine"}>
+    <Content label={"TimeLine"} hasTitle={width >= 640}>
       <Suspense
         fallback={
           <Stack p={4}>

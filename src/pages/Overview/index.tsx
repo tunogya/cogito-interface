@@ -8,6 +8,7 @@ import { parseFlow } from "../../utils/parseFlow"
 import useSetupCogito from "../../hooks/useSetupCogito"
 import { PROCESSING } from "../../constants/status"
 import { useCogitoIDs } from "../../hooks/useCogitoIDs"
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const Overview = () => {
   const { user } = useCurrentUser()
@@ -15,9 +16,10 @@ const Overview = () => {
   const supply = useCogitoSupply()
   const init = useSetupCogito(user.addr)
   const cogitoIDs = useCogitoIDs(user.addr)
+  const {width} = useWindowDimensions()
 
   return (
-    <Content label={"Overview"} hasDivider>
+    <Content label={"Overview"} hasDivider hasTitle={width >= 640}>
       <Text>{user.addr}</Text>
       <Text>Balance: {parseFlow(flow.balance)} FLOW</Text>
       <Text>Cogito Supply: {supply.supply}</Text>
