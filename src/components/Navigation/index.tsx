@@ -1,29 +1,35 @@
-import { Button, Heading, IconButton, Spacer, Stack, Text } from "@chakra-ui/react"
-import { Trans } from "@lingui/macro"
-import { useHistory } from "react-router-dom"
-import { useState, Suspense } from "react"
+import {Button, Heading, IconButton, Spacer, Stack, Text} from "@chakra-ui/react"
+import {Trans} from "@lingui/macro"
+import {useHistory} from "react-router-dom"
+import {useState, Suspense} from "react"
 import Auth from "./Auth"
-import { GiExtraTime, GiSandsOfTime, RiUserSmileFill, RiUserSmileLine } from "react-icons/all"
+import {
+  BiSearchAlt, BiSearchAlt2,
+  GiExtraTime,
+  GiSandsOfTime,
+  RiUserSmileFill,
+  RiUserSmileLine
+} from "react-icons/all"
 import MintCogito from "./MintCogito"
 import Support from "./Support"
 import useSetupCogito from "../../hooks/useSetupCogito"
-import { useCurrentUser } from "../../hooks/useCurrentUser"
-import { PROCESSING } from "../../constants/status"
+import {useCurrentUser} from "../../hooks/useCurrentUser"
+import {PROCESSING} from "../../constants/status"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 export const links = [
-  { pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill />, outlineIcon: <RiUserSmileLine /> },
+  {pathname: "/", label: <Trans>Overview</Trans>, fillIcon: <RiUserSmileFill/>, outlineIcon: <RiUserSmileLine/>},
   {
     pathname: "/timeline",
     label: <Trans>Timeline</Trans>,
-    fillIcon: <GiExtraTime />,
-    outlineIcon: <GiSandsOfTime />,
+    fillIcon: <GiExtraTime/>,
+    outlineIcon: <GiSandsOfTime/>,
   },
 ]
 
 export const Navigation = () => {
   const history = useHistory()
-  const { width } = useWindowDimensions()
+  const {width} = useWindowDimensions()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
 
   return (
@@ -65,18 +71,28 @@ export const Navigation = () => {
           )}
         </Stack>
       ))}
+      {width < 980 && (
+        <Stack direction={"row"} justifyContent={"center"} alignItems={"center"}>
+          <IconButton aria-label={"explore"} w={12} variant={"ghost"} h={12}
+                      icon={currentPath === "explore" ? <BiSearchAlt/> : <BiSearchAlt2/>}
+                      onClick={() => {
+                        history.push("explore")
+                        setCurrentPath("explore")
+                      }}/>
+        </Stack>
+      )}
       <Suspense fallback={null}>
-        <WrappedMintButton />
+        <WrappedMintButton/>
       </Suspense>
-      <Spacer />
-      <Auth />
-      {width >= 1200 && <Support />}
+      <Spacer/>
+      <Auth/>
+      {width >= 1200 && <Support/>}
     </Stack>
   )
 }
 
 const WrappedMintButton = () => {
-  const { user } = useCurrentUser()
+  const {user} = useCurrentUser()
   const init = useSetupCogito(user.addr)
 
   if (!user.loggedIn) {
@@ -85,7 +101,7 @@ const WrappedMintButton = () => {
   return (
     <Stack alignItems={"center"}>
       {init.init ? (
-        <MintCogito />
+        <MintCogito/>
       ) : (
         <Button onClick={init.setup} isLoading={init.status === PROCESSING}>
           Setup Cogito First

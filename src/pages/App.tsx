@@ -26,6 +26,7 @@ function App() {
         <Switch>
           <Route exact strict path="/" component={Overview} />
           <Route exact strict path="/timeline" component={TimeLine} />
+          <Route exact strict path="/explore" component={Explore} />
           <Redirect to="/" />
         </Switch>
         {width < 640 && (
@@ -36,7 +37,7 @@ function App() {
         )}
       </Stack>
       <Divider orientation="vertical" />
-      {width >= 800 && <Explore />}
+      {width >= 980 && <Explore />}
     </Stack>
   )
 }

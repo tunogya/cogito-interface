@@ -2,7 +2,7 @@ import { Button, Heading, Input, Stack, Text } from "@chakra-ui/react"
 
 const Explore = () => {
   return (
-    <Stack py={2} px={4} h={"100%"} w={80}>
+    <Stack py={2} px={4} h={"100%"}>
       <Input variant={"filled"} placeholder={"address"} borderRadius={"full"} />
       <Stack direction={"row"}>
         <Input variant={"outline"} placeholder={"id"} borderRadius={"full"} />

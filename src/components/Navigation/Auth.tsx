@@ -30,7 +30,7 @@ const Auth = () => {
               {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 6)}
             </MenuButton>
           ) : (
-            <MenuButton as={Button} aria-label={"user"} variant={"outline"} h={16} fontSize={"xx-small"} w={16} p={0}>
+            <MenuButton as={Button} aria-label={"user"} variant={"ghost"} h={16} fontSize={"xx-small"} w={16} p={0}>
               {hasCopied ? t`Copied!` : shortenCid(user.addr ?? "", 3)}
             </MenuButton>
           )}
