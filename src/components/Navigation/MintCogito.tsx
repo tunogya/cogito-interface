@@ -97,6 +97,7 @@ const MintCogito = () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       metadata = { ...metadata, text: text }
     }
+    console.log(metadata)
     return metadata
   }
 

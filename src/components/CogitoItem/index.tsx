@@ -1,4 +1,4 @@
-import {FC, Suspense} from "react"
+import {FC, Key, Suspense} from "react"
 import {
   AccordionButton,
   AccordionIcon,
@@ -36,12 +36,16 @@ const CogitoItem: FC<Props> = props => {
 }
 
 const CogitoContent: FC<Props> = props => {
-  const uri = useCogitoTokenURI(props.address, props.id)
+  const cogito = useCogitoTokenURI(props.address, props.id)
+  console.log(cogito.cogito?.attachment?.media)
 
   return (
     <Stack>
-      <Text>{uri.cogito.text}</Text>
-      <Text fontSize={"xs"} color={"gray"}>{parseDate(uri.cogito.create_at)}</Text>
+      <Text>{cogito.cogito.text}</Text>
+      { cogito.cogito?.attachment?.media.map((media: any, index: Key)=> (
+        <Text key={index}>{media.name}</Text>
+      )) }
+      <Text fontSize={"xs"} color={"gray"}>{parseDate(cogito.cogito.create_at)}</Text>
     </Stack>
 
   )
