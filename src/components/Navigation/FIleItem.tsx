@@ -26,7 +26,7 @@ const FIleItem: FC<Props> = ({ attachment, onDelete, onUpdate }) => {
       setCid(cid)
       onUpdate(attachment.content.name, { ...attachment, uri: parseIpfsCid(cid) })
     })
-  }, [attachment, storage, onUpdate])
+  }, [attachment.content])
 
   return (
     <Menu>
@@ -37,11 +37,11 @@ const FIleItem: FC<Props> = ({ attachment, onDelete, onUpdate }) => {
         overflow={"scroll"}
         isLoading={storage?.state === PROCESSING}
         spinnerPlacement="start"
-        loadingText={attachment.content.name}
+        loadingText={shortenCid(attachment.content.name, 6)}
         fontFamily={"sans-serif"}
         textTransform={"none"}
       >
-        {attachment.content.name}
+        { shortenCid(attachment.content.name, 6)}
       </MenuButton>
       <MenuList borderRadius={"xl"}>
         <Text px={3} fontWeight={"bold"}>
