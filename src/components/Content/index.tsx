@@ -14,7 +14,7 @@ export const Content: FC<ContentProps> = ({...props}) => {
   const {colorMode, toggleColorMode} = useColorMode()
 
   return (
-    <Stack w={"100%"} h={"100%"} spacing={0}>
+    <Stack w={"100%"} h={"100%"} spacing={0} overflow={"hidden"}>
       {props.hasTitle && (
         <Stack direction={"row"} alignItems={"center"} p={2}>
           <Heading fontWeight={"bold"} fontSize={"xl"}>
