@@ -100,6 +100,10 @@ const MintCogito = () => {
     return metadata
   }
 
+  if (!user.loggedIn) {
+    return null
+  }
+
   return (
     <>
       {width >= 1200 ? (
