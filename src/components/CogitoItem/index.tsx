@@ -37,17 +37,18 @@ const CogitoItem: FC<Props> = props => {
 
 const CogitoContent: FC<Props> = props => {
   const cogito = useCogitoTokenURI(props.address, props.id)
-  console.log(cogito.cogito?.attachment?.media)
 
   return (
     <Stack>
       <Text>{cogito.cogito.text}</Text>
       { cogito.cogito?.attachment?.media.map((media: any, index: Key)=> (
-        <Text key={index}>{media.name}</Text>
+        <Stack key={index}>
+          <Text>{media?.name}</Text>
+          <Text>{media?.uri}</Text>
+        </Stack>
       )) }
       <Text fontSize={"xs"} color={"gray"}>{parseDate(cogito.cogito.create_at)}</Text>
     </Stack>
-
   )
 }
 
