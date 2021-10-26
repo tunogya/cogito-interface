@@ -16,6 +16,5 @@ Mint your mind as an NFT! Metadata is stored in Flow blockchain and IPFS.
 
 ## Timeline
 
-
 ## Explore
 
