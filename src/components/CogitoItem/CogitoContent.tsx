@@ -1,9 +1,11 @@
 import {FC, Key} from "react";
 import useCogitoTokenURI from "../../hooks/useCogitoTokenURI";
-import {Stack, Text, Link, Button, Tooltip} from "@chakra-ui/react";
+import {Stack, Text, Link, Tooltip, Badge, useColorMode} from "@chakra-ui/react";
 import {parseDate} from "../../utils/parseDate";
 import parseUriToHttp from "../../utils/parseUriToHttp";
 import shortenCid from "../../utils/shortenCid";
+import {AttachmentIcon} from "@chakra-ui/icons";
+import {FaPhotoVideo} from "react-icons/all";
 
 interface Props {
   address: string | null
@@ -12,6 +14,7 @@ interface Props {
 
 const CogitoContent: FC<Props> = props => {
   const cogito = useCogitoTokenURI(props.address, props.id)
+  const {colorMode} = useColorMode()
 
   return (
     <Stack>
@@ -22,12 +25,14 @@ const CogitoContent: FC<Props> = props => {
             return null
           }
           return (
-            <Button key={index} as={Link} href={parseUriToHttp(media.uri)[0]} isExternal size={"sm"}
-                    colorScheme={"pink"}>
-              <Tooltip label={media?.name} borderRadius={"xl"}>
-                <Text>{shortenCid(media?.name, 10)}</Text>
+            <Stack as={Badge} key={index} direction={"row"} alignItems={"center"} colorScheme={"purple"}>
+              <FaPhotoVideo/>
+              <Tooltip label={media?.name} borderRadius={"xl"} bg={colorMode === "light" ? "black" : "white"}>
+                <Link href={parseUriToHttp(media.uri)[0]} isExternal>
+                  <Text>{shortenCid(media?.name, 10)}</Text>
+                </Link>
               </Tooltip>
-            </Button>
+            </Stack>
           )
         })}
 
@@ -36,11 +41,14 @@ const CogitoContent: FC<Props> = props => {
             return null
           }
           return (
-            <Button key={index} as={Link} href={parseUriToHttp(file.uri)[0]} isExternal size={"sm"}>
-              <Tooltip label={file?.name} borderRadius={"xl"}>
-                <Text>{shortenCid(file?.name, 10)}</Text>
+            <Stack as={Badge} key={index} direction={"row"} alignItems={"center"}>
+              <AttachmentIcon/>
+              <Tooltip label={file?.name} borderRadius={"xl"} bg={colorMode === "light" ? "black" : "white"}>
+                <Link href={parseUriToHttp(file.uri)[0]} isExternal>
+                  <Text>{shortenCid(file?.name, 10)}</Text>
+                </Link>
               </Tooltip>
-            </Button>
+            </Stack>
           )
         })}
 
