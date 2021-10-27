@@ -4,7 +4,7 @@ Mint your mind as an NFT! Metadata is stored in Flow blockchain and IPFS.
 
 ## Live Demo
 
-[Fleek](https://cogito.on.fleek.co/#/)
+[Fleek](https://cogito.on.fleek.co/)
 
 ## Overview
 
