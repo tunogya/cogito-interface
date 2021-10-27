@@ -1,7 +1,9 @@
 import {FC, Key} from "react";
 import useCogitoTokenURI from "../../hooks/useCogitoTokenURI";
-import {Stack, Text} from "@chakra-ui/react";
+import {AspectRatio, Stack, Text, Image, Link, Button, Tooltip} from "@chakra-ui/react";
 import {parseDate} from "../../utils/parseDate";
+import parseUriToHttp from "../../utils/parseUriToHttp";
+import shortenCid from "../../utils/shortenCid";
 
 interface Props {
   address: string | null
@@ -14,12 +16,19 @@ const CogitoContent: FC<Props> = props => {
   return (
     <Stack>
       <Text>{cogito.cogito.text}</Text>
-      { cogito.cogito?.attachment?.media.map((media: any, index: Key)=> (
-        <Stack key={index}>
-          <Text>{media?.name}</Text>
-          <Text>{media?.uri}</Text>
-        </Stack>
-      )) }
+      <Stack direction={"row"}>
+      {cogito.cogito?.attachment?.media.map((media: any, index: Key) => (
+        <>
+          {media?.uri && (
+            <Button key={index} as={Link} href={parseUriToHttp(media.uri)[0]} isExternal size={"sm"}>
+              <Tooltip label={media?.name} borderRadius={"xl"}>
+                <Text>{shortenCid(media?.name, 10)}</Text>
+              </Tooltip>
+            </Button>
+          )}
+        </>
+      ))}
+      </Stack>
       <Text fontSize={"xs"} color={"gray"}>{parseDate(cogito.cogito.create_at)}</Text>
     </Stack>
   )
