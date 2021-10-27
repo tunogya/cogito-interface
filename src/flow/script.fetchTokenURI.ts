@@ -17,7 +17,7 @@ pub fun main(address: Address, id: UInt64): String? {
 `
 
 const scriptFetchTokenURI = (address: string | null, id: Number) => {
-  if (address == null) return Promise.resolve(false)
+  if (address == null) return Promise.resolve(null)
 
   return send([script(CODE), args([arg(address, t.Address), arg(id, t.UInt64)])]).then(decode)
 }

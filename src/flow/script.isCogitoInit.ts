@@ -15,7 +15,7 @@ pub fun main(address: Address): Bool {
 `
 
 const scriptIsCogitoInit = (address: string | null) => {
-  if (address == null) return Promise.resolve(false)
+  if (address == null) return Promise.resolve(null)
 
   return send([script(CODE), args([arg(address, t.Address)])]).then(decode)
 }

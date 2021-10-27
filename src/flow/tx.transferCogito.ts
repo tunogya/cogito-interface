@@ -32,8 +32,8 @@ transaction(recipient: Address, withdrawID: UInt64) {
 `
 
 const txTransferCogito = (recipient: string, withdrawID: Number, opts = {}) => {
-  invariant(recipient != null, "transferWakandaToken({recipient, withdrawID}) -- amount required")
-  invariant(withdrawID != null, "transferWakandaToken({recipient, withdrawID}) -- to required")
+  invariant(recipient != null, "transferCogito({recipient, withdrawID}) -- amount required")
+  invariant(withdrawID != null, "transferCogito({recipient, withdrawID}) -- to required")
 
   return tx(
     [
