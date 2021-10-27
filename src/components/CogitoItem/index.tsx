@@ -1,4 +1,4 @@
-import {FC, Key, Suspense} from "react"
+import {FC, Suspense, lazy} from "react"
 import {
   AccordionButton,
   AccordionIcon,
@@ -6,11 +6,7 @@ import {
   AccordionPanel,
   Heading,
   Spinner,
-  Stack,
-  Text
 } from "@chakra-ui/react"
-import useCogitoTokenURI from "../../hooks/useCogitoTokenURI";
-import {parseDate} from "../../utils/parseDate";
 
 interface Props {
   address: string | null
@@ -18,6 +14,8 @@ interface Props {
 }
 
 const CogitoItem: FC<Props> = props => {
+  const CogitoContent = lazy(()=> import("./CogitoContent"))
+
   return (
     <AccordionItem>
       <AccordionButton h={12}>
@@ -32,23 +30,6 @@ const CogitoItem: FC<Props> = props => {
         </Suspense>
       </AccordionPanel>
     </AccordionItem>
-  )
-}
-
-const CogitoContent: FC<Props> = props => {
-  const cogito = useCogitoTokenURI(props.address, props.id)
-
-  return (
-    <Stack>
-      <Text>{cogito.cogito.text}</Text>
-      { cogito.cogito?.attachment?.media.map((media: any, index: Key)=> (
-        <Stack key={index}>
-          <Text>{media?.name}</Text>
-          <Text>{media?.uri}</Text>
-        </Stack>
-      )) }
-      <Text fontSize={"xs"} color={"gray"}>{parseDate(cogito.cogito.create_at)}</Text>
-    </Stack>
   )
 }
 
