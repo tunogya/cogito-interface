@@ -11,17 +11,17 @@ export const useNFTStorage = () => {
     return
   }
 
-  const client = new NFTStorage({ token: apiKey })
+  const nftStorage = new NFTStorage({ token: apiKey })
 
   const storeBlob = async (data: any) => {
     setState(PROCESSING)
-    const result = await client.storeBlob(new Blob([data]))
+    const cid = await nftStorage.storeBlob(new Blob([data]))
     setState(IDLE)
-    return result
+    return cid
   }
 
   const queryStatus = async (cid: string) => {
-    return await client.status(cid)
+    return await nftStorage.status(cid)
   }
 
   return {

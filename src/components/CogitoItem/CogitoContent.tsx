@@ -20,7 +20,7 @@ const CogitoContent: FC<Props> = props => {
     <Stack>
       <Text>{cogito.cogito.text}</Text>
       <Stack direction={"row"}>
-        {cogito.cogito?.attachment?.media.map((media: any, index: Key) => {
+        {cogito.cogito?.attachment?.media?.map((media: any, index: Key) => {
           if (!media.uri) {
             return null
           }
@@ -29,7 +29,7 @@ const CogitoContent: FC<Props> = props => {
               <FaPhotoVideo/>
               <Tooltip label={media?.name} borderRadius={"xl"} bg={colorMode === "light" ? "black" : "white"}>
                 <Link href={parseUriToHttp(media.uri)[0]} isExternal>
-                  <Text>{shortenCid(media?.name, 10)}</Text>
+                  <Text>{media?.name.length > 20 ? shortenCid(media?.name, 10) : media.name}</Text>
                 </Link>
               </Tooltip>
             </Stack>
@@ -45,7 +45,7 @@ const CogitoContent: FC<Props> = props => {
               <AttachmentIcon/>
               <Tooltip label={file?.name} borderRadius={"xl"} bg={colorMode === "light" ? "black" : "white"}>
                 <Link href={parseUriToHttp(file.uri)[0]} isExternal>
-                  <Text>{shortenCid(file?.name, 10)}</Text>
+                  <Text>{file?.name?.length > 20 ? shortenCid(file?.name, 10) : file?.name}</Text>
                 </Link>
               </Tooltip>
             </Stack>
