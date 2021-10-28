@@ -24,14 +24,9 @@ export const useNFTStorage = () => {
     return await client.status(cid)
   }
 
-  const deleteFile = async (cid: string) => {
-    return await client.delete(cid)
-  }
-
   return {
     state,
     storeBlob,
     queryStatus,
-    deleteFile,
   }
 }
