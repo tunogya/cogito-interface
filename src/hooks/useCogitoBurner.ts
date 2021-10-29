@@ -4,7 +4,7 @@ import txBurnCogito from "../flow/tx.burnCogito"
 import sleep from "../utils/sleep"
 
 export const statusAtom = atomFamily({
-  key: "pass-ids::status",
+  key: "cogito-burner::status",
   default: IDLE,
 })
 

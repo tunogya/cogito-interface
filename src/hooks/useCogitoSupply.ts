@@ -3,15 +3,15 @@ import scriptFetchCogitoSupply from "../flow/script.fetchCogitoSupply"
 import { IDLE, PROCESSING } from "../constants/status"
 
 export const supplyAtom = atomFamily({
-  key: "wkdt-supply::state",
+  key: "cogito-supply::state",
   default: selectorFamily({
-    key: "wkdt-supply::default",
+    key: "cogito-supply::default",
     get: () => async () => scriptFetchCogitoSupply(),
   }),
 })
 
 export const statusAtom = atomFamily({
-  key: "wkdt-supply::status",
+  key: "cogito-supply::status",
   default: IDLE,
 })
 

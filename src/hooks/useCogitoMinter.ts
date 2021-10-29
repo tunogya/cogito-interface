@@ -4,7 +4,7 @@ import txMintCogito from "../flow/tx.mintCogito"
 import sleep from "../utils/sleep"
 
 export const statusAtom = atomFamily({
-  key: "pass-ids::status",
+  key: "cogito-minter::status",
   default: IDLE,
 })
 

@@ -10,96 +10,69 @@ import {
   ModalHeader,
   ModalOverlay,
   Spacer,
+  Text,
   Textarea,
   useDisclosure,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react"
-import { Trans } from "@lingui/macro"
-import { useCurrentUser } from "../../hooks/useCurrentUser"
-import { useRef, useState } from "react"
-import { useNFTStorage } from "../../hooks/useNFTStorage"
-import { AiFillFileAdd } from "react-icons/all"
-import FIleItem from "./FIleItem"
-import { Attachment } from "../../constants/interfaces"
-import { PROCESSING } from "../../constants/status"
+import {Trans} from "@lingui/macro"
+import {useCurrentUser} from "../../hooks/useCurrentUser"
+import {useRef, useState} from "react"
+import {AiFillFileAdd} from "react-icons/all"
+import FileItem from "./FileItem"
+import {PROCESSING} from "../../constants/status"
 import parseIpfsCid from "../../utils/parseIpfsCid"
 import checkMedia from "../../utils/checkMedia"
 import useCogitoMinter from "../../hooks/useCogitoMinter"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
-import { SmallAddIcon } from "@chakra-ui/icons"
+import {SmallAddIcon} from "@chakra-ui/icons"
+import {atom, useRecoilState} from "recoil";
+
+export interface FileData {
+  name: string
+  content: File
+  type: string
+  size: number
+}
+
+const defaultFiles: FileData[] = []
+
+export const filesAtom = atom({
+  key: "upload::files",
+  default: defaultFiles,
+})
 
 const MintCogito = () => {
-  const { width } = useWindowDimensions()
+  const {width} = useWindowDimensions()
 
-  // mint Modal status
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const {isOpen, onOpen, onClose} = useDisclosure()
   const [text, setText] = useState("")
-  const [files, setFiles] = useState([])
-  // get user info
-  const { user } = useCurrentUser()
-  // content input ref
+  const [files, setFiles] = useRecoilState(filesAtom)
+  const {user} = useCurrentUser()
   const filesUpload = useRef(null)
-  // upload nft storage hooks
-  const storage = useNFTStorage()
+
   const initialFocusRef = useRef(null)
   const minter = useCogitoMinter()
-  // delete the attachment
-  const handleDelete = (name: string) => {
-    // @ts-ignore
-    setFiles(files.filter(attachment => attachment.fileName !== name))
-  }
-  const handleUpdate = (fileName: string, newAttachment: Attachment) => {
-    // @ts-ignore
-    setFiles(files.map(attachment => (attachment.fileName === fileName ? newAttachment : attachment)))
-  }
   const handleReset = () => {
     setText("")
-    setFiles([])
   }
   const getMetaData = () => {
     let metadata = {}
     if (user.loggedIn) {
-      metadata = { ...metadata, author: user.addr }
-    }
-    if (files.length > 0) {
-      let attachment = {}
-      // @ts-ignore
-      const m = files.filter(file => checkMedia(file.type))
-      // @ts-ignore
-      const f = files.filter(file => !checkMedia(file.type))
-      if (m.length > 0) {
-        attachment = {
-          ...attachment,
-          media: m.map(file => {
-            // @ts-ignore
-            return { name: file.fileName, uri: file.uri }
-          }),
-        }
-      }
-      if (f.length > 0) {
-        attachment = {
-          ...attachment,
-          files: f.map(file => {
-            // @ts-ignore
-            return { name: file.fileName, uri: file.uri }
-          }),
-        }
-      }
-      metadata = {
-        ...metadata,
-        attachment,
-      }
+      metadata = {...metadata, author: user.addr}
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    metadata = { ...metadata, create_at: Date.now() }
+    metadata = {...metadata, create_at: Date.now()}
     if (text !== "") {
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      metadata = { ...metadata, text: text }
+      metadata = {...metadata, text: text}
     }
     console.log(metadata)
     return metadata
   }
+
+  console.log(files)
 
   if (!user.loggedIn) {
     return null
@@ -112,7 +85,7 @@ const MintCogito = () => {
           <Trans>+ Cogito</Trans>
         </Button>
       ) : (
-        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon />} w={12} h={12}/>
+        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon/>} w={12} h={12}/>
       )}
 
       <Modal
@@ -124,14 +97,14 @@ const MintCogito = () => {
         initialFocusRef={initialFocusRef}
         size={width >= 640 ? "xl" : "xs"}
       >
-        <ModalOverlay />
+        <ModalOverlay/>
         <ModalContent h={96}>
           <ModalHeader>
             <Heading fontSize={"xl"}>
               <Trans>Cogito ergo sum</Trans>
             </Heading>
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton/>
           <ModalBody>
             <Textarea
               placeholder="What's happening?"
@@ -141,9 +114,9 @@ const MintCogito = () => {
               onChange={e => setText(e.target.value)}
             />
             <Wrap pt={2}>
-              {files.map((attachment, index) => (
+              {files.map((f, index) => (
                 <WrapItem key={index}>
-                  <FIleItem attachment={attachment} onDelete={handleDelete} onUpdate={handleUpdate} />
+                  <FileItem name={f.name}/>
                 </WrapItem>
               ))}
             </Wrap>
@@ -152,26 +125,22 @@ const MintCogito = () => {
             <input
               type={"file"}
               ref={filesUpload}
-              style={{ display: "none" }}
+              style={{display: "none"}}
               onChange={e => {
                 if (!e.target.files) {
                   return
                 }
                 for (let i = 0; i < e.target.files.length; i++) {
                   const f = e.target.files[i]
-                  setFiles([
-                    // @ts-ignore
-                    ...files,
-                    // @ts-ignore
-                    { fileName: f.name, content: f as File, create_at: f.lastModified, size: f.size, type: f.type },
-                  ])
+                  // @ts-ignore
+                  setFiles([...files, { name: f.name, content: f as File, size: f.size, type: f.type }])
                 }
               }}
             />
 
             <IconButton
               aria-label={"files"}
-              icon={<AiFillFileAdd />}
+              icon={<AiFillFileAdd/>}
               size={"md"}
               variant={"ghost"}
               onClick={() => {
@@ -179,19 +148,13 @@ const MintCogito = () => {
                 filesUpload.current.click()
               }}
             />
-            <Spacer />
+            <Spacer/>
             <Button
               fontWeight={"bold"}
-              disabled={text === "" && files.length === 0}
-              isLoading={storage?.state === PROCESSING || minter.status === PROCESSING}
+              disabled={text === "" && files === []}
               onClick={async () => {
-                const cid = await storage?.storeBlob(JSON.stringify(getMetaData())).then(cid => cid)
-                if (user.addr) {
-                  await minter.mint(parseIpfsCid(cid)).then(res => {
-                    console.log(res)
-                  })
-                  handleReset()
-                }
+                // JSON.stringify(getMetaData())
+
               }}
             >
               Mint
