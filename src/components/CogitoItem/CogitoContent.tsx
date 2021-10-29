@@ -7,12 +7,12 @@ import shortenCid from "../../utils/shortenCid";
 import {AttachmentIcon} from "@chakra-ui/icons";
 import {FaPhotoVideo} from "react-icons/all";
 
-interface Props {
+interface CogitoContentProps {
   address: string | null
   id: number
 }
 
-const CogitoContent: FC<Props> = props => {
+const CogitoContent: FC<CogitoContentProps> = props => {
   const cogito = useCogitoTokenURI(props.address, props.id)
   const {colorMode} = useColorMode()
 

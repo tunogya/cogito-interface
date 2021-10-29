@@ -8,12 +8,12 @@ import {
   Spinner,
 } from "@chakra-ui/react"
 
-interface Props {
-  address: string | null
+interface CogitoItemProps {
+  address: string | null,
   id: number
 }
 
-const CogitoItem: FC<Props> = props => {
+const CogitoItem: FC<CogitoItemProps> = props => {
   const CogitoContent = lazy(()=> import("./CogitoContent"))
 
   return (

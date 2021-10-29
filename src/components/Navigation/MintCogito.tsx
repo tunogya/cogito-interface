@@ -27,21 +27,8 @@ import checkMedia from "../../utils/checkMedia"
 import useCogitoMinter from "../../hooks/useCogitoMinter"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import {SmallAddIcon} from "@chakra-ui/icons"
-import {atom, useRecoilState} from "recoil";
-
-export interface FileData {
-  name: string
-  content: File
-  type: string
-  size: number
-}
-
-const defaultFiles: FileData[] = []
-
-export const filesAtom = atom({
-  key: "upload::files",
-  default: defaultFiles,
-})
+import {useRecoilState} from "recoil";
+import {filesAtom} from "../../state/Files";
 
 const MintCogito = () => {
   const {width} = useWindowDimensions()

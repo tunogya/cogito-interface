@@ -10,7 +10,7 @@ interface ContentProps {
   hasTitle?: boolean
 }
 
-export const Content: FC<ContentProps> = ({...props}) => {
+export const Content: FC<ContentProps> = props => {
   const {colorMode, toggleColorMode} = useColorMode()
 
   return (
