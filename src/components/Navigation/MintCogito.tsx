@@ -59,8 +59,6 @@ const MintCogito = () => {
     return metadata
   }
 
-  console.log(files)
-
   if (!user.loggedIn) {
     return null
   }
