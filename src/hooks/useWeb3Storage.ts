@@ -1,4 +1,4 @@
-import {Web3Storage} from "web3.storage";
+import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js"
 import {useState} from "react";
 import {IDLE, PROCESSING} from "../constants/status";
 

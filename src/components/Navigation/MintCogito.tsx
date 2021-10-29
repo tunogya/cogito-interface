@@ -29,6 +29,7 @@ import useWindowDimensions from "../../hooks/useWindowDimensions"
 import {SmallAddIcon} from "@chakra-ui/icons"
 import {useRecoilState} from "recoil";
 import {filesAtom} from "../../state/Files";
+import useWeb3Storage from "../../hooks/useWeb3Storage";
 
 const MintCogito = () => {
   const {width} = useWindowDimensions()
@@ -38,7 +39,7 @@ const MintCogito = () => {
   const [files, setFiles] = useRecoilState(filesAtom)
   const {user} = useCurrentUser()
   const filesUpload = useRef(null)
-
+  const web3storage = useWeb3Storage()
   const initialFocusRef = useRef(null)
   const minter = useCogitoMinter()
   const handleReset = () => {
