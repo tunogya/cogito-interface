@@ -10,7 +10,6 @@ import {
   ModalHeader,
   ModalOverlay,
   Spacer,
-  Text,
   Textarea,
   useDisclosure,
   Wrap,
@@ -21,15 +20,15 @@ import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {useRef, useState} from "react"
 import {AiFillFileAdd} from "react-icons/all"
 import FileItem from "./FileItem"
-import {PROCESSING} from "../../constants/status"
-import parseIpfsCid from "../../utils/parseIpfsCid"
-import checkMedia from "../../utils/checkMedia"
 import useCogitoMinter from "../../hooks/useCogitoMinter"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import {SmallAddIcon} from "@chakra-ui/icons"
 import {useRecoilState} from "recoil";
 import {filesAtom} from "../../state/Files";
 import useWeb3Storage from "../../hooks/useWeb3Storage";
+import parseUriToHttp from "../../utils/parseUriToHttp";
+import parseIpfsCid from "../../utils/parseIpfsCid";
+import {PROCESSING} from "../../constants/status";
 
 const MintCogito = () => {
   const {width} = useWindowDimensions()
@@ -44,20 +43,23 @@ const MintCogito = () => {
   const minter = useCogitoMinter()
   const handleReset = () => {
     setText("")
+    setFiles([])
   }
-  const getMetaData = () => {
+
+  const generateFilesAndMeta = () => {
     let metadata = {}
     if (user.loggedIn) {
       metadata = {...metadata, author: user.addr}
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     metadata = {...metadata, create_at: Date.now()}
     if (text !== "") {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       metadata = {...metadata, text: text}
     }
-    console.log(metadata)
-    return metadata
+    if (files){
+      metadata = {...metadata, attachment: files.map((f)=>f.name)}
+    }
+    const metaFile = new File([JSON.stringify(metadata)], "metadata.json", {type: "application/json"})
+    return [...files, {name: metaFile.name, content: metaFile, size: metaFile.size, type: metaFile.type}]
   }
 
   if (!user.loggedIn) {
@@ -118,8 +120,7 @@ const MintCogito = () => {
                 }
                 for (let i = 0; i < e.target.files.length; i++) {
                   const f = e.target.files[i]
-                  // @ts-ignore
-                  setFiles([...files, { name: f.name, content: f as File, size: f.size, type: f.type }])
+                  setFiles([...files, {name: f.name, content: f as File, size: f.size, type: f.type}])
                 }
               }}
             />
@@ -138,9 +139,12 @@ const MintCogito = () => {
             <Button
               fontWeight={"bold"}
               disabled={text === "" && files === []}
+              isLoading={minter.status === PROCESSING}
               onClick={async () => {
-                // JSON.stringify(getMetaData())
-
+                const cid = await web3storage?.storeFile(generateFilesAndMeta())
+                console.log(cid)
+                await minter.mint(parseUriToHttp(parseIpfsCid(cid))[0])
+                handleReset()
               }}
             >
               Mint
