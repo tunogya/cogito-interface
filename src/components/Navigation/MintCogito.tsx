@@ -28,6 +28,7 @@ import {filesAtom} from "../../state/Files";
 import useWeb3Storage from "../../hooks/useWeb3Storage";
 import parseIpfsCid from "../../utils/parseIpfsCid";
 import {PROCESSING} from "../../constants/status";
+import {useCogitoIDs} from "../../hooks/useCogitoIDs";
 
 const MintCogito = () => {
   const {width} = useWindowDimensions()
@@ -40,6 +41,7 @@ const MintCogito = () => {
   const web3storage = useWeb3Storage()
   const initialFocusRef = useRef(null)
   const minter = useCogitoMinter()
+  const {refresh} = useCogitoIDs(user.addr)
   const handleReset = () => {
     setText("")
     setFiles([])
@@ -113,6 +115,7 @@ const MintCogito = () => {
               type={"file"}
               ref={filesUpload}
               style={{display: "none"}}
+              disabled={minter.status === PROCESSING}
               onChange={e => {
                 if (!e.target.files) {
                   return
@@ -143,6 +146,7 @@ const MintCogito = () => {
                 const cid = await web3storage?.storeFile(generateFilesAndMeta())
                 await minter.mint(parseIpfsCid(cid))
                 handleReset()
+                await refresh()
               }}
             >
               Mint

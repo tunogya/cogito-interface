@@ -8,9 +8,9 @@ import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const CogitoList = () => {
   const {user} = useCurrentUser()
-  const cogitoIDs = useCogitoIDs(user.addr)
+  const {ids} = useCogitoIDs(user.addr)
 
-  if (!user.loggedIn || !cogitoIDs.ids) {
+  if (!user.loggedIn || !ids) {
     return (
       <Stack>
         <Text>No cogito</Text>
@@ -20,7 +20,7 @@ const CogitoList = () => {
 
   return (
     <Accordion defaultIndex={[]} allowMultiple w={"100%"}>
-      {cogitoIDs.ids.map((id: number, index: Key) => (
+      {ids.map((id: number, index: Key) => (
         <CogitoItem address={user.addr} id={id} key={index}/>
       ))}
     </Accordion>

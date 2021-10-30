@@ -13,7 +13,6 @@ const useCogitoMinter = () => {
   const [status, setStatus] = useRecoilState(statusAtom())
 
   const mint = async (metadata: string) => {
-    console.log(metadata)
     return await txMintCogito(metadata, {
       onStart() {
         setStatus(PROCESSING)
