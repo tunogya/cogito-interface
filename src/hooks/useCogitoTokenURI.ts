@@ -34,12 +34,15 @@ const $statusAtom = atomFamily({
   default: IDLE,
 })
 
-const fetchCogito = async (address: string, id: number) => {
+export const fetchCogito = async (address: string, id: number) => {
   const uri = await fetchUri(address, id)
-  return await fetcher(parseUriToHttp(uri)[0] + "metadata.json").then(res => res)
+  if (uri){
+    return await fetcher(parseUriToHttp(uri)[0] + "metadata.json").then(res => res)
+  }
+  return null
 }
 
-const fetchUri = async (address: string, id: number) => {
+export const fetchUri = async (address: string, id: number) => {
   return await scriptFetchTokenURI(address, id).then((res: any) => res)
 }
 
