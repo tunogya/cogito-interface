@@ -26,7 +26,6 @@ import {SmallAddIcon} from "@chakra-ui/icons"
 import {useRecoilState} from "recoil";
 import {filesAtom} from "../../state/Files";
 import useWeb3Storage from "../../hooks/useWeb3Storage";
-import parseUriToHttp from "../../utils/parseUriToHttp";
 import parseIpfsCid from "../../utils/parseIpfsCid";
 import {PROCESSING} from "../../constants/status";
 
@@ -142,8 +141,7 @@ const MintCogito = () => {
               isLoading={minter.status === PROCESSING}
               onClick={async () => {
                 const cid = await web3storage?.storeFile(generateFilesAndMeta())
-                console.log(cid)
-                await minter.mint(parseUriToHttp(parseIpfsCid(cid))[0])
+                await minter.mint(parseIpfsCid(cid))
                 handleReset()
               }}
             >
