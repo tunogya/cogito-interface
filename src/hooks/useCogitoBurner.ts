@@ -1,18 +1,18 @@
-import { atomFamily, useRecoilState } from "recoil"
+import {atomFamily, useRecoilState} from "recoil"
 import { ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS } from "../constants/status"
 import txBurnCogito from "../flow/tx.burnCogito"
 import sleep from "../utils/sleep"
 
 export const statusAtom = atomFamily({
-  key: "cogito-burner::status",
+  // @ts-ignore
+  key: (id) => () => { return  id + "-cogito-burner::status" },
   default: IDLE,
 })
 
-const useCogitoBurner = () => {
-  // @ts-ignore
-  const [status, setStatus] = useRecoilState(statusAtom())
+const useCogitoBurner = (id: number) => {
+  const [status, setStatus] = useRecoilState(statusAtom(id))
 
-  const burn = async (id: Number) => {
+  const burn = async () => {
     await txBurnCogito(id, {
       onStart() {
         setStatus(PROCESSING)
@@ -28,11 +28,11 @@ const useCogitoBurner = () => {
         setStatus(ERROR)
       },
     })
+  }
 
-    return {
-      status,
-      burn,
-    }
+  return {
+    status,
+    burn,
   }
 }
 

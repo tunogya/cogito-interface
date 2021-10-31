@@ -37,7 +37,7 @@ const Auth = () => {
             </MenuButton>
           )}
 
-          <MenuList borderRadius={"xl"} padding={0} background={colorMode === "light" ? "white" : "black"}>
+          <MenuList borderRadius={"xl"} background={colorMode === "light" ? "white" : "black"}>
             <MenuItem onClick={onCopy} icon={<CopyIcon/>}>
               <Heading fontSize={"md"} fontWeight={"normal"}>
                 <Trans>Copy Address</Trans>

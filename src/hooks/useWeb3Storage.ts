@@ -16,8 +16,7 @@ export const useWeb3Storage = () => {
   const web3storage = new Web3Storage({token: apiKey})
 
   const storeFile = async (fileList: FileData[]) => {
-    const onRootCidReady = (cid: string) => {
-      console.log('uploading files with cid:', cid)
+    const onRootCidReady = () => {
       setStatus(PROCESSING)
     }
 
@@ -27,7 +26,6 @@ export const useWeb3Storage = () => {
     const onStoredChunk = (size: number) => {
       uploaded += size
       const pct =  uploaded / totalSize * 100 <= 100 ? uploaded / totalSize * 100 : 100
-      console.log(`Uploading... ${pct.toFixed(2)}% complete`)
       setProgress(Number(pct.toFixed(2)))
     }
 

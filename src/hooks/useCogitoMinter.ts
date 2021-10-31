@@ -1,16 +1,15 @@
-import { atomFamily, useRecoilState } from "recoil"
+import {atom, useRecoilState} from "recoil"
 import { ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS } from "../constants/status"
 import txMintCogito from "../flow/tx.mintCogito"
 import sleep from "../utils/sleep"
 
-export const statusAtom = atomFamily({
+export const statusAtom = atom({
   key: "cogito-minter::status",
   default: IDLE,
 })
 
 const useCogitoMinter = () => {
-  // @ts-ignore
-  const [status, setStatus] = useRecoilState(statusAtom())
+  const [status, setStatus] = useRecoilState(statusAtom)
 
   const mint = async (metadata: string) => {
     return await txMintCogito(metadata, {

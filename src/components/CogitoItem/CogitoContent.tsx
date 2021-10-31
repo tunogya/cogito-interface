@@ -1,10 +1,26 @@
 import {FC, Key} from "react";
 import useCogitoTokenURI from "../../hooks/useCogitoTokenURI";
-import {Badge, Link, Stack, Text, Tooltip, useColorMode} from "@chakra-ui/react";
+import {
+  Badge,
+  Heading,
+  IconButton,
+  Link, Menu,
+  MenuButton, MenuItem,
+  MenuList,
+  Spacer,
+  Stack,
+  Text,
+  Tooltip,
+  useColorMode
+} from "@chakra-ui/react";
 import {parseDate} from "../../utils/parseDate";
 import parseUriToHttp from "../../utils/parseUriToHttp";
 import shortenCid from "../../utils/shortenCid";
 import {AttachmentIcon} from "@chakra-ui/icons";
+import {Trans} from "@lingui/macro";
+import {AiOutlineDelete, FiMoreHorizontal} from "react-icons/all";
+import useCogitoBurner from "../../hooks/useCogitoBurner";
+import {PROCESSING} from "../../constants/status";
 
 interface CogitoContentProps {
   address: string | null
@@ -14,6 +30,7 @@ interface CogitoContentProps {
 const CogitoContent: FC<CogitoContentProps> = props => {
   const {uri, cogito} = useCogitoTokenURI(props.address, props.id)
   const {colorMode} = useColorMode()
+  const burner = useCogitoBurner(props.id)
 
   return (
     <Stack>
@@ -32,7 +49,27 @@ const CogitoContent: FC<CogitoContentProps> = props => {
           )
         })}
       </Stack>
-      <Text fontSize={"xs"} color={"gray"}>{parseDate(cogito.create_at)}</Text>
+      <Stack direction={"row"} alignItems={"center"}>
+        <Text fontSize={"xs"} color={"gray"}>{parseDate(cogito.create_at)}</Text>
+        <Spacer/>
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            isLoading={burner.status === PROCESSING}
+            aria-label="Options"
+            icon={<FiMoreHorizontal/>}
+            size={"sm"}
+            variant="ghost"
+          />
+          <MenuList borderRadius={"xl"} background={colorMode === "light" ? "white" : "black"}>
+            <MenuItem icon={<AiOutlineDelete/>} color={"red"} onClick={burner.burn}>
+              <Heading fontSize={"md"} fontWeight={"normal"}>
+                <Trans>Burn</Trans>
+              </Heading>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Stack>
     </Stack>
   )
 }
