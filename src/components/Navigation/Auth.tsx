@@ -29,7 +29,7 @@ const Auth = () => {
               {shortenCid(user.addr ?? "", 6)}
             </MenuButton>
           ) : (
-            <MenuButton as={Button} aria-label={"user"} variant={"ghost"} h={16} fontSize={"xx-small"} w={16} p={0}>
+            <MenuButton as={Button} aria-label={"user"} borderRadius={8} variant={"ghost"} h={12} fontSize={"xx-small"} w={16} p={0}>
               {shortenCid(user.addr ?? "", 3)}
             </MenuButton>
           )}
