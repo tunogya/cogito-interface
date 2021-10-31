@@ -1,9 +1,9 @@
-import {Button, Heading, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text} from "@chakra-ui/react"
-import {FC} from "react"
-import {DeleteIcon} from "@chakra-ui/icons"
+import { Button, Heading, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text } from "@chakra-ui/react"
+import { FC } from "react"
+import { DeleteIcon } from "@chakra-ui/icons"
 import shortenCid from "../../utils/shortenCid"
-import {useRecoilState} from "recoil";
-import {filesAtom} from "../../state/Files";
+import { useRecoilState } from "recoil"
+import { filesAtom } from "../../state/Files"
 
 interface FileItemProps {
   name: string
@@ -32,8 +32,8 @@ const FileItem: FC<FileItemProps> = props => {
         <Text px={3} fontWeight={"bold"}>
           {props.name}
         </Text>
-        <MenuDivider/>
-        <MenuItem color={"red"} onClick={() => handleDelete(props.name)} icon={<DeleteIcon/>}>
+        <MenuDivider />
+        <MenuItem color={"red"} onClick={() => handleDelete(props.name)} icon={<DeleteIcon />}>
           <Heading size={"sm"} fontWeight={"normal"}>
             Delete
           </Heading>

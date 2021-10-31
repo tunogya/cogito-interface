@@ -1,11 +1,11 @@
-import {atomFamily, useRecoilState} from "recoil"
-import {ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS} from "../constants/status"
+import { atomFamily, useRecoilState } from "recoil"
+import { ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS } from "../constants/status"
 import txBurnCogito from "../flow/tx.burnCogito"
 import sleep from "../utils/sleep"
 
 export const statusAtom = atomFamily({
   // @ts-ignore
-  key: (id) => () => {
+  key: id => () => {
     return id + "-cogito-burner::status"
   },
   default: IDLE,

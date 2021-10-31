@@ -15,8 +15,6 @@ Test GPG
 - Collect your interesting and valuable ideas
 - Clone and share your thoughts with others, or get other people’s
 
-
 ## Timeline
 
 ## Explore
-

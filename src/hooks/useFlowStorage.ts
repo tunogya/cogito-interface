@@ -1,6 +1,6 @@
-import {atomFamily, selectorFamily, useRecoilState} from "recoil";
-import {IDLE, PROCESSING} from "../constants/status";
-import fetchFlowStorage from "../flow/script.fetchFlowStorage";
+import { atomFamily, selectorFamily, useRecoilState } from "recoil"
+import { IDLE, PROCESSING } from "../constants/status"
+import fetchFlowStorage from "../flow/script.fetchFlowStorage"
 
 export const valueAtom = atomFamily({
   key: "flow-storage::state",

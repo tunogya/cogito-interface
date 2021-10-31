@@ -16,33 +16,33 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react"
-import {Trans} from "@lingui/macro"
+import { Trans } from "@lingui/macro"
 import useCurrentUser from "../../hooks/useCurrentUser"
-import {useRef, useState} from "react"
-import {AiFillFileAdd} from "react-icons/all"
+import { useRef, useState } from "react"
+import { AiFillFileAdd } from "react-icons/all"
 import FileItem from "./FileItem"
 import useCogitoMinter from "../../hooks/useCogitoMinter"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
-import {SmallAddIcon} from "@chakra-ui/icons"
-import {useRecoilState} from "recoil";
-import {filesAtom} from "../../state/Files";
-import useWeb3Storage from "../../hooks/useWeb3Storage";
-import parseIpfsCid from "../../utils/parseIpfsCid";
-import {PROCESSING} from "../../constants/status";
-import useCogitoIDs from "../../hooks/useCogitoIDs";
+import { SmallAddIcon } from "@chakra-ui/icons"
+import { useRecoilState } from "recoil"
+import { filesAtom } from "../../state/Files"
+import useWeb3Storage from "../../hooks/useWeb3Storage"
+import parseIpfsCid from "../../utils/parseIpfsCid"
+import { PROCESSING } from "../../constants/status"
+import useCogitoIDs from "../../hooks/useCogitoIDs"
 
 const MintCogito = () => {
-  const {width} = useWindowDimensions()
+  const { width } = useWindowDimensions()
 
-  const {isOpen, onOpen, onClose} = useDisclosure()
+  const { isOpen, onOpen, onClose } = useDisclosure()
   const [text, setText] = useState("")
   const [files, setFiles] = useRecoilState(filesAtom)
-  const {user} = useCurrentUser()
+  const { user } = useCurrentUser()
   const filesUpload = useRef(null)
   const web3storage = useWeb3Storage()
   const initialFocusRef = useRef(null)
   const minter = useCogitoMinter()
-  const {refresh} = useCogitoIDs(user.addr)
+  const { refresh } = useCogitoIDs(user.addr)
   const handleReset = () => {
     setText("")
     setFiles([])
@@ -51,17 +51,17 @@ const MintCogito = () => {
   const generateFilesAndMeta = () => {
     let metadata = {}
     if (user.loggedIn) {
-      metadata = {...metadata, author: user.addr}
+      metadata = { ...metadata, author: user.addr }
     }
-    metadata = {...metadata, create_at: Date.now()}
+    metadata = { ...metadata, create_at: Date.now() }
     if (text !== "") {
-      metadata = {...metadata, text: text}
+      metadata = { ...metadata, text: text }
     }
-    if (files){
-      metadata = {...metadata, attachment: files.map((f)=>f.name)}
+    if (files) {
+      metadata = { ...metadata, attachment: files.map(f => f.name) }
     }
-    const metaFile = new File([JSON.stringify(metadata)], "metadata.json", {type: "application/json"})
-    return [...files, {name: metaFile.name, content: metaFile, size: metaFile.size, type: metaFile.type}]
+    const metaFile = new File([JSON.stringify(metadata)], "metadata.json", { type: "application/json" })
+    return [...files, { name: metaFile.name, content: metaFile, size: metaFile.size, type: metaFile.type }]
   }
 
   if (!user.loggedIn) {
@@ -75,7 +75,7 @@ const MintCogito = () => {
           <Trans>+ Cogito</Trans>
         </Button>
       ) : (
-        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon/>} w={12} h={12}/>
+        <IconButton aria-label={"mint"} onClick={onOpen} icon={<SmallAddIcon />} w={12} h={12} />
       )}
 
       <Modal
@@ -87,14 +87,14 @@ const MintCogito = () => {
         initialFocusRef={initialFocusRef}
         size={width >= 640 ? "xl" : "xs"}
       >
-        <ModalOverlay/>
+        <ModalOverlay />
         <ModalContent h={96}>
           <ModalHeader>
             <Heading fontSize={"xl"}>
               <Trans>Cogito ergo sum</Trans>
             </Heading>
           </ModalHeader>
-          <ModalCloseButton/>
+          <ModalCloseButton />
           <ModalBody>
             <Textarea
               placeholder="What's happening?"
@@ -106,7 +106,7 @@ const MintCogito = () => {
             <Wrap pt={2}>
               {files.map((f, index) => (
                 <WrapItem key={index}>
-                  <FileItem name={f.name}/>
+                  <FileItem name={f.name} />
                 </WrapItem>
               ))}
             </Wrap>
@@ -115,7 +115,7 @@ const MintCogito = () => {
             <input
               type={"file"}
               ref={filesUpload}
-              style={{display: "none"}}
+              style={{ display: "none" }}
               disabled={minter.status === PROCESSING || web3storage?.status === PROCESSING}
               onChange={e => {
                 if (!e.target.files) {
@@ -123,17 +123,17 @@ const MintCogito = () => {
                 }
                 for (let i = 0; i < e.target.files.length; i++) {
                   const f = e.target.files[i]
-                  setFiles([...files, {name: f.name, content: f as File, size: f.size, type: f.type}])
+                  setFiles([...files, { name: f.name, content: f as File, size: f.size, type: f.type }])
                 }
               }}
             />
 
-            { web3storage?.status === PROCESSING ? (
+            {web3storage?.status === PROCESSING ? (
               <Text fontSize={"sm"}>Uploading to IPFS... ({web3storage.progress}%)</Text>
             ) : (
               <IconButton
                 aria-label={"files"}
-                icon={<AiFillFileAdd/>}
+                icon={<AiFillFileAdd />}
                 size={"md"}
                 variant={"ghost"}
                 onClick={() => {
@@ -142,7 +142,7 @@ const MintCogito = () => {
                 }}
               />
             )}
-            <Spacer/>
+            <Spacer />
             <Button
               fontWeight={"bold"}
               disabled={text === "" && files === []}

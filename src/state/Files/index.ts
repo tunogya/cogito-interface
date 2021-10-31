@@ -1,5 +1,5 @@
-import {atom} from "recoil";
-import {FileData} from "./FileData";
+import { atom } from "recoil"
+import { FileData } from "./FileData"
 
 const defaultFiles: FileData[] = []
 

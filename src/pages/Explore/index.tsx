@@ -1,7 +1,7 @@
-import {Button, Heading, Input, Link, Stack, Text} from "@chakra-ui/react"
-import {useState} from "react";
-import {fetchCogito, fetchUri} from "../../hooks/useCogitoTokenURI";
-import parseUriToHttp from "../../utils/parseUriToHttp";
+import { Button, Heading, Input, Link, Stack, Text } from "@chakra-ui/react"
+import { useState } from "react"
+import { fetchCogito, fetchUri } from "../../hooks/useCogitoTokenURI"
+import parseUriToHttp from "../../utils/parseUriToHttp"
 
 const Explore = (props: any) => {
   const [address, setAddress] = useState("")
@@ -11,17 +11,30 @@ const Explore = (props: any) => {
 
   return (
     <Stack py={2} px={4} h={"100%"} {...props}>
-      <Input variant={"filled"} placeholder={"address"} borderRadius={"full"}
-             onChange={(e) => setAddress(e.target.value)}/>
+      <Input
+        variant={"filled"}
+        placeholder={"address"}
+        borderRadius={"full"}
+        onChange={e => setAddress(e.target.value)}
+      />
       <Stack direction={"row"}>
-        <Input variant={"outline"} placeholder={"id"} borderRadius={"full"} type={"number"}
-               onChange={(e) => setId(Number(e.target.value))}/>
-        <Button size={"md"} minW={24} onClick={async () => {
-          const uri = await fetchUri(address, id)
-          setUri(uri)
-          const cogito = await fetchCogito(address, id)
-          setCogito(cogito)
-        }}>
+        <Input
+          variant={"outline"}
+          placeholder={"id"}
+          borderRadius={"full"}
+          type={"number"}
+          onChange={e => setId(Number(e.target.value))}
+        />
+        <Button
+          size={"md"}
+          minW={24}
+          onClick={async () => {
+            const uri = await fetchUri(address, id)
+            setUri(uri)
+            const cogito = await fetchCogito(address, id)
+            setCogito(cogito)
+          }}
+        >
           Search
         </Button>
       </Stack>
@@ -29,7 +42,9 @@ const Explore = (props: any) => {
         <Heading fontSize={"xl"}>Search Result</Heading>
         <Stack>
           {uri && cogito ? (
-            <Link href={parseUriToHttp(uri)[0]} isExternal>{uri}</Link>
+            <Link href={parseUriToHttp(uri)[0]} isExternal>
+              {uri}
+            </Link>
           ) : (
             <Text>404</Text>
           )}

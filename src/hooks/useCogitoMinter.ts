@@ -1,4 +1,4 @@
-import {atom, useRecoilState} from "recoil"
+import { atom, useRecoilState } from "recoil"
 import { ERROR, IDLE, IDLE_DELAY, PROCESSING, SUCCESS } from "../constants/status"
 import txMintCogito from "../flow/tx.mintCogito"
 import sleep from "../utils/sleep"

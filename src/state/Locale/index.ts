@@ -1,5 +1,5 @@
-import {DEFAULT_LOCALE, SUPPORTED_LOCALES, SupportedLocale} from "../../constants/locales";
-import {atom} from "recoil";
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES, SupportedLocale } from "../../constants/locales"
+import { atom } from "recoil"
 
 export function parseLocale(maybeSupportedLocale: unknown): SupportedLocale | undefined {
   if (typeof maybeSupportedLocale !== "string") return undefined

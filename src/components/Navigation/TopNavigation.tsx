@@ -1,13 +1,13 @@
-import {Button, Stack} from "@chakra-ui/react";
-import {links} from "./index";
-import {useHistory} from "react-router-dom";
-import {useState} from "react";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { Button, Stack } from "@chakra-ui/react"
+import { links } from "./index"
+import { useHistory } from "react-router-dom"
+import { useState } from "react"
+import useWindowDimensions from "../../hooks/useWindowDimensions"
 
 export const TopNavigation = () => {
   const history = useHistory()
   const [currentPath, setCurrentPath] = useState(history.location.pathname)
-  const {width} = useWindowDimensions()
+  const { width } = useWindowDimensions()
 
   return (
     <Stack direction={"row"} justifyContent={"flex-end"} p={2} alignItems={"center"}>
@@ -30,10 +30,11 @@ export const TopNavigation = () => {
           fontWeight={currentPath === "explore" ? "bold" : "normal"}
           variant={currentPath === "explore" ? "solid" : "ghost"}
           size={"sm"}
-          onClick={()=> {
-          history.push("explore")
-          setCurrentPath("explore")
-        }}>
+          onClick={() => {
+            history.push("explore")
+            setCurrentPath("explore")
+          }}
+        >
           Explore
         </Button>
       )}

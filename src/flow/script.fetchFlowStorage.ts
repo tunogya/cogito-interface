@@ -1,5 +1,5 @@
-import {send, decode, script, args, arg, cdc} from "@onflow/fcl"
-import {Address} from "@onflow/types"
+import { send, decode, script, args, arg, cdc } from "@onflow/fcl"
+import { Address } from "@onflow/types"
 
 const CODE = cdc`
 pub fun main(address: Address): {String: UInt64} {
