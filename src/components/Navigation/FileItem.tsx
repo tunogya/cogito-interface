@@ -1,7 +1,5 @@
 import {Button, Heading, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text} from "@chakra-ui/react"
 import {FC} from "react"
-import {useNFTStorage} from "../../hooks/useNFTStorage"
-import {PROCESSING} from "../../constants/status"
 import {DeleteIcon} from "@chakra-ui/icons"
 import shortenCid from "../../utils/shortenCid"
 import {useRecoilState} from "recoil";
@@ -12,7 +10,6 @@ interface FileItemProps {
 }
 
 const FileItem: FC<FileItemProps> = props => {
-  const storage = useNFTStorage()
   const [files, setFiles] = useRecoilState(filesAtom)
 
   const handleDelete = (name: string) => {
@@ -26,9 +23,6 @@ const FileItem: FC<FileItemProps> = props => {
         size={"sm"}
         maxW={48}
         overflow={"scroll"}
-        isLoading={storage?.state === PROCESSING}
-        spinnerPlacement="start"
-        loadingText={shortenCid(props.name, 6)}
         fontFamily={"sans-serif"}
         textTransform={"none"}
       >
