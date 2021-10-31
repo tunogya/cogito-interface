@@ -16,7 +16,8 @@ export const useWeb3Storage = () => {
   const web3storage = new Web3Storage({token: apiKey})
 
   const storeFile = async (fileList: FileData[]) => {
-    const onRootCidReady = () => {
+    const onRootCidReady = (cid: string) => {
+      console.log('uploading files with cid:', cid)
       setStatus(PROCESSING)
     }
 
