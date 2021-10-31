@@ -6,7 +6,8 @@ import {FileData} from "../state/Files/FileData";
 const apiKey = process.env.REACT_APP_WEB3_STORAGE_DEFAULT_KEY
 
 export const useWeb3Storage = () => {
-  const [state, setState] = useState(IDLE)
+  const [status, setStatus] = useState(IDLE)
+  const [progress, setProgress] = useState(0)
 
   if (!apiKey) {
     return
@@ -15,17 +16,33 @@ export const useWeb3Storage = () => {
   const web3storage = new Web3Storage({token: apiKey})
 
   const storeFile = async (fileList: FileData[]) => {
-    setState(PROCESSING)
+    const onRootCidReady = (cid: string) => {
+      console.log('uploading files with cid:', cid)
+      setStatus(PROCESSING)
+    }
+
+    const totalSize = fileList.map(f => f.size).reduce((a, b) => a + b, 0)
+    let uploaded = 0
+
+    const onStoredChunk = (size: number) => {
+      uploaded += size
+      const pct =  uploaded / totalSize * 100
+      console.log(`Uploading... ${pct.toFixed(2)}% complete`)
+      setProgress(Number(pct.toFixed(2)))
+    }
+
     const files = fileList.map((f)=>(
       new File([f.content], f.name, {type: f.type})
     ))
-    const cid = await web3storage.put(files)
-    setState(IDLE)
+
+    const cid = await web3storage.put(files, { onRootCidReady, onStoredChunk })
+    setStatus(IDLE)
     return cid
   }
 
   return {
-    state,
+    status,
+    progress,
     storeFile,
   }
 }

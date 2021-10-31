@@ -11,6 +11,7 @@ import {
   ModalOverlay,
   Spacer,
   Textarea,
+  Text,
   useDisclosure,
   Wrap,
   WrapItem,
@@ -97,9 +98,9 @@ const MintCogito = () => {
           <ModalBody>
             <Textarea
               placeholder="What's happening?"
-              resize={"none"}
               variant="filled"
               value={text}
+              readOnly={minter.status === PROCESSING || web3storage?.status === PROCESSING}
               onChange={e => setText(e.target.value)}
             />
             <Wrap pt={2}>
@@ -115,7 +116,7 @@ const MintCogito = () => {
               type={"file"}
               ref={filesUpload}
               style={{display: "none"}}
-              disabled={minter.status === PROCESSING}
+              disabled={minter.status === PROCESSING || web3storage?.status === PROCESSING}
               onChange={e => {
                 if (!e.target.files) {
                   return
@@ -127,21 +128,25 @@ const MintCogito = () => {
               }}
             />
 
-            <IconButton
-              aria-label={"files"}
-              icon={<AiFillFileAdd/>}
-              size={"md"}
-              variant={"ghost"}
-              onClick={() => {
-                // @ts-ignore
-                filesUpload.current.click()
-              }}
-            />
+            { web3storage?.status === PROCESSING ? (
+              <Text fontSize={"sm"}>Uploading to IPFS... ({web3storage.progress}%)</Text>
+            ) : (
+              <IconButton
+                aria-label={"files"}
+                icon={<AiFillFileAdd/>}
+                size={"md"}
+                variant={"ghost"}
+                onClick={() => {
+                  // @ts-ignore
+                  filesUpload.current.click()
+                }}
+              />
+            )}
             <Spacer/>
             <Button
               fontWeight={"bold"}
               disabled={text === "" && files === []}
-              isLoading={minter.status === PROCESSING}
+              isLoading={minter.status === PROCESSING || web3storage?.status === PROCESSING}
               onClick={async () => {
                 const cid = await web3storage?.storeFile(generateFilesAndMeta())
                 await minter.mint(parseIpfsCid(cid))
