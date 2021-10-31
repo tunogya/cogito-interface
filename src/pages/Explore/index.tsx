@@ -38,9 +38,9 @@ const Explore = (props: any) => {
           Search
         </Button>
       </Stack>
-      <Stack p={2} borderRadius={"2xl"}>
-        <Heading fontSize={"xl"}>Search Result</Heading>
-        <Stack>
+      <Stack borderRadius={"2xl"}>
+        <Heading fontSize={"xl"} p={2}>Search Result</Heading>
+        <Stack boxShadow={"base"} borderRadius={"md"} p={4}>
           {uri && cogito ? (
             <Link href={parseUriToHttp(uri)[0]} isExternal>
               {uri}

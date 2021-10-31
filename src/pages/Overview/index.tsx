@@ -1,5 +1,5 @@
 import Content from "../../components/Content"
-import {Spinner, Stack, Text} from "@chakra-ui/react"
+import {Heading, Spinner, Stack, Stat, StatHelpText, StatLabel, StatNumber} from "@chakra-ui/react"
 import useFlowBalance from "../../hooks/useFlowBalance"
 import useCurrentUser from "../../hooks/useCurrentUser"
 import { Suspense } from "react"
@@ -32,15 +32,38 @@ const OverviewContent = () => {
   const storage = useFlowStorage(user.addr)
 
   return (
-    <Stack>
-      <Text>{user.addr}</Text>
-      {flow.balance && <Text>Balance: {parseFlow(flow.balance)} FLOW</Text>}
-      <Text>Cogito Supply: {supply.supply}</Text>
-      {storage.storage && (
-        <Text>
-          {bytesToSize(storage.storage.storageUsed)} / {bytesToSize(storage.storage.storageCapacity)},{" "}
-          {((storage.storage.storageUsed / storage.storage.storageCapacity) * 100).toFixed(2)}% used
-        </Text>
+    <Stack p={4} spacing={4}>
+      <Stat p={4} borderRadius={"xl"} boxShadow={"base"}>
+        <StatLabel>
+          <Heading size={"xs"} fontWeight={"light"}>Cogito Supply</Heading>
+        </StatLabel>
+        <StatNumber>
+          <Heading size={"md"}>
+            {supply.supply}
+          </Heading>
+        </StatNumber>
+      </Stat>
+      { user.loggedIn && (
+        <Stat p={4} borderRadius={"xl"} boxShadow={"base"}>
+          <StatLabel>
+            <Heading size={"xs"} fontWeight={"light"}>{user.addr}</Heading>
+          </StatLabel>
+          <StatNumber>
+            {flow.balance && (
+              <Heading size={"md"}>
+                {parseFlow(flow.balance)} flow
+              </Heading>
+            )}
+          </StatNumber>
+          <StatHelpText>
+            {storage.storage && (
+              <Heading size={"xs"} fontWeight={"light"}>
+                Storage: {bytesToSize(storage.storage.storageUsed)} / {bytesToSize(storage.storage.storageCapacity)},{" "}
+                {((storage.storage.storageUsed / storage.storage.storageCapacity) * 100).toFixed(2)}% has used
+              </Heading>
+            )}
+          </StatHelpText>
+        </Stat>
       )}
     </Stack>
   )

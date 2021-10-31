@@ -1,5 +1,5 @@
 import Content from "../../components/Content"
-import { Accordion, Button, Spinner, Stack, Text } from "@chakra-ui/react"
+import {Accordion, Button, Heading, Spinner, Stack, Text} from "@chakra-ui/react"
 import useCogitoIDs from "../../hooks/useCogitoIDs"
 import useCurrentUser from "../../hooks/useCurrentUser"
 import { Key, Suspense } from "react"
@@ -12,10 +12,10 @@ const CogitoList = () => {
   const { user } = useCurrentUser()
   const { ids } = useCogitoIDs(user.addr)
 
-  if (!user.loggedIn || !ids) {
+  if (!user.loggedIn || ids.length === 0) {
     return (
-      <Stack>
-        <Text>No cogito</Text>
+      <Stack p={4} boxShadow={"base"} m={4} borderRadius={"xl"}>
+        <Heading size={"md"} fontWeight={"light"}>Sorry, no cogito in your account.</Heading>
       </Stack>
     )
   }
@@ -33,7 +33,7 @@ const TimeLine = () => {
   const { width } = useWindowDimensions()
 
   return (
-    <Content label={"TimeLine"} hasTitle={width >= 640}>
+    <Content label={"TimeLine"} hasTitle={width >= 640} hasDivider>
       <Suspense
         fallback={
           <Stack p={4}>
