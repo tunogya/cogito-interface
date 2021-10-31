@@ -26,7 +26,7 @@ export const useWeb3Storage = () => {
 
     const onStoredChunk = (size: number) => {
       uploaded += size
-      const pct =  uploaded / totalSize * 100
+      const pct =  uploaded / totalSize * 100 <= 100 ? uploaded / totalSize * 100 : 100
       console.log(`Uploading... ${pct.toFixed(2)}% complete`)
       setProgress(Number(pct.toFixed(2)))
     }
