@@ -7,51 +7,56 @@ import parseUriToHttp from "../utils/parseUriToHttp"
 export const cogitoAtom = atomFamily({
   // @ts-ignore
   key:
-  // @ts-ignore
-    ({ address, id }) =>
-    () => {
-      return address + id + "cogito::value"
-    },
+    // @ts-ignore
+
+      ({ address, id }) =>
+      () => {
+        return address + id + "cogito::value"
+      },
   default: selectorFamily({
     key: "cogito::default",
     // @ts-ignore
     get:
-    // @ts-ignore
-      ({ address, id }) =>
-      async () => {
-        return await fetchCogito(address, id)
-      },
+      // @ts-ignore
+
+        ({ address, id }) =>
+        async () => {
+          return await fetchCogito(address, id)
+        },
   }),
 })
 
 export const uriAtom = atomFamily({
   // @ts-ignore
   key:
-  // @ts-ignore
-    ({ address, id }) =>
-    () => {
-      return address + id + "cogito-uri::value"
-    },
+    // @ts-ignore
+
+      ({ address, id }) =>
+      () => {
+        return address + id + "cogito-uri::value"
+      },
   default: selectorFamily({
     key: "cogito-uri::default",
     // @ts-ignore
     get:
-    // @ts-ignore
-      ({ address, id }) =>
-      async () => {
-        return await fetchUri(address, id)
-      },
+      // @ts-ignore
+
+        ({ address, id }) =>
+        async () => {
+          return await fetchUri(address, id)
+        },
   }),
 })
 
 export const statusAtom = atomFamily({
   // @ts-ignore
   key:
-  // @ts-ignore
-    ({ address, id }) =>
-    () => {
-      return address + id + "cogito-ids::status"
-    },
+    // @ts-ignore
+
+      ({ address, id }) =>
+      () => {
+        return address + id + "cogito-ids::status"
+      },
   default: IDLE,
 })
 

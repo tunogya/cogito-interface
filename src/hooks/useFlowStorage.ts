@@ -6,7 +6,7 @@ export const valueAtom = atomFamily({
   key: "flow-storage::state",
   default: selectorFamily({
     key: "flow-storage::default",
-    get: (address: string) => async () => fetchFlowStorage(address),
+    get: (address: string | null) => async () => fetchFlowStorage(address),
   }),
 })
 
@@ -15,7 +15,7 @@ export const statusAtom = atomFamily({
   default: IDLE,
 })
 
-const useFlowStorageHook = (address: string) => {
+const useFlowStorageHook = (address: string | null) => {
   const [storage, setStorage] = useRecoilState(valueAtom(address))
   const [status, setStatus] = useRecoilState(statusAtom(address))
 

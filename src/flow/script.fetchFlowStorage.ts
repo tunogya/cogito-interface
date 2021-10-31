@@ -8,7 +8,7 @@ pub fun main(address: Address): {String: UInt64} {
 }
 `
 
-const fetchFlowStorage = (address: string) => {
+const fetchFlowStorage = (address: string | null) => {
   if (address == null) return Promise.resolve(false)
 
   // prettier-ignore
