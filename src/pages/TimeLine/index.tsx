@@ -51,11 +51,22 @@ const WrappedCogitoList = () => {
   const {user} = useCurrentUser()
   const {init, setup, status} = useSetupCogito(user.addr)
 
+  if (!user.loggedIn) {
+    return (
+      <Stack>
+        <Text>
+          Log in
+        </Text>
+      </Stack>
+    )
+  }
+
   if (init){
     return (
       <CogitoList/>
     )
   }
+
   return (
     <Stack>
       <Button onClick={setup} isLoading={status === PROCESSING}>
