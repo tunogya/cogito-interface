@@ -1,10 +1,12 @@
 import Content from "../../components/Content"
-import {Accordion, Spinner, Stack, Text} from "@chakra-ui/react"
+import {Accordion, Button, Spinner, Stack, Text} from "@chakra-ui/react"
 import {useCogitoIDs} from "../../hooks/useCogitoIDs"
 import {useCurrentUser} from "../../hooks/useCurrentUser"
 import {Key, Suspense} from "react"
 import CogitoItem from "../../components/CogitoItem"
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useSetupCogito from "../../hooks/useSetupCogito";
+import {PROCESSING} from "../../constants/status";
 
 const CogitoList = () => {
   const {user} = useCurrentUser()
@@ -39,9 +41,27 @@ const TimeLine = () => {
           </Stack>
         }
       >
-        <CogitoList/>
+        <WrappedCogitoList/>
       </Suspense>
     </Content>
+  )
+}
+
+const WrappedCogitoList = () => {
+  const {user} = useCurrentUser()
+  const {init, setup, status} = useSetupCogito(user.addr)
+
+  if (init){
+    return (
+      <CogitoList/>
+    )
+  }
+  return (
+    <Stack>
+      <Button onClick={setup} isLoading={status === PROCESSING}>
+        Setup Cogito First
+      </Button>
+    </Stack>
   )
 }
 
