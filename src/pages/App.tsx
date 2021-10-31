@@ -41,7 +41,7 @@ function App() {
       </Stack>
       <Divider orientation="vertical"/>
       {width >= 980 && (
-        <Explore/>
+        <Explore w={"350px"}/>
       )}
     </Stack>
   )

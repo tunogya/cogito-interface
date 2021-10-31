@@ -3,14 +3,14 @@ import {useState} from "react";
 import {fetchCogito, fetchUri} from "../../hooks/useCogitoTokenURI";
 import parseUriToHttp from "../../utils/parseUriToHttp";
 
-const Explore = () => {
+const Explore = (props: any) => {
   const [address, setAddress] = useState("")
   const [id, setId] = useState(0)
   const [uri, setUri] = useState(undefined)
   const [cogito, setCogito] = useState()
 
   return (
-    <Stack py={2} px={4} h={"100%"}>
+    <Stack py={2} px={4} h={"100%"} {...props}>
       <Input variant={"filled"} placeholder={"address"} borderRadius={"full"}
              onChange={(e) => setAddress(e.target.value)}/>
       <Stack direction={"row"}>
