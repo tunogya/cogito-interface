@@ -7,7 +7,7 @@ export const currentUser = atom({
   default: { addr: null, loggedIn: null, cid: null },
 })
 
-export function useCurrentUser() {
+const useCurrentUser = () => {
   const [user, setUser] = useRecoilState(currentUser)
   useEffect(() => fcl.currentUser().subscribe(setUser), [setUser])
   return {
@@ -18,3 +18,5 @@ export function useCurrentUser() {
     changeUser: fcl.reauthenticate,
   }
 }
+
+export default useCurrentUser

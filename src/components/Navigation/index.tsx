@@ -13,7 +13,7 @@ import {
 import MintCogito from "./MintCogito"
 import Support from "./Support"
 import useSetupCogito from "../../hooks/useSetupCogito"
-import {useCurrentUser} from "../../hooks/useCurrentUser"
+import useCurrentUser from "../../hooks/useCurrentUser"
 import {PROCESSING} from "../../constants/status"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 

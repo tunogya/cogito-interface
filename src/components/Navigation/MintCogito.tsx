@@ -17,7 +17,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
-import {useCurrentUser} from "../../hooks/useCurrentUser"
+import useCurrentUser from "../../hooks/useCurrentUser"
 import {useRef, useState} from "react"
 import {AiFillFileAdd} from "react-icons/all"
 import FileItem from "./FileItem"
@@ -29,7 +29,7 @@ import {filesAtom} from "../../state/Files";
 import useWeb3Storage from "../../hooks/useWeb3Storage";
 import parseIpfsCid from "../../utils/parseIpfsCid";
 import {PROCESSING} from "../../constants/status";
-import {useCogitoIDs} from "../../hooks/useCogitoIDs";
+import useCogitoIDs from "../../hooks/useCogitoIDs";
 
 const MintCogito = () => {
   const {width} = useWindowDimensions()

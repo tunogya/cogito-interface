@@ -21,7 +21,7 @@ import {Trans} from "@lingui/macro";
 import {AiOutlineDelete, FiMoreHorizontal} from "react-icons/all";
 import useCogitoBurner from "../../hooks/useCogitoBurner";
 import {PROCESSING} from "../../constants/status";
-import {useCogitoIDs} from "../../hooks/useCogitoIDs";
+import useCogitoIDs from "../../hooks/useCogitoIDs";
 
 interface CogitoContentProps {
   address: string | null

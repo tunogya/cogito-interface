@@ -16,10 +16,8 @@ export const statusAtom = atomFamily({
 })
 
 const useCogitoSupply = () => {
-  // @ts-ignore
-  const [supply, setSupply] = useRecoilState(supplyAtom())
-  // @ts-ignore
-  const [status, setStatus] = useRecoilState(statusAtom())
+  const [supply, setSupply] = useRecoilState(supplyAtom({}))
+  const [status, setStatus] = useRecoilState(statusAtom({}))
 
   return {
     supply,

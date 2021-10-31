@@ -3,7 +3,7 @@ import { IDLE, IDLE_DELAY, PROCESSING } from "../constants/status"
 import { atomFamily, selectorFamily, useRecoilState } from "recoil"
 import sleep from "../utils/sleep"
 
-export const $value = atomFamily({
+export const valueAtom = atomFamily({
   key: "flow-balance::value",
   default: selectorFamily({
     key: "flow-balance::init",
@@ -11,14 +11,14 @@ export const $value = atomFamily({
   }),
 })
 
-export const $status = atomFamily({
+export const statusAtom = atomFamily({
   key: "flow-balance::status",
   default: IDLE,
 })
 
 const useFlowBalance = (address: string | null) => {
-  const [balance, setBalance] = useRecoilState($value(address))
-  const [status, setStatus] = useRecoilState($status(address))
+  const [balance, setBalance] = useRecoilState(valueAtom(address))
+  const [status, setStatus] = useRecoilState(statusAtom(address))
 
   async function update() {
     setStatus(PROCESSING)

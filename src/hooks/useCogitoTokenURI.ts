@@ -4,7 +4,7 @@ import scriptFetchTokenURI from "../flow/script.fetchTokenURI"
 import fetcher from "../utils/fetcher"
 import parseUriToHttp from "../utils/parseUriToHttp"
 
-const $cogitoAtom = atomFamily({
+export const cogitoAtom = atomFamily({
   // @ts-ignore
   key: ({address, id}) => () => { return address + id + "cogito::value" },
   default: selectorFamily({
@@ -16,7 +16,7 @@ const $cogitoAtom = atomFamily({
   })
 })
 
-const $uriAtom = atomFamily({
+export const uriAtom = atomFamily({
   // @ts-ignore
   key: ({address, id}) => () => { return address + id + "cogito-uri::value" },
   default: selectorFamily({
@@ -28,7 +28,7 @@ const $uriAtom = atomFamily({
   })
 })
 
-const $statusAtom = atomFamily({
+export const statusAtom = atomFamily({
   // @ts-ignore
   key: ({address, id}) => () => { return address + id + "cogito-ids::status" },
   default: IDLE,
@@ -47,9 +47,9 @@ export const fetchUri = async (address: string, id: number) => {
 }
 
 const useCogitoTokenURI = (address: string | null, id: number) => {
-  const [status, setStatus] = useRecoilState($statusAtom({ address, id}))
-  const [uri, setUri] = useRecoilState($uriAtom({address, id}))
-  const [cogito, setCogito] = useRecoilState($cogitoAtom({ address, id }))
+  const [status, setStatus] = useRecoilState(statusAtom({ address, id}))
+  const [uri, setUri] = useRecoilState(uriAtom({address, id}))
+  const [cogito, setCogito] = useRecoilState(cogitoAtom({ address, id }))
 
   async function refresh() {
     setStatus(PROCESSING)

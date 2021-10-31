@@ -4,23 +4,22 @@ import scriptIsCogitoInit from "../flow/script.isCogitoInit"
 import txSetupCogito from "../flow/tx.setupCogito"
 import sleep from "../utils/sleep"
 
-export const $status = atomFamily({
+export const statusAtom = atomFamily({
   key: "init-cogito::status",
   default: IDLE,
 })
 
-export const $init = atomFamily({
+export const initAtom = atomFamily({
   key: "init-cogito::state",
   default: selectorFamily({
     key: "init-cogito::default",
-    // @ts-ignore
-    get: address => () => scriptIsCogitoInit(address),
+    get: (address: string | null) => () => scriptIsCogitoInit(address),
   }),
 })
 
 const useSetupCogito = (address: string | null) => {
-  const [init, setInit] = useRecoilState($init(address))
-  const [status, setStatus] = useRecoilState($status(address))
+  const [init, setInit] = useRecoilState(initAtom(address))
+  const [status, setStatus] = useRecoilState(statusAtom(address))
 
   const recheck = () => {
     scriptIsCogitoInit(address).then(setInit)

@@ -1,7 +1,7 @@
 import Content from "../../components/Content"
 import {Accordion, Button, Spinner, Stack, Text} from "@chakra-ui/react"
-import {useCogitoIDs} from "../../hooks/useCogitoIDs"
-import {useCurrentUser} from "../../hooks/useCurrentUser"
+import useCogitoIDs from "../../hooks/useCogitoIDs"
+import useCurrentUser from "../../hooks/useCurrentUser"
 import {Key, Suspense} from "react"
 import CogitoItem from "../../components/CogitoItem"
 import useWindowDimensions from "../../hooks/useWindowDimensions";

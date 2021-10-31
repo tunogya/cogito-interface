@@ -5,7 +5,7 @@ import {FileData} from "../state/Files/FileData";
 
 const apiKey = process.env.REACT_APP_WEB3_STORAGE_DEFAULT_KEY
 
-export const useWeb3Storage = () => {
+const useWeb3Storage = () => {
   const [status, setStatus] = useState(IDLE)
   const [progress, setProgress] = useState(0)
 

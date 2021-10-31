@@ -9,7 +9,7 @@ import {
   MenuList, useColorMode,
 } from "@chakra-ui/react"
 import {Trans} from "@lingui/macro"
-import {useCurrentUser} from "../../hooks/useCurrentUser"
+import useCurrentUser from "../../hooks/useCurrentUser"
 import {ChevronDownIcon, CopyIcon, ExternalLinkIcon} from "@chakra-ui/icons"
 import {useClipboard} from "@chakra-ui/react"
 import {AiOutlineLogout} from "react-icons/all"
