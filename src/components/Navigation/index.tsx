@@ -37,11 +37,11 @@ export const Navigation = () => {
     <Stack h={"100%"} p={[2, 2, 2, 4]} spacing={2}>
       {width >= 1200 ? (
         <Heading fontSize={"md"} mb={4}>
-          Cogito ergo sum
+          <Trans>Cogito ergo sum</Trans>
         </Heading>
       ) : (
         <Heading fontSize={"md"} mb={4} textAlign={"center"}>
-          Cogito
+         <Trans>Cogito</Trans>
         </Heading>
       )}
       {links.map((link, index) => (
@@ -110,7 +110,7 @@ const WrappedMintButton = () => {
         <MintCogito />
       ) : (
         <Button onClick={init.setup} isLoading={init.status === PROCESSING}>
-          Setup Cogito First
+          <Trans>Setup Cogito First</Trans>
         </Button>
       )}
     </Stack>

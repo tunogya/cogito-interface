@@ -1,7 +1,8 @@
-import { Button, Heading, Input, Link, Stack, Text } from "@chakra-ui/react"
+import { Button, Heading, Input, Link, Stack } from "@chakra-ui/react"
 import { useState } from "react"
 import { fetchCogito, fetchUri } from "../../hooks/useCogitoTokenURI"
 import parseUriToHttp from "../../utils/parseUriToHttp"
+import {Trans} from "@lingui/macro";
 
 const Explore = (props: any) => {
   const [address, setAddress] = useState("")
@@ -35,7 +36,7 @@ const Explore = (props: any) => {
             setCogito(cogito)
           }}
         >
-          Search
+         <Trans>Search</Trans>
         </Button>
       </Stack>
       <Stack borderRadius={"2xl"}>
@@ -46,7 +47,9 @@ const Explore = (props: any) => {
               {uri}
             </Link>
           ) : (
-            <Text>404</Text>
+            <Heading size={"md"}>
+              <Trans>404</Trans>
+            </Heading>
           )}
         </Stack>
       </Stack>

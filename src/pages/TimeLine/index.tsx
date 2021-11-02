@@ -1,5 +1,5 @@
 import Content from "../../components/Content"
-import {Accordion, Button, Heading, Spinner, Stack, Text} from "@chakra-ui/react"
+import {Accordion, Button, Heading, Spinner, Stack} from "@chakra-ui/react"
 import useCogitoIDs from "../../hooks/useCogitoIDs"
 import useCurrentUser from "../../hooks/useCurrentUser"
 import { Key, Suspense } from "react"
@@ -7,6 +7,7 @@ import CogitoItem from "../../components/CogitoItem"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import useSetupCogito from "../../hooks/useSetupCogito"
 import { PROCESSING } from "../../constants/status"
+import {Trans} from "@lingui/macro";
 
 const CogitoList = () => {
   const { user } = useCurrentUser()
@@ -15,7 +16,11 @@ const CogitoList = () => {
   if (!user.loggedIn || ids.length === 0) {
     return (
       <Stack p={4} boxShadow={"base"} m={4} borderRadius={"xl"}>
-        <Heading size={"md"} fontWeight={"light"}>Sorry, no cogito in your account.</Heading>
+        <Heading size={"md"} fontWeight={"light"}>
+          <Trans>
+            Sorry, no cogito in your account.
+          </Trans>
+         </Heading>
       </Stack>
     )
   }
@@ -66,7 +71,9 @@ const WrappedCogitoList = () => {
   return (
     <Stack>
       <Button onClick={setup} isLoading={status === PROCESSING}>
-        Setup Cogito First
+        <Trans>
+          Setup Cogito First
+        </Trans>
       </Button>
     </Stack>
   )

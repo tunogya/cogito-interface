@@ -8,6 +8,7 @@ import { parseFlow } from "../../utils/parseFlow"
 import useWindowDimensions from "../../hooks/useWindowDimensions"
 import useFlowStorage from "../../hooks/useFlowStorage"
 import bytesToSize from "../../utils/bytesToSize"
+import {Trans} from "@lingui/macro";
 
 const Overview = () => {
   const { width } = useWindowDimensions()
@@ -58,8 +59,8 @@ const OverviewContent = () => {
           <StatHelpText>
             {storage.storage && (
               <Heading size={"xs"} fontWeight={"light"}>
-                Storage: {bytesToSize(storage.storage.storageUsed)} / {bytesToSize(storage.storage.storageCapacity)},{" "}
-                {((storage.storage.storageUsed / storage.storage.storageCapacity) * 100).toFixed(2)}% has used
+               <Trans>Storage:</Trans> {bytesToSize(storage.storage.storageUsed)} / {bytesToSize(storage.storage.storageCapacity)},{" "}
+                {((storage.storage.storageUsed / storage.storage.storageCapacity) * 100).toFixed(2)}% <Trans>has used</Trans>
               </Heading>
             )}
           </StatHelpText>
