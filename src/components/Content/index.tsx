@@ -16,7 +16,7 @@ export const Content: FC<ContentProps> = props => {
   return (
     <Stack w={"100%"} h={"100%"} spacing={0} overflow={"hidden"}>
       {props.hasTitle && (
-        <Stack direction={"row"} alignItems={"center"} p={2}>
+        <Stack direction={"row"} alignItems={"center"} px={4} py={2}>
           <Heading fontWeight={"bold"} fontSize={"xl"}>
             <Trans>{props.label}</Trans>
           </Heading>

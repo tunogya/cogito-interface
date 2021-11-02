@@ -53,8 +53,8 @@ const WrappedCogitoList = () => {
 
   if (!user.loggedIn) {
     return (
-      <Stack>
-        <Text>Log in</Text>
+      <Stack p={4} boxShadow={"base"} m={4} borderRadius={"xl"}>
+        <Heading size={"md"} fontWeight={"light"}>You need to log in</Heading>
       </Stack>
     )
   }
