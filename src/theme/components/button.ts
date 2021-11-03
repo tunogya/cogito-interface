@@ -4,6 +4,7 @@ export const Button = {
     textTransform: "uppercase",
     fontFamily: "ChicagoFLFRegular",
     fontWeight: "normal",
+    _focus: "none"
   },
   sizes: {},
   variants: {
