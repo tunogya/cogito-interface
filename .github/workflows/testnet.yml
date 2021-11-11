@@ -1,0 +1,65 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: cache
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: install pacakges
+        run: yarn
+
+      - name: build
+        run: yarn build
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: static
+          path: build/
+
+  deploy:
+    environment: testnet
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_CHAIN_ENV: ${{ env.AWS_ACCESS_KEY_ID }}
+      REACT_APP_ACCESS_NODE: ${{ env.AWS_SECRET_ACCESS_KEY }}
+      REACT_APP_ALCHEMY_API_KEY: ${{ env.REACT_APP_ALCHEMY_API_KEY }}
+      REACT_APP_WALLET_DISCOVERY: ${{ env.REACT_APP_WALLET_DISCOVERY }}
+      REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN: ${{ env.REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN }}
+      REACT_APP_CONTRACT_FUNGIBLE_TOKEN: ${{ env.REACT_APP_CONTRACT_FUNGIBLE_TOKEN }}
+      REACT_APP_CONTRACT_COGITO: ${{ env.REACT_APP_CONTRACT_COGITO }}
+      REACT_APP_DETAIL_ICON: ${{ env.REACT_APP_DETAIL_ICON }}
+      REACT_APP_DETAIL_TITLE: ${{ env.REACT_APP_DETAIL_TITLE }}
+      REACT_APP_WEB3_STORAGE_DEFAULT_KEY: ${{ env.REACT_APP_WEB3_STORAGE_DEFAULT_KEY }}
+    steps:
+      - name: download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: static
+          path: build
+      - name: upload to web3
+        uses: web3-storage/add-to-web3@v1.0.0
+        with:
+          path_to_add: build
+          web3_token: ${{ secrets.WEB3STORAGE }}
+          web3_api: https://api.web3.storage
+          wrap_with_directory: false
