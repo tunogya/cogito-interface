@@ -40,16 +40,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     env:
-      REACT_APP_CHAIN_ENV: ${{ env.AWS_ACCESS_KEY_ID }}
-      REACT_APP_ACCESS_NODE: ${{ env.AWS_SECRET_ACCESS_KEY }}
-      REACT_APP_ALCHEMY_API_KEY: ${{ env.REACT_APP_ALCHEMY_API_KEY }}
-      REACT_APP_WALLET_DISCOVERY: ${{ env.REACT_APP_WALLET_DISCOVERY }}
-      REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN: ${{ env.REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN }}
-      REACT_APP_CONTRACT_FUNGIBLE_TOKEN: ${{ env.REACT_APP_CONTRACT_FUNGIBLE_TOKEN }}
-      REACT_APP_CONTRACT_COGITO: ${{ env.REACT_APP_CONTRACT_COGITO }}
-      REACT_APP_DETAIL_ICON: ${{ env.REACT_APP_DETAIL_ICON }}
-      REACT_APP_DETAIL_TITLE: ${{ env.REACT_APP_DETAIL_TITLE }}
-      REACT_APP_WEB3_STORAGE_DEFAULT_KEY: ${{ env.REACT_APP_WEB3_STORAGE_DEFAULT_KEY }}
+      REACT_APP_CHAIN_ENV: testnet
+      REACT_APP_ACCESS_NODE: https://flow-testnet.g.alchemy.com
+      REACT_APP_ALCHEMY_API_KEY: ${{ secrets.REACT_APP_ALCHEMY_API_KEY }}
+      REACT_APP_WALLET_DISCOVERY: https://fcl-discovery.onflow.org/testnet/authn
+      REACT_APP_CONTRACT_NON_FUNGIBLE_TOKEN: 0x631e88ae7f1d7c20
+      REACT_APP_CONTRACT_FUNGIBLE_TOKEN: 0x9a0766d93b6608b7
+      REACT_APP_CONTRACT_COGITO: 0x441422d5b5a1758b
+      REACT_APP_DETAIL_ICON: https://wkdt-pocket-3ghyf7p36445e5ef-1304586669.tcloudbaseapp.com/logo512.png
+      REACT_APP_DETAIL_TITLE: "Cogito ergo sum"
+      REACT_APP_WEB3_STORAGE_DEFAULT_KEY: ${{ secrets.WEB3STORAGE }}
     steps:
       - name: download artifact
         uses: actions/download-artifact@v2
